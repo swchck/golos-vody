@@ -460,7 +460,7 @@ export default function App() {
               return (
                 <button
                   key={c.slug}
-                  className={`node ${i === active ? 'active' : ''} ${i === aim ? 'aim' : ''} ${
+                  className={`node ${reading && i === active ? 'active' : ''} ${i === aim ? 'aim' : ''} ${
                     hasMood(c) ? 'has' : 'empty'
                   }`}
                   style={{ left: `${p.x}%`, top: `${p.y}%` }}
