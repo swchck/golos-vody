@@ -82,6 +82,7 @@ export default function App() {
   const [view, setView] = useState('wheel') // 'wheel' | 'all' | 'camp'
   const [aim, setAim] = useState(7)
   const [active, setActive] = useState(7)
+  const [reading, setReading] = useState(false)
   const [mood, setMood] = useState('Весёлые')
   const [allMoods, setAllMoods] = useState(true)
   const [query, setQuery] = useState('')
@@ -197,7 +198,8 @@ export default function App() {
       if (e.target.tagName === 'INPUT') return
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') setAim((s) => (s + 1) % 16)
       if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') setAim((s) => (s + 15) % 16)
-      if (e.key === 'Enter' || e.key === ' ') setActive(aim)
+      if (e.key === 'Enter' || e.key === ' ') openCard(aim)
+      if (e.key === 'Escape') setReading(false)
     }
     window.addEventListener('keydown', key)
     return () => window.removeEventListener('keydown', key)
@@ -214,6 +216,7 @@ export default function App() {
   const openCard = (i) => {
     setActive(i)
     setAim(i)
+    setReading(true)
   }
   const openStory = (story, c, m) => setModal({ story, card: c, mood: m })
 
@@ -348,7 +351,10 @@ export default function App() {
           className="stage"
           ref={stageRef}
           onPointerMove={(e) => !e.target.closest('.reading') && aimAt(e.clientX, e.clientY)}
-          onClick={(e) => !e.target.closest('.reading') && !e.target.closest('.node') && openCard(aim)}
+          onClick={(e) => {
+            if (e.target.closest('.reading') || e.target.closest('.node')) return
+            reading ? setReading(false) : openCard(aim)
+          }}
         >
           <div className="divider" aria-hidden />
           <div className="hub" aria-hidden />
@@ -379,7 +385,21 @@ export default function App() {
             })}
           </div>
 
+          {!reading && (
+            <button
+              type="button"
+              className="wheel-hint"
+              onClick={() => openCard(aim)}
+            >
+              наведи и кликни карту
+            </button>
+          )}
+
+          {reading && (
           <section className="reading" key={active + mood}>
+            <button className="reading-close" onClick={() => setReading(false)} aria-label="Закрыть">
+              ×
+            </button>
             <div className="reading-card">
               <img className="bigcard" src={`${BASE}icons/${card.slug}.png`} alt={card.name} />
             </div>
@@ -421,6 +441,7 @@ export default function App() {
               </div>
             </div>
           </section>
+          )}
         </main>
       ) : view === 'all' ? (
         <AllView

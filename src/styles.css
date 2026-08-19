@@ -40,6 +40,10 @@ body {
   height: 100%;
   display: grid;
   grid-template-rows: auto 1fr auto;
+  /* pin the single column to the viewport width; without this the implicit
+     `auto` track grows to the widest child (long subtitle / button rows) and
+     the masthead spills past the screen on mobile */
+  grid-template-columns: minmax(0, 1fr);
   overflow: hidden;
   color: var(--ink);
 }
@@ -253,6 +257,43 @@ body {
 }
 @keyframes deal { from { opacity: 0; transform: translate(-50%, -46%); } to { opacity: 1; transform: translate(-50%, -50%); } }
 
+.reading-close {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  z-index: 2;
+  background: transparent;
+  border: none;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--ink);
+  cursor: pointer;
+  opacity: 0.5;
+  padding: 4px 8px;
+}
+.reading-close:hover { opacity: 1; }
+
+.wheel-hint {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  background: transparent;
+  border: 1px dashed var(--rule);
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: 0.55;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.wheel-hint:hover { opacity: 0.9; }
+
 .reading-card { flex: 0 0 34%; }
 .bigcard {
   width: 100%;
@@ -354,19 +395,54 @@ body {
 /* ---------------- responsive ---------------- */
 @media (max-width: 900px) {
   .app { overflow-x: hidden; overflow-y: auto; height: auto; min-height: 100%; }
-  .masthead { flex-direction: column; align-items: stretch; }
-  .controls { align-items: stretch; }
-  .moods { overflow-x: auto; }
-  .mood { flex: 0 0 auto; }
-  .search { width: 100%; }
+  /* block layout (not flex-column) so children take exactly 100% width and
+     wrap their text instead of holding their min-content width */
+  .masthead { display: block; padding: 12px 16px 10px; }
+  .title-block { margin-bottom: 12px; }
+  .controls { align-items: stretch; gap: 8px; min-width: 0; }
+  .toprow, .filterrow { justify-content: flex-start; gap: 8px; min-width: 0; width: 100%; }
+
+  /* bordered button groups fill the row instead of overflowing off-screen.
+     min-width:0 defeats flexbox's default min-width:auto that otherwise lets
+     a bordered group grow to its content width and blow past the viewport */
+  .views, .ownfilter { width: 100%; min-width: 0; }
+  .views button, .ownfilter button { flex: 1 1 0; min-width: 0; padding: 9px 4px; font-size: 11px; }
+  .moods { width: 100%; min-width: 0; }
+  .mood { flex: 1 1 0; min-width: 0; font-size: 10px; letter-spacing: 0.03em; padding: 9px 3px; white-space: nowrap; }
+  .search { width: 100%; min-width: 0; }
   .search input { width: 100%; }
-  .stage { width: 100%; aspect-ratio: auto; }
-  .divider, .hub, .pointer { display: none; }
-  .ring { position: relative; inset: auto; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 16px; }
-  .node { position: static; transform: none; width: 54px; }
-  .node:hover, .node.active { transform: scale(1.05); }
-  .reading { position: static; transform: none; width: auto; max-height: none; flex-direction: column; margin: 0 12px 24px; animation: none; }
-  .reading-card { flex: 0 0 auto; align-self: center; max-width: 200px; }
+  /* collbox packs 6 controls; let them wrap instead of running off-screen */
+  .collbox { flex-wrap: wrap; width: 100%; gap: 8px; }
+
+  /* keep the wheel a real circle, sized to the viewport; ring inset so the
+     medallions (centred on the ring edge) stay inside the stage box */
+  .stage { width: min(92vw, 480px); max-width: 92vw; aspect-ratio: 1 / 1; height: auto; margin: 14px auto; }
+  .ring { inset: 8%; }
+  .divider { top: 8%; bottom: 8%; }
+  .pointer { display: none; }
+  .node { width: 13%; border-width: 1.5px; }
+  .node.active { transform: translate(-50%, -50%) scale(1.3); }
+
+  /* wheel hint pill sits centred at the smaller scale */
+  .wheel-hint { font-size: 11px; padding: 8px 14px; }
+
+  /* reading table becomes a bottom sheet that never covers the whole wheel */
+  .reading {
+    position: fixed;
+    left: 0; right: 0; bottom: 0; top: auto;
+    transform: none;
+    width: 100%; min-width: 0; max-width: 100%;
+    max-height: 82vh;
+    overflow-y: auto;
+    flex-direction: column;
+    gap: 14px;
+    border-radius: 16px 16px 0 0;
+    z-index: 60;
+    animation: sheet 0.3s ease-out both;
+  }
+  @keyframes sheet { from { transform: translateY(100%); } to { transform: translateY(0); } }
+  .reading-card { flex: 0 0 auto; align-self: center; max-width: 180px; }
+  .reading-close { top: 8px; right: 12px; font-size: 30px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
