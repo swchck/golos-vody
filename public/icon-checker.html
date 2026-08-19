@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Чекер иконок — Голос воды</title>
+    <style>
+      :root {
+        --paper: #e7ddc6; --card: #f3ecd8; --ink: #2a2419; --rule: #b9a878;
+        --gold: #a6791f; --stamp: #7c2b1e; --muted: #6f6552;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0; font: 15px/1.4 'PT Serif', Georgia, serif;
+        background: var(--paper); color: var(--ink);
+        display: flex; flex-direction: column; height: 100vh; overflow: hidden;
+      }
+      header {
+        display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+        padding: 10px 16px; border-bottom: 1.5px solid var(--rule); background: var(--card);
+      }
+      header h1 { font-size: 17px; margin: 0; }
+      header .stat { color: var(--muted); font-size: 13px; }
+      header .stat b { color: var(--stamp); }
+      header .spacer { flex: 1; }
+      button {
+        font: inherit; cursor: pointer; border: 1.5px solid var(--rule);
+        background: var(--paper); color: var(--ink); padding: 5px 12px; border-radius: 3px;
+      }
+      button:hover { border-color: var(--gold); }
+      button.primary { background: var(--stamp); color: #f3ecd8; border-color: var(--stamp); }
+      button.on { background: var(--gold); color: #f3ecd8; border-color: var(--gold); }
+      .main { display: flex; flex: 1; min-height: 0; }
+      .left {
+        width: 42%; max-width: 560px; border-right: 1.5px solid var(--rule);
+        display: flex; flex-direction: column; min-height: 0;
+      }
+      .toolbar { display: flex; gap: 6px; flex-wrap: wrap; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+      .toolbar input[type=search] { flex: 1; min-width: 120px; padding: 5px 10px; border: 1.5px solid var(--rule); border-radius: 3px; background: var(--paper); font: inherit; }
+      .list { overflow-y: auto; flex: 1; }
+      .row {
+        display: flex; gap: 10px; align-items: center; padding: 8px 12px;
+        border-bottom: 1px solid rgba(120,110,90,.25); cursor: pointer;
+      }
+      .row:hover { background: rgba(166,121,31,.1); }
+      .row.sel { background: rgba(124,43,30,.14); }
+      .row .thumb { width: 44px; height: 44px; flex: 0 0 44px; border-radius: 50%; overflow: hidden; border: 1.5px solid var(--rule); background: #191510; }
+      .row .thumb img { width: 100%; height: 100%; object-fit: cover; }
+      .row .none { display: flex; align-items: center; justify-content: center; color: var(--stamp); font-size: 20px; }
+      .row .meta { min-width: 0; }
+      .row .t-ru { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .row .t-en { color: var(--muted); font-size: 13px; font-style: italic; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .row .cm { color: var(--muted); font-size: 12px; }
+      .row .badge { margin-left: auto; font-size: 11px; padding: 2px 7px; border-radius: 10px; }
+      .badge.no { background: #7c2b1e; color: #f3ecd8; }
+      .badge.chg { background: var(--gold); color: #f3ecd8; }
+      .right { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+      .sel-head { padding: 12px 16px; border-bottom: 1px solid var(--rule); background: var(--card); }
+      .sel-head .big { display: flex; gap: 14px; align-items: center; }
+      .sel-head .bigimg { width: 84px; height: 84px; flex: 0 0 84px; border-radius: 8px; overflow: hidden; border: 2px solid var(--rule); background: #191510; }
+      .sel-head .bigimg img { width: 100%; height: 100%; object-fit: contain; }
+      .sel-head h2 { margin: 0 0 3px; font-size: 18px; }
+      .sel-head .sub { color: var(--muted); font-size: 13px; }
+      .sel-head .cur { margin-top: 6px; font-size: 13px; }
+      .sel-head .cur b { color: var(--stamp); }
+      .gtoolbar { display: flex; gap: 10px; align-items: center; padding: 8px 16px; border-bottom: 1px solid var(--rule); }
+      .gtoolbar input[type=search] { flex: 1; padding: 5px 10px; border: 1.5px solid var(--rule); border-radius: 3px; background: var(--paper); font: inherit; }
+      .gtoolbar label { font-size: 13px; color: var(--muted); display: flex; gap: 5px; align-items: center; }
+      .gallery { overflow-y: auto; flex: 1; display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px; padding: 14px 16px; align-content: start; }
+      .cell { cursor: pointer; text-align: center; border: 1.5px solid transparent; border-radius: 6px; padding: 4px; position: relative; }
+      .cell:hover { border-color: var(--gold); background: rgba(166,121,31,.08); }
+      .cell.assigned { border-color: var(--stamp); background: rgba(124,43,30,.12); }
+      .cell .im { width: 100%; aspect-ratio: 1; border-radius: 50%; overflow: hidden; border: 1.5px solid var(--rule); background: #191510; }
+      .cell .im img { width: 100%; height: 100%; object-fit: cover; }
+      .cell .fn { font-size: 11px; margin-top: 3px; word-break: break-all; line-height: 1.15; }
+      .cell .used { position: absolute; top: 2px; right: 2px; font-size: 10px; background: var(--muted); color: #f3ecd8; border-radius: 8px; padding: 1px 5px; }
+      .cell.usedself .used { background: var(--stamp); }
+      .empty { color: var(--muted); padding: 40px; text-align: center; }
+      .hint { font-size: 12px; color: var(--muted); padding: 0 16px 8px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Чекер иконок</h1>
+      <span class="stat" id="stat"></span>
+      <span class="spacer"></span>
+      <button id="export" class="primary">Экспорт карты</button>
+      <button id="reset">Сбросить мои правки</button>
+    </header>
+    <div class="main">
+      <div class="left">
+        <div class="toolbar">
+          <button data-f="unmapped" class="on">Без иконки</button>
+          <button data-f="changed">Изменённые</button>
+          <button data-f="all">Все</button>
+          <input type="search" id="qstory" placeholder="поиск по названию / карте…" />
+        </div>
+        <div class="list" id="list"></div>
+      </div>
+      <div class="right" id="right">
+        <div class="empty">Выбери историю слева — покажу вигнетки для сопоставления.</div>
+      </div>
+    </div>
+
+    <script>
+      const OVR_KEY = 'gv-icon-overrides'
+      let DATA = null
+      let overrides = {}
+      try { overrides = JSON.parse(localStorage.getItem(OVR_KEY)) || {} } catch {}
+      let filter = 'unmapped'
+      let storyQ = ''
+      let selId = null
+      let onlyFree = true
+      let imgQ = ''
+
+      const $ = (s) => document.querySelector(s)
+      const save = () => localStorage.setItem(OVR_KEY, JSON.stringify(overrides))
+      const effIcon = (s) => (Object.prototype.hasOwnProperty.call(overrides, s.id) ? overrides[s.id] : s.icon)
+
+      // image -> [storyIds] using CURRENT effective assignments
+      function usage() {
+        const u = {}
+        for (const s of DATA.stories) {
+          const ic = effIcon(s)
+          if (ic) (u[ic] ||= []).push(s.id)
+        }
+        return u
+      }
+
+      function counts() {
+        let assigned = 0, changed = 0
+        for (const s of DATA.stories) {
+          if (effIcon(s)) assigned++
+        }
+        changed = Object.keys(overrides).length
+        return { assigned, unmapped: DATA.stories.length - assigned, changed }
+      }
+
+      function renderStat() {
+        const c = counts()
+        $('#stat').innerHTML = `назначено <b>${c.assigned}</b> / ${DATA.stories.length} · без иконки <b>${c.unmapped}</b> · моих правок <b>${c.changed}</b>`
+      }
+
+      function storyMatches(s) {
+        if (filter === 'unmapped' && effIcon(s)) return false
+        if (filter === 'changed' && !Object.prototype.hasOwnProperty.call(overrides, s.id)) return false
+        if (storyQ) {
+          const hay = (s.titleRu + ' ' + s.titleEn + ' ' + s.cardName + ' ' + s.moodShort + ' ' + s.id).toLowerCase()
+          if (!hay.includes(storyQ)) return false
+        }
+        return true
+      }
+
+      function renderList() {
+        const list = $('#list')
+        const rows = DATA.stories.filter(storyMatches)
+        list.innerHTML = ''
+        for (const s of rows) {
+          const ic = effIcon(s)
+          const changed = Object.prototype.hasOwnProperty.call(overrides, s.id)
+          const el = document.createElement('div')
+          el.className = 'row' + (s.id === selId ? ' sel' : '')
+          el.innerHTML =
+            `<div class="thumb ${ic ? '' : 'none'}">${ic ? `<img src="storyicons/${ic}.webp" loading="lazy">` : '✕'}</div>` +
+            `<div class="meta"><div class="t-ru">${esc(s.titleRu) || '<i>без названия</i>'}</div>` +
+            `<div class="t-en">${esc(s.titleEn)}</div>` +
+            `<div class="cm">${esc(s.cardName)} · ${esc(s.moodShort)}</div></div>` +
+            (ic ? (changed ? '<span class="badge chg">правка</span>' : '') : '<span class="badge no">нет</span>')
+          el.onclick = () => { selId = s.id; render() }
+          list.appendChild(el)
+        }
+        if (!rows.length) list.innerHTML = '<div class="empty">Под фильтр ничего не попало.</div>'
+      }
+
+      function renderRight() {
+        const right = $('#right')
+        const s = DATA.stories.find((x) => x.id === selId)
+        if (!s) { right.innerHTML = '<div class="empty">Выбери историю слева.</div>'; return }
+        const ic = effIcon(s)
+        const u = usage()
+        const imgs = DATA.images.filter((name) => {
+          if (imgQ && !name.toLowerCase().includes(imgQ)) return false
+          if (onlyFree) {
+            const owners = (u[name] || []).filter((id) => id !== s.id)
+            if (owners.length) return false
+          }
+          return true
+        })
+        right.innerHTML =
+          `<div class="sel-head"><div class="big">` +
+          `<div class="bigimg">${ic ? `<img src="storyicons_lg/${ic}.webp" onerror="this.src='storyicons/${ic}.webp'">` : ''}</div>` +
+          `<div><h2>${esc(s.titleRu) || '<i>без названия</i>'}</h2>` +
+          `<div class="sub">${esc(s.titleEn)}</div>` +
+          `<div class="sub">${esc(s.roman)} · ${esc(s.cardName)} <i>${esc(s.cardEn)}</i> · ${esc(s.moodShort)} · <code>${esc(s.id)}</code></div>` +
+          `<div class="cur">иконка: ${ic ? `<b>${esc(ic)}</b> <button id="clear">снять</button>` : '<b>не задана</b>'}</div>` +
+          `</div></div></div>` +
+          `<div class="gtoolbar">` +
+          `<label><input type="checkbox" id="free" ${onlyFree ? 'checked' : ''}> только свободные</label>` +
+          `<input type="search" id="qimg" placeholder="поиск картинки по имени…" value="${esc(imgQ)}">` +
+          `<span class="stat">${imgs.length} шт.</span>` +
+          `</div>` +
+          `<div class="hint">Клик по картинке — назначить её этой истории. «Свободные» скрывает вигнетки, уже занятые другими историями.</div>` +
+          `<div class="gallery" id="gal"></div>`
+
+        const gal = $('#gal')
+        for (const name of imgs) {
+          const owners = (u[name] || [])
+          const usedByOther = owners.filter((id) => id !== s.id)
+          const isSelf = ic === name
+          const cell = document.createElement('div')
+          cell.className = 'cell' + (isSelf ? ' assigned' : '') + (usedByOther.length ? ' usedother' : '')
+          cell.innerHTML =
+            `<div class="im"><img src="storyicons/${name}.webp" loading="lazy"></div>` +
+            `<div class="fn">${esc(name)}</div>` +
+            (usedByOther.length ? `<span class="used" title="${esc(usedByOther.join(', '))}">занята</span>` : '')
+          cell.onclick = () => assign(s, name)
+          gal.appendChild(cell)
+        }
+        const clr = $('#clear'); if (clr) clr.onclick = () => assign(s, null)
+        $('#free').onchange = (e) => { onlyFree = e.target.checked; renderRight() }
+        $('#qimg').oninput = (e) => { imgQ = e.target.value.toLowerCase(); renderRight() }
+      }
+
+      function assign(s, name) {
+        // toggle off if clicking the already-assigned image
+        if (name && effIcon(s) === name) name = null
+        // record as override unless it equals the original (then drop the override)
+        if (name === s.icon) delete overrides[s.id]
+        else overrides[s.id] = name
+        save(); render()
+      }
+
+      function render() { renderStat(); renderList(); renderRight() }
+      function esc(v) { return (v == null ? '' : String(v)).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])) }
+
+      $('#export').onclick = () => {
+        const map = {}
+        for (const s of DATA.stories) { const ic = effIcon(s); if (ic) map[s.id] = ic }
+        const blob = new Blob([JSON.stringify(map, null, 2)], { type: 'application/json' })
+        const a = document.createElement('a')
+        a.href = URL.createObjectURL(blob); a.download = 'story_icon_map.json'; a.click()
+        URL.revokeObjectURL(a.href)
+      }
+      $('#reset').onclick = () => {
+        if (!confirm('Убрать все твои правки и вернуться к текущей карте из репозитория?')) return
+        overrides = {}; save(); render()
+      }
+      document.querySelectorAll('.toolbar [data-f]').forEach((b) => {
+        b.onclick = () => {
+          filter = b.dataset.f
+          document.querySelectorAll('.toolbar [data-f]').forEach((x) => x.classList.toggle('on', x === b))
+          render()
+        }
+      })
+      $('#qstory').oninput = (e) => { storyQ = e.target.value.toLowerCase(); renderList() }
+
+      fetch('icon-checker-data.json')
+        .then((r) => r.json())
+        .then((d) => { DATA = d; render() })
+        .catch(() => { $('#right').innerHTML = '<div class="empty">Не удалось загрузить icon-checker-data.json</div>' })
+    </script>
+  </body>
+</html>
