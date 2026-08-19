@@ -1,0 +1,22 @@
+{
+  "name": "Голос воды — помощник по Where the Water Tastes Like Wine",
+  "short_name": "Голос воды",
+  "description": "Все истории по картам Таро и настроениям, эволюция, кому рассказал, помощник у костра и справочник персонажей.",
+  "lang": "ru",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#17130d",
+  "theme_color": "#17130d",
+  "categories": ["games", "utilities", "reference"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "screenshots": [
+    { "src": "og.png", "sizes": "1200x630", "type": "image/png", "form_factor": "wide" }
+  ]
+}

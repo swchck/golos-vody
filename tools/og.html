@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,600;1,700&family=PT+Serif:ital@0;1&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; }
+  :root {
+    --paper: #e7ddc6;
+    --paper2: #ded2b6;
+    --ink: #191308;
+    --red: #a82a1e;
+    --rim: #191308;
+  }
+  body {
+    width: 1200px; height: 630px;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'PT Serif', serif;
+    position: relative;
+    overflow: hidden;
+  }
+  /* paper grain + vignette */
+  .grain {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(120% 130% at 50% 40%, rgba(255,255,255,.18), rgba(0,0,0,0) 55%),
+      radial-gradient(120% 130% at 50% 120%, rgba(25,19,8,.22), rgba(0,0,0,0) 60%);
+    pointer-events: none;
+  }
+  /* almanac double keyline */
+  .frame { position: absolute; inset: 22px; border: 3px solid var(--ink); }
+  .frame::after { content:""; position:absolute; inset:6px; border:1px solid var(--ink); opacity:.55; }
+
+  .stage { position: absolute; inset: 22px; display: flex; }
+  .left {
+    width: 640px; padding: 62px 18px 54px 56px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .kicker {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 21px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink);
+  }
+  .kicker b { color: var(--red); font-weight: 700; }
+  .rule { width: 86px; height: 4px; background: var(--red); margin: 20px 0 10px; }
+  h1 {
+    font-family: 'Playfair Display', serif; font-weight: 800;
+    font-size: 90px; line-height: .94; letter-spacing: -.01em; white-space: nowrap;
+  }
+  .sub {
+    font-family: 'Playfair Display', serif; font-style: italic; font-weight: 600;
+    font-size: 29px; margin-top: 14px; color: #4b3f27;
+  }
+  .desc {
+    font-size: 25px; line-height: 1.42; margin-top: 24px; max-width: 510px;
+  }
+  .desc .h { color: var(--red); font-style: italic; }
+  .stats { display: flex; gap: 40px; margin-top: 40px; }
+  .stat .n {
+    font-family: 'Playfair Display', serif; font-weight: 800; font-size: 56px;
+    color: var(--red); line-height: 1;
+  }
+  .stat .l {
+    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 16px;
+    letter-spacing: .13em; text-transform: uppercase; color: #4b3f27; margin-top: 4px;
+  }
+
+  /* ---- the wheel ---- */
+  .right { flex: 1; position: relative; }
+  #wheel { position: absolute; inset: 0; }
+  .ring {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+    width: 396px; height: 396px; border-radius: 50%;
+    border: 3px solid var(--ink);
+    box-shadow: 0 0 0 10px var(--paper), 0 0 0 12px rgba(25,19,8,.35);
+  }
+  .divider {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+    width: 3px; height: 396px; background: var(--ink);
+  }
+  .node {
+    position: absolute; width: 90px; height: 90px; border-radius: 50%;
+    transform: translate(-50%,-50%);
+    overflow: hidden; border: 3px solid var(--rim);
+    background: var(--paper2);
+    box-shadow: 0 4px 10px rgba(25,19,8,.28);
+  }
+  .node img { width: 100%; height: 100%; object-fit: cover; object-position: center 34%; filter: saturate(.92) contrast(1.02); }
+  .hub {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--ink); z-index: 5;
+  }
+  .hand {
+    position: absolute; left: 50%; top: 50%;
+    width: 4px; height: 190px; background: var(--red);
+    transform-origin: bottom center;
+    border-radius: 3px 3px 0 0; z-index: 4;
+  }
+  .hand::after {
+    content:""; position:absolute; top:-16px; left:50%; transform:translateX(-50%);
+    border-left: 9px solid transparent; border-right: 9px solid transparent;
+    border-bottom: 18px solid var(--red);
+  }
+</style>
+</head>
+<body>
+  <div class="grain"></div>
+  <div class="frame"></div>
+  <div class="stage">
+    <div class="left">
+      <div class="kicker">Помощник по игре · <b>Where the Water Tastes Like Wine</b></div>
+      <div class="rule"></div>
+      <h1>Голос&nbsp;воды</h1>
+      <div class="sub">альманах кочующих историй</div>
+      <div class="desc">Найди нужную историю по <span class="h">настроению</span> и <span class="h">карте&nbsp;Таро</span>, следи за эволюцией и кому рассказал.</div>
+      <div class="stats">
+        <div class="stat"><div class="n">218</div><div class="l">Историй</div></div>
+        <div class="stat"><div class="n">16</div><div class="l">Карт&nbsp;Таро</div></div>
+        <div class="stat"><div class="n">5</div><div class="l">Настроений</div></div>
+      </div>
+    </div>
+    <div class="right">
+      <div id="wheel">
+        <div class="ring"></div>
+        <div class="divider"></div>
+        <div class="hub"></div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const ICON_DIR = '../public/icons/';
+  const ICONS = ['sun','star','world','lovers','wheel','high-priestess','justice','fool',
+                 'three-of-staves','queen-of-cups','empress','tower','devil','emperor','two-of-coins','nine-of-swords'];
+  const wheel = document.getElementById('wheel');
+  const r = wheel.getBoundingClientRect();
+  const cx = r.width / 2, cy = r.height / 2;
+  const RX = 198, RY = 198;
+  ICONS.forEach((name, i) => {
+    // start at top, go clockwise
+    const ang = (-90 + i * (360 / ICONS.length)) * Math.PI / 180;
+    const x = cx + RX * Math.cos(ang);
+    const y = cy + RY * Math.sin(ang);
+    const el = document.createElement('div');
+    el.className = 'node';
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    el.innerHTML = '<img src="' + ICON_DIR + name + '.png">';
+    wheel.appendChild(el);
+  });
+  // clock-hand aims between two upper-right cards (like mid-selection)
+  const hand = document.createElement('div');
+  hand.className = 'hand';
+  hand.style.transform = 'translate(-50%,-100%) rotate(58deg)';
+  wheel.appendChild(hand);
+</script>
+</body>
+</html>
