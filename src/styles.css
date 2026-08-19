@@ -156,7 +156,7 @@ body {
   top: 4%;
   bottom: 4%;
   width: 0;
-  border-left: 1.5px solid rgba(42, 36, 25, 0.4);
+  border-left: 1.5px solid rgba(42, 36, 25, 0.22);
   z-index: 1;
 }
 .hub {
@@ -242,8 +242,7 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 58%;
-  min-width: min(420px, 92vw);
+  width: min(680px, 90vw);
   max-width: 94vw;
   max-height: 86%;
   z-index: 20;
@@ -294,7 +293,7 @@ body {
 }
 .wheel-hint:hover { opacity: 0.9; }
 
-.reading-card { flex: 0 0 34%; }
+.reading-card { flex: 0 0 30%; }
 .bigcard {
   width: 100%;
   display: block;
@@ -363,7 +362,7 @@ body {
   border: 1.5px solid var(--rule);
 }
 .story-icon img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
-.story-title { font-family: var(--body); font-size: 15.5px; line-height: 1.28; flex: 1; }
+.story-title { font-family: var(--body); font-size: 15.5px; line-height: 1.28; flex: 1; overflow-wrap: anywhere; }
 .chev { font-family: var(--display); color: var(--stamp); font-size: 22px; transition: transform 0.2s; }
 .story.open .chev { transform: rotate(90deg); }
 
@@ -456,7 +455,7 @@ body {
   columns: 2; column-gap: 30px; padding-top: 14px;
 }
 .allgrid .story { break-inside: avoid; }
-@media (max-width: 1100px) { .allgrid { columns: 1; } }
+@media (max-width: 720px) { .allgrid { columns: 1; } }
 
 /* per-telling "heard" markers */
 .telling { align-items: flex-start; }
@@ -624,7 +623,7 @@ body {
 .camp-match b { color: var(--stamp); }
 
 .camp-body { columns: 2; column-gap: 30px; padding-top: 16px; }
-@media (max-width: 1100px) { .camp-body { columns: 1; } }
+@media (max-width: 720px) { .camp-body { columns: 1; } }
 .camp-card { break-inside: avoid; margin-bottom: 20px; border: 1.5px solid var(--rule); }
 .camp-card.used { opacity: 0.5; }
 .camp-card-head { display: flex; align-items: center; gap: 10px; padding: 9px 12px;
@@ -892,4 +891,62 @@ body {
   .gs-modal-title h2 { font-size: 23px; }
   .gs-text p { font-size: 15.5px; }
   .gs-toolbar { flex-wrap: wrap; }
+}
+
+/* card meaning (game concept) + character enrichment */
+.card-meaning { font-family: var(--body); font-style: italic; font-size: 13px; color: var(--ink-soft); margin-top: 2px; }
+.modal-sub .card-meaning { display: inline; margin: 0; }
+.camp-regions { color: var(--ink-soft); }
+.camp-info-extra { display: block; font-family: var(--label); font-size: 12px; color: var(--ink-soft); margin-top: 4px; letter-spacing: 0.02em; }
+.camp-info-extra em { color: var(--stamp-deep); font-style: normal; text-transform: uppercase; font-size: 10px; letter-spacing: 0.12em; margin-right: 4px; }
+.camp-author { margin-left: 14px; }
+
+/* story variability + game original inside StoryModal */
+.variant-cards { display: flex; flex-wrap: wrap; gap: 12px; }
+.variant-card {
+  display: inline-flex; align-items: center; gap: 10px; font-family: var(--body); font-size: 14px;
+  padding: 8px 14px 8px 8px; border: 1.5px solid var(--rule); border-radius: 999px;
+  background: transparent; color: inherit; cursor: pointer; transition: border-color .15s, background .15s;
+}
+.variant-card:hover { border-color: var(--stamp-deep); }
+.variant-card.on { border-color: var(--stamp-deep); background: color-mix(in srgb, var(--stamp) 16%, transparent); }
+.variant-card.on::after { content: '✓ у тебя'; font-family: var(--label); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--stamp-deep); margin-left: 2px; }
+.variant-card img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 1.5px solid var(--rule); }
+.variant-card b { color: var(--ink); }
+.variant-card em { color: var(--ink-soft); font-style: italic; font-size: 12px; }
+.gs-orig-lbl { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+/* character life-story chapters (accordion) */
+.chapters { display: flex; flex-direction: column; gap: 8px; }
+.chapter { border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+.chapter-head {
+  width: 100%; display: flex; align-items: center; gap: 10px; padding: 12px 16px;
+  background: transparent; border: 0; cursor: pointer; font-family: var(--label);
+  letter-spacing: 0.06em; text-transform: uppercase; font-size: 12px; color: var(--ink); text-align: left;
+}
+.chapter.open .chapter-head { border-bottom: 1px solid var(--rule); }
+.chapter-no { flex: 1; }
+.chapter-toggle { font-size: 18px; color: var(--stamp-deep); line-height: 1; }
+.chapter-body { padding: 14px 16px 4px; }
+.chapter-body p { margin: 0 0 12px; }
+
+/* story vignette as modal hero (when the story is matched to game art) */
+.story.wildcard { cursor: pointer; }
+.story-icon.joker img { object-fit: cover; }
+.joker-badge {
+  display: inline-block; font-family: var(--label); font-size: 10px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--paper); background: var(--stamp-deep);
+  padding: 1px 7px; border-radius: 999px; margin-right: 6px; vertical-align: middle;
+}
+
+/* game vignette sprite — full image at modal width, no crop, no frame;
+   sprites are RGBA so transparent margins blend into the modal in any theme */
+.modal-hero.has-vignette { flex-direction: column; align-items: stretch; gap: 12px; }
+.modal-vignette {
+  width: 100%; max-height: 360px; object-fit: contain;
+}
+.modal-cardicon { width: 20px; height: 20px; border-radius: 50%; object-fit: cover;
+  border: 1px solid var(--rule); vertical-align: middle; margin-right: 6px; }
+@media (max-width: 680px) {
+  .modal-vignette { max-height: 220px; }
 }

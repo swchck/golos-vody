@@ -13,7 +13,8 @@
 "Пекос Билл, который оседлал торнадо"
 ],
 "id": "two-of-coins_adv_0",
-"location": null
+"location": null,
+"icon": "pecosbill1"
 }
 ],
 "Весёлые": [
@@ -24,16 +25,18 @@
 "Маленькая ведьма, которая выращивала котят в саду, словно яблоки"
 ],
 "id": "two-of-coins_fun_0",
-"location": null
+"location": null,
+"icon": "basketgirl"
 },
 {
 "tellings": [
 "Дерево с бутылками на ветвях",
-"The vulgar ghost trapped in the bottle",
-"The trapped ghost who would turn any old faucet"
+"Пошлый призрак, запертый в бутылке",
+"Запертый призрак, что лился бы из любого старого крана"
 ],
 "id": "two-of-coins_fun_1",
-"location": null
+"location": null,
+"icon": "bottletree"
 },
 {
 "tellings": [
@@ -42,7 +45,8 @@
 "Девочка, выращенная вдали от людей огромной стаей коварных диких кошек"
 ],
 "id": "two-of-coins_fun_2",
-"location": null
+"location": null,
+"icon": "girlwithcats"
 },
 {
 "tellings": [
@@ -51,7 +55,8 @@
 "Церковь грешников, которые поклоняются Сатане и распевают грязные песни во время службы"
 ],
 "id": "two-of-coins_fun_3",
-"location": null
+"location": null,
+"icon": "composer"
 }
 ],
 "Грустные": [],
@@ -63,7 +68,8 @@
 "Торжественный марш уток из \"Пибоди\""
 ],
 "id": "two-of-coins_hope_0",
-"location": null
+"location": null,
+"icon": "memphis"
 },
 {
 "tellings": [
@@ -72,7 +78,8 @@
 "Пара летучих мышей, которые стали успешным комедийным дуэтом"
 ],
 "id": "two-of-coins_hope_1",
-"location": null
+"location": null,
+"icon": "doublebat"
 },
 {
 "tellings": [
@@ -81,7 +88,8 @@
 "Литры патоки, которой можно было накормить целый город"
 ],
 "id": "two-of-coins_hope_2",
-"location": null
+"location": null,
+"icon": "molassesman"
 },
 {
 "tellings": [
@@ -90,7 +98,8 @@
 "Эликсир, раскрывавший души"
 ],
 "id": "two-of-coins_hope_3",
-"location": null
+"location": null,
+"icon": "notdrunk"
 },
 {
 "tellings": [
@@ -99,7 +108,8 @@
 "Луг с миллиардами бабочек всех цветов радуги"
 ],
 "id": "two-of-coins_hope_4",
-"location": null
+"location": null,
+"icon": "butterflies"
 },
 {
 "tellings": [
@@ -108,7 +118,8 @@
 "Пес, который мог приносить нематериальные вещи - любовь и самооценку"
 ],
 "id": "two-of-coins_hope_5",
-"location": null
+"location": null,
+"icon": "dog"
 },
 {
 "tellings": [
@@ -117,7 +128,8 @@
 "Тигренок, которому предначертано спасти цирковых зверей из неволи"
 ],
 "id": "two-of-coins_hope_6",
-"location": null
+"location": null,
+"icon": "runciterscircus1"
 }
 ]
 },
@@ -125,7 +137,9 @@
 "en": "Two of Coins",
 "roman": "II",
 "charShort": "Росио",
-"charSlug": "rocio"
+"charSlug": "rocio",
+"meaning": "Радость",
+"meaningEn": "Joy"
 },
 {
 "name": "Звезда",
@@ -139,7 +153,8 @@
 "Город, хранящий разгадки тайн вселенной, расшифровать которые могут только жители"
 ],
 "id": "star_scary_0",
-"location": null
+"location": null,
+"icon": "wingdings"
 },
 {
 "tellings": [
@@ -148,7 +163,8 @@
 "Почитающий Сатану проповедник, который выдает себя за божьего человека и губит подлинно верующих"
 ],
 "id": "star_scary_1",
-"location": null
+"location": null,
+"icon": "preacher"
 },
 {
 "tellings": [
@@ -157,7 +173,8 @@
 "Проклятая камера, полная похищенных душ"
 ],
 "id": "star_scary_2",
-"location": null
+"location": null,
+"icon": "photography"
 },
 {
 "tellings": [
@@ -177,7 +194,8 @@
 "Норовистый дикий жеребец из Эль-Пасо и ковбой, который смог его укротить"
 ],
 "id": "star_adv_0",
-"location": null
+"location": null,
+"icon": "rodeo"
 },
 {
 "tellings": [
@@ -186,7 +204,8 @@
 "Проклятый идол, которого охраняет сам дьявол"
 ],
 "id": "star_adv_1",
-"location": null
+"location": null,
+"icon": "snake"
 }
 ],
 "Весёлые": [
@@ -197,7 +216,8 @@
 "Кожевник, который странствовал по Коннектикуту двести лет назад"
 ],
 "id": "star_fun_0",
-"location": null
+"location": null,
+"icon": "leatherman"
 },
 {
 "tellings": [
@@ -206,7 +226,8 @@
 "Виртуоз, который обрел талант, заключив сделку с дьяволом"
 ],
 "id": "star_fun_1",
-"location": null
+"location": null,
+"icon": "guitarplayer"
 },
 {
 "tellings": [
@@ -215,7 +236,8 @@
 "Призрак, который жаждет свиных ног"
 ],
 "id": "star_fun_2",
-"location": null
+"location": null,
+"icon": "pigs"
 }
 ],
 "Грустные": [],
@@ -227,7 +249,8 @@
 "Лесные феи, которые помогали женщинам избавиться от зла в жизни"
 ],
 "id": "star_hope_0",
-"location": null
+"location": null,
+"icon": "prayercircle"
 },
 {
 "tellings": [
@@ -236,7 +259,8 @@
 "Святая, которая бродила по свету, спасая потерянные души"
 ],
 "id": "star_hope_1",
-"location": null
+"location": null,
+"icon": "woman"
 },
 {
 "tellings": [
@@ -245,13 +269,14 @@
 "Эль-Пасо, где все думают о ближних своих, потому что иначе можно увидеть свои грехи на большом экране"
 ],
 "id": "star_hope_2",
-"location": null
+"location": null,
+"icon": "elpaso"
 },
 {
 "tellings": [
-"The foreign wedding with the gossiping relatives",
-"The beautiful interracial wedding that's unaffected by evil",
-"The Chinese man who stays calm while encountering demons at his wedding that's unaffected by evil"
+"Чужеземная свадьба со сплетничающими роднёй",
+"Прекрасная межрасовая свадьба, которой не коснулось зло",
+"Китаец, сохранивший спокойствие при встрече с демонами на своей свадьбе, которой не коснулось зло"
 ],
 "id": "star_hope_3",
 "location": null
@@ -262,7 +287,9 @@
 "en": "The Star",
 "roman": "XVII",
 "charShort": "Джимми",
-"charSlug": "jimmy"
+"charSlug": "jimmy",
+"meaning": "Вера, доверие",
+"meaningEn": "Faith"
 },
 {
 "name": "Справедливость",
@@ -276,7 +303,8 @@
 "Демон, который продаст целый мир за один поцелуй"
 ],
 "id": "justice_scary_0",
-"location": null
+"location": null,
+"icon": "alley"
 },
 {
 "tellings": [
@@ -285,7 +313,8 @@
 "Убитая женщина, которая бродит по юго-западу в надежде на месть"
 ],
 "id": "justice_scary_1",
-"location": null
+"location": null,
+"icon": "ladyinred"
 }
 ],
 "Захватывающие приключения": [
@@ -296,7 +325,8 @@
 "Бригада маляров, которые линчуют нечистых на руку клиентов по всей стране"
 ],
 "id": "justice_adv_0",
-"location": null
+"location": null,
+"icon": "lunchbreak"
 },
 {
 "tellings": [
@@ -305,7 +335,8 @@
 "Кровожадный банкир, который похищает бродяг и поедает их на обед"
 ],
 "id": "justice_adv_1",
-"location": null
+"location": null,
+"icon": "thedevil"
 },
 {
 "tellings": [
@@ -314,7 +345,8 @@
 "Человек, который выслеживал своего мертвого недруга, чья душа жила в лошади"
 ],
 "id": "justice_adv_2",
-"location": null
+"location": null,
+"icon": "ropingrevenge"
 },
 {
 "tellings": [
@@ -323,7 +355,8 @@
 "Ростовщики, которые отпилили должнику руку его же пилой"
 ],
 "id": "justice_adv_3",
-"location": null
+"location": null,
+"icon": "loansharked"
 },
 {
 "tellings": [
@@ -332,7 +365,8 @@
 "Неуязвимый ловкач, которого не могут достать пули полицейских"
 ],
 "id": "justice_adv_4",
-"location": null
+"location": null,
+"icon": "shellgame"
 }
 ],
 "Весёлые": [
@@ -352,7 +386,8 @@
 "Газета, которая после биржевого краха публиковала ложные котировки, чтобы оттянуть Великую депрессию"
 ],
 "id": "justice_fun_1",
-"location": null
+"location": null,
+"icon": "dustbowl"
 },
 {
 "tellings": [
@@ -361,7 +396,8 @@
 "Проказливые духи-близнецов, которые разоряли фермеров"
 ],
 "id": "justice_fun_2",
-"location": null
+"location": null,
+"icon": "sheeprustlers"
 },
 {
 "tellings": [
@@ -370,7 +406,8 @@
 "Озорной дух, который приспособился к современному миру, выдавая себя за журналиста"
 ],
 "id": "justice_fun_3",
-"location": null
+"location": null,
+"icon": "gentleman"
 },
 {
 "tellings": [
@@ -379,7 +416,8 @@
 "Карточные шулеров, которые с помощью своих трюков обобрали до нитки целый город"
 ],
 "id": "justice_fun_4",
-"location": null
+"location": null,
+"icon": "brothers"
 }
 ],
 "Грустные": [
@@ -390,7 +428,12 @@
 "Индейский Робин Гуд, возвращающий своему народу то, что у него украли"
 ],
 "id": "justice_sad_0",
-"location": null
+"location": null,
+"icon": "manwithskulls",
+"variantCards": [
+"justice",
+"nine-of-swords"
+]
 }
 ],
 "Счастливые/Оптимистичные": []
@@ -399,7 +442,9 @@
 "en": "Justice",
 "roman": "XI",
 "charShort": "Мал. Бен",
-"charSlug": "little-ben"
+"charSlug": "little-ben",
+"meaning": "Выбор, нравственность",
+"meaningEn": "Choice"
 },
 {
 "name": "Башня",
@@ -422,7 +467,8 @@
 "Растущее стадо тех, кто пал от руки фашизма"
 ],
 "id": "tower_scary_1",
-"location": null
+"location": null,
+"icon": "sheepherd"
 },
 {
 "tellings": [
@@ -440,7 +486,8 @@
 "Курильщик, который появляется перед теми, кому вскоре предстоит умереть"
 ],
 "id": "tower_scary_3",
-"location": null
+"location": null,
+"icon": "cigarettesmokingman"
 },
 {
 "tellings": [
@@ -449,7 +496,8 @@
 "Черный кот, который высасывает души покойников"
 ],
 "id": "tower_scary_4",
-"location": null
+"location": null,
+"icon": "blackcat"
 },
 {
 "tellings": [
@@ -458,7 +506,8 @@
 "Тростниковое поле, которое обрабатывают странствующие скелеты мертвецов"
 ],
 "id": "tower_scary_5",
-"location": null
+"location": null,
+"icon": "sugarcane"
 },
 {
 "tellings": [
@@ -467,7 +516,8 @@
 "Меткий малый, который способен убить человека с десяти миль"
 ],
 "id": "tower_scary_6",
-"location": null
+"location": null,
+"icon": "gunshot"
 },
 {
 "tellings": [
@@ -476,7 +526,8 @@
 "Тейлипо, мстительный кот"
 ],
 "id": "tower_scary_7",
-"location": null
+"location": null,
+"icon": "farmhouse"
 },
 {
 "tellings": [
@@ -505,7 +556,8 @@
 "Медведь, который обитает на северо-западе и охотится на преступников"
 ],
 "id": "tower_adv_1",
-"location": null
+"location": null,
+"icon": "bearattack"
 },
 {
 "tellings": [
@@ -514,7 +566,8 @@
 "Зловещий торговец, чьи яды выкосили население нескольких городов"
 ],
 "id": "tower_adv_2",
-"location": null
+"location": null,
+"icon": "peddler"
 },
 {
 "tellings": [
@@ -523,7 +576,8 @@
 "Человек, который травил животных, скармливая им собственную гниющую плоть"
 ],
 "id": "tower_adv_3",
-"location": null
+"location": null,
+"icon": "runciterscircus4"
 }
 ],
 "Весёлые": [
@@ -534,7 +588,8 @@
 "Мошенник, его план, его призрак и его любовь"
 ],
 "id": "tower_fun_0",
-"location": null
+"location": null,
+"icon": "grifter"
 },
 {
 "tellings": [
@@ -552,7 +607,8 @@
 "Ресторан, которым управляют слоны-алкоголики"
 ],
 "id": "tower_fun_2",
-"location": null
+"location": null,
+"icon": "runciterscircus2"
 }
 ],
 "Грустные": [
@@ -563,7 +619,8 @@
 "Фермер, который проклял молодых людей и заставил их работать на себя до смерти"
 ],
 "id": "tower_sad_0",
-"location": null
+"location": null,
+"icon": "cottonfield"
 },
 {
 "tellings": [
@@ -572,7 +629,8 @@
 "Опустевший город, где нашли сотню безликих неопознанных трупов"
 ],
 "id": "tower_sad_1",
-"location": null
+"location": null,
+"icon": "kudzu"
 },
 {
 "tellings": [
@@ -581,7 +639,8 @@
 "Ночные поезда, которые перевозят трупы по пыльным пустошам"
 ],
 "id": "tower_sad_2",
-"location": null
+"location": null,
+"icon": "coaltrain"
 },
 {
 "tellings": [
@@ -590,7 +649,8 @@
 "Женщина, которая перемолола кости своих детей в порошок от насекомых, способный убить все живое"
 ],
 "id": "tower_sad_3",
-"location": null
+"location": null,
+"icon": "locustbait"
 },
 {
 "tellings": [
@@ -599,7 +659,8 @@
 "Ясновидящая, которая так часто вмешивалась в то, что еще не произошло, что разрушила собственную судьбу"
 ],
 "id": "tower_sad_4",
-"location": null
+"location": null,
+"icon": "fortuneteller"
 }
 ],
 "Счастливые/Оптимистичные": []
@@ -608,7 +669,9 @@
 "en": "The Tower",
 "roman": "XVI",
 "charShort": "Мэйсон",
-"charSlug": "mason"
+"charSlug": "mason",
+"meaning": "Смерть, перемены, конец",
+"meaningEn": "Death"
 },
 {
 "name": "Королева Кубков",
@@ -622,7 +685,8 @@
 "Дети, которым Ла Йорона вырезала языки"
 ],
 "id": "queen-of-cups_scary_0",
-"location": null
+"location": null,
+"icon": "lallorona"
 },
 {
 "tellings": [
@@ -631,7 +695,8 @@
 "Человек, который убил своих братьев-близнецов из могилы"
 ],
 "id": "queen-of-cups_scary_1",
-"location": null
+"location": null,
+"icon": "twins"
 }
 ],
 "Захватывающие приключения": [],
@@ -644,7 +709,8 @@
 "Ребенок-перевертыш, который преследовал усталых и больных"
 ],
 "id": "queen-of-cups_sad_0",
-"location": null
+"location": null,
+"icon": "childhood"
 },
 {
 "tellings": [
@@ -653,7 +719,8 @@
 "Отец, чей призрак живет в машине и катает детей по Америке"
 ],
 "id": "queen-of-cups_sad_1",
-"location": null
+"location": null,
+"icon": "deaddadcar"
 }
 ],
 "Счастливые/Оптимистичные": [
@@ -664,7 +731,8 @@
 "Человек, у которого звенели кости"
 ],
 "id": "queen-of-cups_hope_0",
-"location": null
+"location": null,
+"icon": "deathbones"
 },
 {
 "tellings": [
@@ -673,7 +741,12 @@
 "Феи, которые похищают угнетенных, чтобы их защитить"
 ],
 "id": "queen-of-cups_hope_1",
-"location": null
+"location": null,
+"icon": "benchboy",
+"variantCards": [
+"devil",
+"lovers"
+]
 },
 {
 "tellings": [
@@ -682,13 +755,14 @@
 "Семья, члены которой настолько сильны, что их младенец своей истерикой разрушил дом"
 ],
 "id": "queen-of-cups_hope_2",
-"location": null
+"location": null,
+"icon": "newbaby"
 },
 {
 "tellings": [
-"The mink who invited his savior to join his family",
-"The mink and his family that saved a man's life with their food",
-"Gods that take the form of minks and foxes in the mountains that always watch over us"
+"Норка, пригласившая своего спасителя в свою семью",
+"Норка и её семья, спасшие человека своей едой",
+"Боги в обличье норок и лис в горах, что всегда хранят нас"
 ],
 "id": "queen-of-cups_hope_3",
 "location": null
@@ -700,7 +774,8 @@
 "Девочка, которая жила с семьей кур"
 ],
 "id": "queen-of-cups_hope_4",
-"location": null
+"location": null,
+"icon": "chickengirl"
 }
 ]
 },
@@ -708,7 +783,9 @@
 "en": "Queen of Cups",
 "roman": "—",
 "charShort": "Берта",
-"charSlug": "bertha"
+"charSlug": "bertha",
+"meaning": "Семья",
+"meaningEn": "Family"
 },
 {
 "name": "Верховная Жрица",
@@ -722,7 +799,8 @@
 "Сверкающий палаточный городок, где есть вход, но нет выхода"
 ],
 "id": "high-priestess_scary_0",
-"location": null
+"location": null,
+"icon": "tentcity"
 }
 ],
 "Захватывающие приключения": [
@@ -733,7 +811,8 @@
 "Одержимый дьяволом лидер и его апокалиптическая секта"
 ],
 "id": "high-priestess_adv_0",
-"location": null
+"location": null,
+"icon": "vwbus"
 },
 {
 "tellings": [
@@ -742,7 +821,8 @@
 "Девушка, которая с помощью поездов управляла преступной сетью, раскинувшейся по всей стране"
 ],
 "id": "high-priestess_adv_1",
-"location": null
+"location": null,
+"icon": "nightshade"
 },
 {
 "tellings": [
@@ -751,7 +831,8 @@
 "Будущее Бостона, где поездки на такси стоят двадцать долларов"
 ],
 "id": "high-priestess_adv_2",
-"location": null
+"location": null,
+"icon": "boston"
 }
 ],
 "Весёлые": [
@@ -762,18 +843,20 @@
 "Девочка, которая по силе не уступала взрослому мужчине"
 ],
 "id": "high-priestess_fun_0",
-"location": null
+"location": null,
+"icon": "tanks"
 }
 ],
 "Грустные": [
 {
 "tellings": [
-"The man on the beach in Miami despairing about the future",
+"Человек на пляже в Майами, отчаявшийся из-за будущего",
 "Человек, который уплыл от своих проблем в океан",
 "Работник радио, который оставил землю, чтобы запустить радиостанцию для русалок"
 ],
 "id": "high-priestess_sad_0",
-"location": null
+"location": null,
+"icon": "miami"
 },
 {
 "tellings": [
@@ -782,7 +865,8 @@
 "Сирена, которая удерживала музыкантов в глухом умирающем городке"
 ],
 "id": "high-priestess_sad_1",
-"location": null
+"location": null,
+"icon": "singer"
 }
 ],
 "Счастливые/Оптимистичные": [
@@ -793,7 +877,8 @@
 "Говорящие чайки, которые подсказывают рыбаку, где лучше улов"
 ],
 "id": "high-priestess_hope_0",
-"location": null
+"location": null,
+"icon": "seagulls"
 },
 {
 "tellings": [
@@ -802,7 +887,8 @@
 "Человек, чья песня могла двигать горы"
 ],
 "id": "high-priestess_hope_1",
-"location": null
+"location": null,
+"icon": "singer3"
 },
 {
 "tellings": [
@@ -811,7 +897,8 @@
 "Проклятые странников, обреченных путешествовать по Америке сотню лет"
 ],
 "id": "high-priestess_hope_2",
-"location": null
+"location": null,
+"icon": "horsecart"
 },
 {
 "tellings": [
@@ -828,7 +915,9 @@
 "en": "The High Priestess",
 "roman": "II",
 "charShort": "Роуз",
-"charSlug": "rose"
+"charSlug": "rose",
+"meaning": "Будущее",
+"meaningEn": "TheFuture"
 },
 {
 "name": "Мир",
@@ -842,7 +931,12 @@
 "Лошадиный грибок, распространяющийся по стране"
 ],
 "id": "world_scary_0",
-"location": null
+"location": null,
+"icon": "cavalry",
+"variantCards": [
+"world",
+"devil"
+]
 },
 {
 "tellings": [
@@ -851,7 +945,8 @@
 "Секта каннибалов, выращивающих кукурузу в Небраске"
 ],
 "id": "world_scary_1",
-"location": null
+"location": null,
+"icon": "childrenofthecorn"
 },
 {
 "tellings": [
@@ -860,7 +955,8 @@
 "Фермеры, которые заманивали путников лимонадом и скармливали их своему сыну-\nканнибалу"
 ],
 "id": "world_scary_2",
-"location": null
+"location": null,
+"icon": "lemonade"
 },
 {
 "tellings": [
@@ -869,7 +965,12 @@
 "Двенадцать белых всадников, которые увозят с собой грешную душу"
 ],
 "id": "world_scary_3",
-"location": null
+"location": null,
+"icon": "desertrider",
+"variantCards": [
+"world",
+"tower"
+]
 }
 ],
 "Захватывающие приключения": [
@@ -880,7 +981,8 @@
 "Гонщица, чья машина была подобна разряду сверкающей молнии"
 ],
 "id": "world_adv_0",
-"location": null
+"location": null,
+"icon": "oilwoman"
 }
 ],
 "Весёлые": [
@@ -891,7 +993,8 @@
 "Коровы-домовладельцы, которые выселили жильца и сами поселились в доме"
 ],
 "id": "world_fun_0",
-"location": null
+"location": null,
+"icon": "cowhouse"
 }
 ],
 "Грустные": [
@@ -902,7 +1005,8 @@
 "Джонни Эпплсид, который бродил по стране, сажая яблони"
 ],
 "id": "world_sad_0",
-"location": null
+"location": null,
+"icon": "johnnyappleseed"
 },
 {
 "tellings": [
@@ -911,7 +1015,8 @@
 "Сан-Антонио, где каждую ночь улицы затопляют стенающие призраки из Аламо"
 ],
 "id": "world_sad_1",
-"location": null
+"location": null,
+"icon": "sanantonio"
 }
 ],
 "Счастливые/Оптимистичные": [
@@ -922,7 +1027,8 @@
 "Песня, с которой можно работать без устали годами, если петь ее не прерываясь"
 ],
 "id": "world_hope_0",
-"location": null
+"location": null,
+"icon": "sleeper"
 },
 {
 "tellings": [
@@ -931,7 +1037,8 @@
 "Женщина, ждущая поцелую, который развеет чары и вернет ей молодость"
 ],
 "id": "world_hope_1",
-"location": null
+"location": null,
+"icon": "crone"
 },
 {
 "tellings": [
@@ -940,7 +1047,8 @@
 "Знаменитый преступник против гендера, который попирал законы, разбивал сердца и изменял мир"
 ],
 "id": "world_hope_2",
-"location": null
+"location": null,
+"icon": "ophelia"
 },
 {
 "tellings": [
@@ -949,7 +1057,8 @@
 "Чудесная фляга, обеспечившая водой всю команду"
 ],
 "id": "world_hope_3",
-"location": null
+"location": null,
+"icon": "gleaners"
 },
 {
 "tellings": [
@@ -958,7 +1067,8 @@
 "Магическая песня, которая усыпляла целые города"
 ],
 "id": "world_hope_4",
-"location": null
+"location": null,
+"icon": "musicians"
 },
 {
 "tellings": [
@@ -967,7 +1077,8 @@
 "Поезд, который прибывал в 11:59 и убивал каждого, кто слышал его свисток"
 ],
 "id": "world_hope_5",
-"location": null
+"location": null,
+"icon": "ghosttrain"
 },
 {
 "tellings": [
@@ -976,7 +1087,8 @@
 "Новый Иерихон, золотой город, основанный у источника вечной молодости"
 ],
 "id": "world_hope_6",
-"location": null
+"location": null,
+"icon": "familymodelt"
 }
 ]
 },
@@ -984,7 +1096,9 @@
 "en": "The World",
 "roman": "XXI",
 "charShort": "Фиделина",
-"charSlug": "fidelina"
+"charSlug": "fidelina",
+"meaning": "Рай, исполнение желаний",
+"meaningEn": "Heaven"
 },
 {
 "name": "Тройка Жезлов",
@@ -1007,7 +1121,11 @@
 "Гоблины, живущие в доме посреди грозового облака"
 ],
 "id": "three-of-staves_scary_1",
-"location": null
+"location": null,
+"variantCards": [
+"three-of-staves",
+"empress"
+]
 },
 {
 "tellings": [
@@ -1027,7 +1145,8 @@
 "Легендарный Кейси Джонс"
 ],
 "id": "three-of-staves_adv_0",
-"location": null
+"location": null,
+"icon": "caseyjones"
 }
 ],
 "Весёлые": [
@@ -1038,7 +1157,8 @@
 "Гонщик, который быстрее всех сумел проехать от одного побережья до другого"
 ],
 "id": "three-of-staves_fun_0",
-"location": null
+"location": null,
+"icon": "racer"
 },
 {
 "tellings": [
@@ -1047,7 +1167,8 @@
 "Странник Уиллис, обреченный проклятием на вечные странствия"
 ],
 "id": "three-of-staves_fun_1",
-"location": null
+"location": null,
+"icon": "walkingwillis"
 }
 ],
 "Грустные": [
@@ -1058,7 +1179,8 @@
 "Сбитый с толку призрак, который катается на автобусах по всей Америке"
 ],
 "id": "three-of-staves_sad_0",
-"location": null
+"location": null,
+"icon": "tickets"
 },
 {
 "tellings": [
@@ -1067,7 +1189,8 @@
 "Молодой человек, погибший от руки девушки, с которой он сбежал"
 ],
 "id": "three-of-staves_sad_1",
-"location": null
+"location": null,
+"icon": "vulture"
 }
 ],
 "Счастливые/Оптимистичные": [
@@ -1078,7 +1201,8 @@
 "Странные формы, которые примут в будущем американцы"
 ],
 "id": "three-of-staves_hope_0",
-"location": null
+"location": null,
+"icon": "children"
 },
 {
 "tellings": [
@@ -1087,7 +1211,8 @@
 "Раскинувшаяся по всей стране сеть рабочих, которые устроят восстание и захватят производство"
 ],
 "id": "three-of-staves_hope_1",
-"location": null
+"location": null,
+"icon": "metalworker"
 },
 {
 "tellings": [
@@ -1096,7 +1221,8 @@
 "Папаша Джо, защитник железной дороги"
 ],
 "id": "three-of-staves_hope_2",
-"location": null
+"location": null,
+"icon": "daddyjoe"
 }
 ]
 },
@@ -1104,7 +1230,9 @@
 "en": "Three of Staves",
 "roman": "III",
 "charShort": "Квинн",
-"charSlug": "quinn"
+"charSlug": "quinn",
+"meaning": "Путешествие, дорога",
+"meaningEn": "Travel"
 },
 {
 "name": "Девятка Мечей",
@@ -1118,7 +1246,8 @@
 "Дьявол из Джерси"
 ],
 "id": "nine-of-swords_scary_0",
-"location": null
+"location": null,
+"icon": "jerseydevil"
 }
 ],
 "Захватывающие приключения": [],
@@ -1131,7 +1260,8 @@
 "Колдун, который чарами заставляет женщин работать в своей прачечной"
 ],
 "id": "nine-of-swords_sad_0",
-"location": null
+"location": null,
+"icon": "laundry"
 },
 {
 "tellings": [
@@ -1140,16 +1270,18 @@
 "Улица Джей Стрит в Вашингтоне, которая возвращала путников в прошлое"
 ],
 "id": "nine-of-swords_sad_1",
-"location": null
+"location": null,
+"icon": "washingtondc"
 },
 {
 "tellings": [
 "Человек, которого бросили умирать от пулевого ранения на улицах Сент-Луиса",
 "Человек, которого застрелили в Сент-Луисе из-за шляпы",
-"Staggerlee – the murder from St Louis whom none dared to bring to justice+2"
+"Стэггерли — убийца из Сент-Луиса, которого никто не смел призвать к ответу"
 ],
 "id": "nine-of-swords_sad_2",
-"location": null
+"location": null,
+"icon": "stlouis"
 },
 {
 "tellings": [
@@ -1158,7 +1290,8 @@
 "Призрак женщины, казненной в Париже много лет назад"
 ],
 "id": "nine-of-swords_sad_3",
-"location": null
+"location": null,
+"icon": "yellowribbon"
 },
 {
 "tellings": [
@@ -1167,7 +1300,8 @@
 "Фермер, который утопил сына в силосной башне"
 ],
 "id": "nine-of-swords_sad_4",
-"location": null
+"location": null,
+"icon": "thesilo"
 },
 {
 "tellings": [
@@ -1176,7 +1310,8 @@
 "Фермер, который отказался дать ангелу яблоко и был наказан богом, наславшим порчу на его сад"
 ],
 "id": "nine-of-swords_sad_5",
-"location": null
+"location": null,
+"icon": "rottenfruit"
 },
 {
 "tellings": [
@@ -1185,7 +1320,8 @@
 "Вороны, оторые плетут еще не произошедшие истории"
 ],
 "id": "nine-of-swords_sad_6",
-"location": null
+"location": null,
+"icon": "birdman"
 }
 ],
 "Счастливые/Оптимистичные": [
@@ -1196,7 +1332,8 @@
 "Бык, чья кровь способна вылечить любой недуг"
 ],
 "id": "nine-of-swords_hope_0",
-"location": null
+"location": null,
+"icon": "stabbedbull"
 }
 ]
 },
@@ -1204,7 +1341,9 @@
 "en": "Nine of Swords",
 "roman": "IX",
 "charShort": "Франклин",
-"charSlug": "franklin"
+"charSlug": "franklin",
+"meaning": "Печаль, грусть",
+"meaningEn": "Sadness"
 },
 {
 "name": "Солнце",
@@ -1215,10 +1354,11 @@
 "tellings": [
 "Жуткая мельница",
 "Мельница с привидениями",
-"The miller who'd lure travellers to their doom"
+"Мельник, заманивавший путников на погибель"
 ],
 "id": "sun_scary_0",
-"location": null
+"location": null,
+"icon": "ghostlymill"
 },
 {
 "tellings": [
@@ -1227,7 +1367,8 @@
 "Сладкая музыка, из-за которой дети пропадали без вести"
 ],
 "id": "sun_scary_1",
-"location": null
+"location": null,
+"icon": "nashville"
 },
 {
 "tellings": [
@@ -1236,7 +1377,8 @@
 "Дух южанина, который выслеживает и убивает янки"
 ],
 "id": "sun_scary_2",
-"location": null
+"location": null,
+"icon": "confederateghost"
 },
 {
 "tellings": [
@@ -1245,7 +1387,8 @@
 "Ферма, где всегда было темно и выращивали грибы и паслен"
 ],
 "id": "sun_scary_3",
-"location": null
+"location": null,
+"icon": "eclipse"
 },
 {
 "tellings": [
@@ -1254,7 +1397,8 @@
 "Месть странствующего голубя"
 ],
 "id": "sun_scary_4",
-"location": null
+"location": null,
+"icon": "pigeons"
 }
 ],
 "Захватывающие приключения": [],
@@ -1266,7 +1410,8 @@
 "Старый ворон, который обрел мудрость, поедая глаза мудрецов"
 ],
 "id": "sun_fun_0",
-"location": null
+"location": null,
+"icon": "ravenandsalmon"
 }
 ],
 "Грустные": [
@@ -1277,7 +1422,8 @@
 "Создание из праха, занесенного в старую школу во время бури"
 ],
 "id": "sun_sad_0",
-"location": null
+"location": null,
+"icon": "moustacheman"
 },
 {
 "tellings": [
@@ -1286,7 +1432,8 @@
 "Проклятая скрипка, которую преследует дух Луизы Эймс"
 ],
 "id": "sun_sad_1",
-"location": null
+"location": null,
+"icon": "violin"
 },
 {
 "tellings": [
@@ -1295,7 +1442,8 @@
 "Человек, одержимый духом своего брата, погибшего на войне"
 ],
 "id": "sun_sad_2",
-"location": null
+"location": null,
+"icon": "soldier"
 },
 {
 "tellings": [
@@ -1304,7 +1452,8 @@
 "Музыкант, который таял по мере того, как его забывали друзья"
 ],
 "id": "sun_sad_3",
-"location": null
+"location": null,
+"icon": "saxophone"
 },
 {
 "tellings": [
@@ -1313,7 +1462,8 @@
 "Призрак архитектора, который преследует дом своего соперника в Санта-Фе"
 ],
 "id": "sun_sad_4",
-"location": null
+"location": null,
+"icon": "twomen"
 }
 ],
 "Счастливые/Оптимистичные": [
@@ -1324,7 +1474,8 @@
 "Ритуал, который позволяет любому найти потерянное"
 ],
 "id": "sun_hope_0",
-"location": null
+"location": null,
+"icon": "medal"
 },
 {
 "tellings": [
@@ -1333,7 +1484,8 @@
 "Астроном, который находил новую звезду всякий раз, когда смотрел на небо"
 ],
 "id": "sun_hope_1",
-"location": null
+"location": null,
+"icon": "telescope"
 }
 ]
 },
@@ -1341,7 +1493,9 @@
 "en": "The Sun",
 "roman": "XIX",
 "charShort": "Август",
-"charSlug": "august"
+"charSlug": "august",
+"meaning": "Прошлое, воспоминания",
+"meaningEn": "ThePast"
 },
 {
 "name": "Император",
@@ -1355,7 +1509,8 @@
 "Ферма, усеянная пугалами, которые сделаны из тел мертвецов"
 ],
 "id": "emperor_scary_0",
-"location": null
+"location": null,
+"icon": "scarecrow"
 },
 {
 "tellings": [
@@ -1373,7 +1528,8 @@
 "Проклятые братья-исполнители, один из которых обладает темной силой, а второй дарит эту силу другим"
 ],
 "id": "emperor_scary_2",
-"location": null
+"location": null,
+"icon": "singers2"
 },
 {
 "tellings": [
@@ -1382,7 +1538,8 @@
 "Старый гангстер, чей дух заперт в теле мальчика"
 ],
 "id": "emperor_scary_3",
-"location": null
+"location": null,
+"icon": "motherandchild"
 }
 ],
 "Захватывающие приключения": [
@@ -1393,7 +1550,8 @@
 "Легендарная Гвен Мише, самая богатая и беспощадная контрабандистка в истории"
 ],
 "id": "emperor_adv_0",
-"location": null
+"location": null,
+"icon": "bootleggers"
 },
 {
 "tellings": [
@@ -1411,7 +1569,8 @@
 "Миннеаполис, раздираемый военным конфликтом между протестующими и полицией"
 ],
 "id": "emperor_adv_2",
-"location": null
+"location": null,
+"icon": "minneapolis"
 },
 {
 "tellings": [
@@ -1420,7 +1579,8 @@
 "Банда анархистов, которые уничтожают тюрьмы по всей стране"
 ],
 "id": "emperor_adv_3",
-"location": null
+"location": null,
+"icon": "manymen"
 },
 {
 "tellings": [
@@ -1429,7 +1589,8 @@
 "Дьявол в облике быка, который наводит ужас на грешников"
 ],
 "id": "emperor_adv_4",
-"location": null
+"location": null,
+"icon": "blindsteer"
 },
 {
 "tellings": [
@@ -1438,7 +1599,8 @@
 "Могучий царь быков, чьи рабы-люди защищали его от всякого вреда"
 ],
 "id": "emperor_adv_5",
-"location": null
+"location": null,
+"icon": "bull"
 }
 ],
 "Весёлые": [
@@ -1449,7 +1611,8 @@
 "Майор, который пережил Первую мировую благодаря счастливому виски, приготовленному по семейному рецепту"
 ],
 "id": "emperor_fun_0",
-"location": null
+"location": null,
+"icon": "truck"
 },
 {
 "tellings": [
@@ -1458,7 +1621,8 @@
 "Ребенок, который мог общаться лишь посредством музыки"
 ],
 "id": "emperor_fun_1",
-"location": null
+"location": null,
+"icon": "singer1"
 },
 {
 "tellings": [
@@ -1467,7 +1631,8 @@
 "Богач, который считал себя клоуном, в то время как окружающие ему потакали"
 ],
 "id": "emperor_fun_2",
-"location": null
+"location": null,
+"icon": "clown"
 }
 ],
 "Грустные": [
@@ -1478,7 +1643,8 @@
 "Чикаго, где закон ничего не значит, а гангстеры из спортивного интереса отстреливают полицейских"
 ],
 "id": "emperor_sad_0",
-"location": null
+"location": null,
+"icon": "chicago"
 },
 {
 "tellings": [
@@ -1487,7 +1653,8 @@
 "Война рабочих по всему Западному побережью"
 ],
 "id": "emperor_sad_1",
-"location": null
+"location": null,
+"icon": "seattle"
 }
 ],
 "Счастливые/Оптимистичные": []
@@ -1496,7 +1663,9 @@
 "en": "The Emperor",
 "roman": "IV",
 "charShort": "Шоу",
-"charSlug": "shaw"
+"charSlug": "shaw",
+"meaning": "Власть, порядок",
+"meaningEn": "Authority"
 },
 {
 "name": "Влюбленные",
@@ -1510,7 +1679,8 @@
 "Бессмертная ведьма и ее муж-зомби"
 ],
 "id": "lovers_scary_0",
-"location": null
+"location": null,
+"icon": "blindfoldedingraveyard"
 },
 {
 "tellings": [
@@ -1519,7 +1689,8 @@
 "Песни ангелов и демонов, которые исполняет безумный певец"
 ],
 "id": "lovers_scary_1",
-"location": null
+"location": null,
+"icon": "seatedman"
 }
 ],
 "Захватывающие приключения": [
@@ -1530,7 +1701,8 @@
 "История девушки, которая ловит жестоких мужчин и скармливает их своей далекой любовнице-гарпии"
 ],
 "id": "lovers_adv_0",
-"location": null
+"location": null,
+"icon": "skullgirl"
 }
 ],
 "Весёлые": [
@@ -1541,7 +1713,8 @@
 "Человек, который присоединился к стае диких индюшек ради своей пернатой возлюбленной"
 ],
 "id": "lovers_fun_0",
-"location": null
+"location": null,
+"icon": "fowlplay"
 },
 {
 "tellings": [
@@ -1550,7 +1723,8 @@
 "Женщина, влюбленная так сильно, что каждый день в течение года проходившей по стомиль"
 ],
 "id": "lovers_fun_1",
-"location": null
+"location": null,
+"icon": "boxhead"
 },
 {
 "tellings": [
@@ -1570,7 +1744,8 @@
 "Солдат, который восстал из мертвых, чтобы вернуться к любимой"
 ],
 "id": "lovers_sad_0",
-"location": null
+"location": null,
+"icon": "cornfieldchurch"
 },
 {
 "tellings": [
@@ -1579,7 +1754,8 @@
 "Ведьма, проситель и ядовитая дорога"
 ],
 "id": "lovers_sad_1",
-"location": null
+"location": null,
+"icon": "curse"
 },
 {
 "tellings": [
@@ -1588,7 +1764,8 @@
 "Кошка, которую возбуждает вкус плоти"
 ],
 "id": "lovers_sad_2",
-"location": null
+"location": null,
+"icon": "catondeadhorse"
 },
 {
 "tellings": [
@@ -1606,7 +1783,8 @@
 "Времена, когда в Нью-Йорке за месяц не наняли ни одного человека"
 ],
 "id": "lovers_sad_4",
-"location": null
+"location": null,
+"icon": "breadline"
 }
 ],
 "Счастливые/Оптимистичные": [
@@ -1617,7 +1795,8 @@
 "Лампа маяка, которая зажигается только в присутствии истинной любви"
 ],
 "id": "lovers_hope_0",
-"location": null
+"location": null,
+"icon": "lighthouse"
 },
 {
 "tellings": [
@@ -1626,7 +1805,8 @@
 "Девушки, которые могли говорить с мертвыми"
 ],
 "id": "lovers_hope_1",
-"location": null
+"location": null,
+"icon": "samandlonnie"
 },
 {
 "tellings": [
@@ -1635,7 +1815,8 @@
 "Цирк, в котором выступают исключительно бывшие брокеры с Уолл-стрит"
 ],
 "id": "lovers_hope_2",
-"location": null
+"location": null,
+"icon": "beardedlady"
 }
 ]
 },
@@ -1643,7 +1824,9 @@
 "en": "The Lovers",
 "roman": "VI",
 "charShort": "Кэссиди",
-"charSlug": "cassady"
+"charSlug": "cassady",
+"meaning": "Любовь",
+"meaningEn": "Love"
 },
 {
 "name": "Дьявол",
@@ -1657,7 +1840,8 @@
 "Жуткая легенда об Икабоде Крейне"
 ],
 "id": "devil_scary_0",
-"location": null
+"location": null,
+"icon": "headlesshorseman"
 },
 {
 "tellings": [
@@ -1675,7 +1859,8 @@
 "Средоточение межпространственного ужаса в подвале фермерского дома"
 ],
 "id": "devil_scary_2",
-"location": null
+"location": null,
+"icon": "tailypo"
 },
 {
 "tellings": [
@@ -1684,7 +1869,8 @@
 "Ходячая рыба, которая заставляет невинных людей поедать себе подобных"
 ],
 "id": "devil_scary_3",
-"location": null
+"location": null,
+"icon": "lakemonster"
 },
 {
 "tellings": [
@@ -1702,7 +1888,8 @@
 "Кухня, где сам дьявол подает проклятую пищу отчаявшимся путникам"
 ],
 "id": "devil_scary_5",
-"location": null
+"location": null,
+"icon": "cookhouse"
 }
 ],
 "Захватывающие приключения": [
@@ -1713,13 +1900,14 @@
 "Маленькие колдуны, которые живут в лесу и враждуют со злобным псом-автомобилистом"
 ],
 "id": "devil_adv_0",
-"location": null
+"location": null,
+"icon": "dogcar"
 },
 {
 "tellings": [
-"The Chinese chef who amazed some miners with a meal of garbage",
-"The Chinese chef who could cook absolutely any ingredient into a delectable dish+2",
-"The Chinese chef who cooked world-famous cuisine with the help of a grim-featured kitchen angel+2"
+"Китайский повар, поразивший старателей блюдом из отбросов",
+"Китайский повар, готовивший из любого ингредиента изысканное блюдо",
+"Китайский повар, готовивший всемирно известную кухню с помощью мрачного кухонного ангела"
 ],
 "id": "devil_adv_1",
 "location": null
@@ -1731,7 +1919,8 @@
 "Джон Ранцитер, который выставлял в цирке мертвых животных"
 ],
 "id": "devil_adv_2",
-"location": null
+"location": null,
+"icon": "runciterscircus3"
 }
 ],
 "Весёлые": [
@@ -1751,7 +1940,8 @@
 "Экзорцист, который прогнал духов из мюзик-холла Цинциннати с помощью треугольника"
 ],
 "id": "devil_fun_1",
-"location": null
+"location": null,
+"icon": "cincinnati"
 },
 {
 "tellings": [
@@ -1760,7 +1950,8 @@
 "Женщина, ставшая матерью чудовищ"
 ],
 "id": "devil_fun_2",
-"location": null
+"location": null,
+"icon": "wheelbarrowgirl"
 },
 {
 "tellings": [
@@ -1769,7 +1960,8 @@
 "Человек, который превратил испорченных детей в овец и продал их на мясо"
 ],
 "id": "devil_fun_3",
-"location": null
+"location": null,
+"icon": "suddensheep"
 },
 {
 "tellings": [
@@ -1778,7 +1970,8 @@
 "Бугимен и ненасытный голод, заставляющий его пожирать самые дикие сны"
 ],
 "id": "devil_fun_4",
-"location": null
+"location": null,
+"icon": "devil2"
 }
 ],
 "Грустные": [
@@ -1789,7 +1982,8 @@
 "Чернокрылая смерть, которая забрала душу пьяницы"
 ],
 "id": "devil_sad_0",
-"location": null
+"location": null,
+"icon": "lineman"
 },
 {
 "tellings": [
@@ -1798,7 +1992,8 @@
 "Легендарный Джон Генри, который умер, пытаясь превзойти машину"
 ],
 "id": "devil_sad_1",
-"location": null
+"location": null,
+"icon": "johnhenry"
 },
 {
 "tellings": [
@@ -1807,7 +2002,8 @@
 "Душа дьявола в бегах"
 ],
 "id": "devil_sad_2",
-"location": null
+"location": null,
+"icon": "thedevilone"
 },
 {
 "tellings": [
@@ -1816,7 +2012,8 @@
 "Жаркий летний ветер, вопящий о жестокости, с которой проходила в Лос-Анджелесе репатриация"
 ],
 "id": "devil_sad_3",
-"location": null
+"location": null,
+"icon": "losangeles"
 }
 ],
 "Счастливые/Оптимистичные": [
@@ -1827,7 +2024,8 @@
 "Пилот, самолет которого мог летать не только по воздуху, но и под водой"
 ],
 "id": "devil_hope_0",
-"location": null
+"location": null,
+"icon": "plane"
 }
 ]
 },
@@ -1835,7 +2033,9 @@
 "en": "The Devil",
 "roman": "XV",
 "charShort": "Алтея",
-"charSlug": "althea"
+"charSlug": "althea",
+"meaning": "Неволя, плен",
+"meaningEn": "Bondage"
 },
 {
 "name": "Дурак",
@@ -1850,7 +2050,8 @@
 "Народ буревестников, которые пикируют и кружат вокруг возвышенностей"
 ],
 "id": "fool_adv_0",
-"location": null
+"location": null,
+"icon": "bridgebuilders"
 },
 {
 "tellings": [
@@ -1859,7 +2060,8 @@
 "Человек, который убивал путников и заготавливал их мясо впрок"
 ],
 "id": "fool_adv_1",
-"location": null
+"location": null,
+"icon": "meatsacks"
 },
 {
 "tellings": [
@@ -1868,7 +2070,8 @@
 "Таинственный автобус, который возит мифических существ по Америке"
 ],
 "id": "fool_adv_2",
-"location": null
+"location": null,
+"icon": "bus"
 }
 ],
 "Весёлые": [
@@ -1879,7 +2082,8 @@
 "Шоггот в ящике"
 ],
 "id": "fool_fun_0",
-"location": null
+"location": null,
+"icon": "boxfiend"
 }
 ],
 "Грустные": [
@@ -1890,7 +2094,8 @@
 "Пес, который следовал за своим маленьким хозяином через всю Америку"
 ],
 "id": "fool_sad_0",
-"location": null
+"location": null,
+"icon": "boyanddog"
 },
 {
 "tellings": [
@@ -1899,7 +2104,8 @@
 "Олень, которого не могла коснуться рука человека"
 ],
 "id": "fool_sad_1",
-"location": null
+"location": null,
+"icon": "whitedeer"
 },
 {
 "tellings": [
@@ -1913,11 +2119,12 @@
 {
 "tellings": [
 "Мертвый пассажир у стоящего поезда",
-"The man who jumped to his death from a train",
+"Человек, спрыгнувший с поезда навстречу смерти",
 "Железная дорога, усеянная трупами тех, кто прыгал с поездов"
 ],
 "id": "fool_sad_3",
-"location": null
+"location": null,
+"icon": "trainpassengers"
 }
 ],
 "Счастливые/Оптимистичные": []
@@ -1926,7 +2133,9 @@
 "en": "The Fool",
 "roman": "0",
 "charShort": "Рэй",
-"charSlug": "ray"
+"charSlug": "ray",
+"meaning": "Свобода",
+"meaningEn": "Freedom"
 },
 {
 "name": "Императрица",
@@ -1940,7 +2149,8 @@
 "Инопланетянин, который с неясными целями ведет заметки о нашем мире"
 ],
 "id": "empress_scary_0",
-"location": null
+"location": null,
+"icon": "soilsurveyor"
 },
 {
 "tellings": [
@@ -1949,7 +2159,8 @@
 "Йети на северо-западе"
 ],
 "id": "empress_scary_1",
-"location": null
+"location": null,
+"icon": "sasquatch"
 },
 {
 "tellings": [
@@ -1958,7 +2169,8 @@
 "Увиденная в Бойсе чешуйчатая шортгорнская, чье молоко превращает людей в ящеров"
 ],
 "id": "empress_scary_2",
-"location": null
+"location": null,
+"icon": "boise"
 },
 {
 "tellings": [
@@ -1967,7 +2179,8 @@
 "Дух голода, который принял форму трехглавой птицы"
 ],
 "id": "empress_scary_3",
-"location": null
+"location": null,
+"icon": "unendinghunger"
 }
 ],
 "Захватывающие приключения": [
@@ -1987,7 +2200,8 @@
 "Разумная пылевая буря, которая поглощает целые города"
 ],
 "id": "empress_adv_1",
-"location": null
+"location": null,
+"icon": "duststorm"
 },
 {
 "tellings": [
@@ -1996,7 +2210,8 @@
 "Ученые, которые умели призывать пылевые бури"
 ],
 "id": "empress_adv_2",
-"location": null
+"location": null,
+"icon": "dustcloud"
 },
 {
 "tellings": [
@@ -2005,7 +2220,8 @@
 "Дух бизона, который каждый год должен бежать от преследователей, чтобы спасти свой род от вымирания"
 ],
 "id": "empress_adv_3",
-"location": null
+"location": null,
+"icon": "babybuff"
 },
 {
 "tellings": [
@@ -2014,7 +2230,8 @@
 "Поль Баньян, лесоруб, который был выше деревьев"
 ],
 "id": "empress_adv_4",
-"location": null
+"location": null,
+"icon": "paulbunyan"
 },
 {
 "tellings": [
@@ -2023,7 +2240,8 @@
 "Бессмертный бродяга, которого охраняет его спутник-орел"
 ],
 "id": "empress_adv_5",
-"location": null
+"location": null,
+"icon": "huntingeagle"
 },
 {
 "tellings": [
@@ -2032,7 +2250,8 @@
 "Королевство детей, живущих в чаще леса"
 ],
 "id": "empress_adv_6",
-"location": null
+"location": null,
+"icon": "arlet"
 },
 {
 "tellings": [
@@ -2041,7 +2260,8 @@
 "Пекос Билл, ковбой, который укротил дикого коня с помощью лассо из гремучей змеи"
 ],
 "id": "empress_adv_7",
-"location": null
+"location": null,
+"icon": "buffandchild"
 },
 {
 "tellings": [
@@ -2050,7 +2270,8 @@
 "Сказочный рогатого зайца"
 ],
 "id": "empress_adv_8",
-"location": null
+"location": null,
+"icon": "jackalope"
 },
 {
 "tellings": [
@@ -2059,7 +2280,8 @@
 "Проклятая женщина, обреченная вечно рисовать со скоростью поезда"
 ],
 "id": "empress_adv_9",
-"location": null
+"location": null,
+"icon": "sketcher"
 }
 ],
 "Весёлые": [
@@ -2079,7 +2301,8 @@
 "Князь Ада, которого обратил в петуха его родной отец, Сатана"
 ],
 "id": "empress_fun_1",
-"location": null
+"location": null,
+"icon": "redrooster"
 },
 {
 "tellings": [
@@ -2088,7 +2311,8 @@
 "Озерное чудовище, перехитрившее рыбака"
 ],
 "id": "empress_fun_2",
-"location": null
+"location": null,
+"icon": "fisherman"
 }
 ],
 "Грустные": [
@@ -2099,7 +2323,8 @@
 "Проклятый фермер, обреченный странствовать и нести с собой смерть"
 ],
 "id": "empress_sad_0",
-"location": null
+"location": null,
+"icon": "farmer"
 },
 {
 "tellings": [
@@ -2108,7 +2333,8 @@
 "Тихие призраки китайского квартала, жертвы землетрясения 1906 года"
 ],
 "id": "empress_sad_1",
-"location": null
+"location": null,
+"icon": "farmerrest"
 }
 ],
 "Счастливые/Оптимистичные": [
@@ -2119,7 +2345,8 @@
 "Формула, благодаря которой одним растением можно накормить сотню голодных людей"
 ],
 "id": "empress_hope_0",
-"location": null
+"location": null,
+"icon": "miraclegrowth"
 },
 {
 "tellings": [
@@ -2128,7 +2355,8 @@
 "Акустическая утопия Денвера, где эхо может отражаться более сотни лет"
 ],
 "id": "empress_hope_1",
-"location": null
+"location": null,
+"icon": "denver"
 }
 ]
 },
@@ -2136,7 +2364,9 @@
 "en": "The Empress",
 "roman": "III",
 "charShort": "Дехайя",
-"charSlug": "dehaaya"
+"charSlug": "dehaaya",
+"meaning": "Дом, родные места",
+"meaningEn": "Place"
 },
 {
 "name": "Колесо Фортуны",
@@ -2150,7 +2380,8 @@
 "Мстительный дух, который убивает всякого, кто смеет его призвать"
 ],
 "id": "wheel_scary_0",
-"location": null
+"location": null,
+"icon": "seance"
 },
 {
 "tellings": [
@@ -2159,7 +2390,8 @@
 "Проклятая гадалка, которая пытается уйти от давней сделки"
 ],
 "id": "wheel_scary_1",
-"location": null
+"location": null,
+"icon": "madame"
 },
 {
 "tellings": [
@@ -2168,7 +2400,8 @@
 "Красный Карлик Детройта"
 ],
 "id": "wheel_scary_2",
-"location": null
+"location": null,
+"icon": "detroit"
 },
 {
 "tellings": [
@@ -2177,7 +2410,8 @@
 "Вампирша из Нового Орлеана"
 ],
 "id": "wheel_scary_3",
-"location": null
+"location": null,
+"icon": "neworleans"
 }
 ],
 "Захватывающие приключения": [
@@ -2188,7 +2422,8 @@
 "Мальчик, который загадывал прохожим загадки и скармливал монстру тех, кто отвечал неправильно"
 ],
 "id": "wheel_adv_0",
-"location": null
+"location": null,
+"icon": "riddles"
 },
 {
 "tellings": [
@@ -2197,7 +2432,8 @@
 "Петуния, обладательница Тройной короны"
 ],
 "id": "wheel_adv_1",
-"location": null
+"location": null,
+"icon": "racehorse"
 },
 {
 "tellings": [
@@ -2206,7 +2442,8 @@
 "Демон-неудачник, который призывает адское пламя на тех, кто обыграл его в покер"
 ],
 "id": "wheel_adv_2",
-"location": null
+"location": null,
+"icon": "atlanta"
 },
 {
 "tellings": [
@@ -2215,7 +2452,8 @@
 "Пара из Лас-Вегаса, которая обыграла в рулетку самого дьявола"
 ],
 "id": "wheel_adv_3",
-"location": null
+"location": null,
+"icon": "lasvegas"
 }
 ],
 "Весёлые": [
@@ -2226,7 +2464,8 @@
 "Ребенок-миллионер, который нанимает сотни бедняков, чтобы те развлекали его танцами"
 ],
 "id": "wheel_fun_0",
-"location": null
+"location": null,
+"icon": "richkid"
 },
 {
 "tellings": [
@@ -2235,7 +2474,8 @@
 "Флойд, нервный серийный убийца"
 ],
 "id": "wheel_fun_1",
-"location": null
+"location": null,
+"icon": "floydprospector"
 }
 ],
 "Грустные": [
@@ -2246,7 +2486,8 @@
 "Работник, который уморил себя голодом, чтобы накормить своих голодных детей"
 ],
 "id": "wheel_sad_0",
-"location": null
+"location": null,
+"icon": "jackhammer"
 },
 {
 "tellings": [
@@ -2255,18 +2496,20 @@
 "Люди, которые съели корову, погибшую в пылевой буре, и сами наполнились пылью"
 ],
 "id": "wheel_sad_1",
-"location": null
+"location": null,
+"icon": "storm"
 }
 ],
 "Счастливые/Оптимистичные": [
 {
 "tellings": [
 "Птица, предсказывающая будущее",
-"The bird which - for good or ill - could speak only the truth+2",
+"Птица, что — к добру или к худу — говорила лишь правду",
 "Священная птица с даром предвидения, которая за плату изменяет будущее"
 ],
 "id": "wheel_hope_0",
-"location": null
+"location": null,
+"icon": "rosalie"
 },
 {
 "tellings": [
@@ -2283,7 +2526,9 @@
 "en": "Wheel of Fortune",
 "roman": "X",
 "charShort": "Дюпри",
-"charSlug": "dupree"
+"charSlug": "dupree",
+"meaning": "Удача, судьба",
+"meaningEn": "Fortune"
 }
 ],
 "moods": [

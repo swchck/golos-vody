@@ -72,6 +72,7 @@ const CARD_BY_SLUG = Object.fromEntries(data.cards.map((c) => [c.slug, c]))
 const KIND_LABEL = { traveling: 'кочующая', chapter: 'история персонажа', folklore: 'фольклор', other: '' }
 const GKEY = 'gv-grades-v1'
 const TKEY = 'gv-told-v1'
+const VKEY = 'gv-variant-v1'
 const loadLS = (k) => {
   try {
     return JSON.parse(localStorage.getItem(k)) || {}
@@ -93,29 +94,49 @@ export default function App() {
   const [sort, setSort] = useState('card') // card | grade | told | az
   const [modal, setModal] = useState(null) // {story, card, mood}
   const [overlay, setOverlay] = useState(null) // 'hint' | 'stats' | 'guide' | null
-  const [theme, setTheme] = useState(
-    () =>
-      localStorage.getItem('gv-theme') ||
-      (window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'night' : 'day'),
+  const [theme, setTheme] = useState(() =>
+    localStorage.getItem('gv-theme-manual') === '1' && localStorage.getItem('gv-theme')
+      ? localStorage.getItem('gv-theme')
+      : window.matchMedia?.('(prefers-color-scheme: dark)').matches
+        ? 'night'
+        : 'day',
   )
+  // manual toggle pins the theme; otherwise it tracks the OS live
+  const toggleTheme = useCallback(() => {
+    setTheme((t) => {
+      const next = t === 'day' ? 'night' : 'day'
+      localStorage.setItem('gv-theme', next)
+      localStorage.setItem('gv-theme-manual', '1')
+      return next
+    })
+  }, [])
   const [grades, setGrades] = useState(() => loadLS(GKEY))
   const [told, setTold] = useState(() => loadLS(TKEY))
+  const [variant, setVariant] = useState(() => loadLS(VKEY))
   const [lang, setLang] = useState(() => localStorage.getItem('gv-lang') || 'ru')
   const [gs, setGs] = useState(null) // lazy-loaded gamestories.json
   const [gModal, setGModal] = useState(null) // opened game story
   const stageRef = useRef(null)
   const fileRef = useRef(null)
 
-  useEffect(() => localStorage.setItem('gv-theme', theme), [theme])
+  useEffect(() => {
+    const mq = window.matchMedia?.('(prefers-color-scheme: dark)')
+    if (!mq) return
+    const onChange = (e) => {
+      if (localStorage.getItem('gv-theme-manual') !== '1') setTheme(e.matches ? 'night' : 'day')
+    }
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
   useEffect(() => localStorage.setItem('gv-lang', lang), [lang])
   useEffect(() => {
-    if (view === 'all' && !gs) {
+    if ((view === 'all' || view === 'camp' || modal) && !gs) {
       fetch(`${BASE}gamestories.json`)
         .then((r) => r.json())
         .then(setGs)
         .catch(() => setGs({ error: true, stories: [], meta: {} }))
     }
-  }, [view, gs])
+  }, [view, modal, gs])
   useEffect(() => {
     if (!localStorage.getItem('gv-seen-guide')) {
       setOverlay('guide')
@@ -139,6 +160,46 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem(TKEY, JSON.stringify(told))
   }, [told])
+  useEffect(() => {
+    localStorage.setItem(VKEY, JSON.stringify(variant))
+  }, [variant])
+
+  // a variant story lives under its game default card until the player marks which
+  // card the mini-game choice actually gave them; then it moves to that card everywhere.
+  const setStoryVariant = useCallback((id, slug) => {
+    setVariant((prev) => {
+      const next = { ...prev }
+      if (!slug || prev[id] === slug) delete next[id]
+      else next[id] = slug
+      return next
+    })
+  }, [])
+  const allEff = useMemo(
+    () =>
+      ALL.map((s) => {
+        const vc = variant[s.id] && CARD_BY_SLUG[variant[s.id]]
+        return vc && vc.slug !== s.card.slug ? { ...s, card: vc } : s
+      }),
+    [variant],
+  )
+  // character-chapter stories are wildcards (jokers): universal, fit any mood
+  const wildcards = useMemo(() => {
+    if (!gs || gs.error) return []
+    return gs.stories
+      .filter((s) => s.kind === 'chapter')
+      .map((s) => {
+        const slug = charSlug(s.character)
+        const ch = CHARACTERS.find((c) => c.slug === slug)
+        return {
+          ...s,
+          wildcard: true,
+          charSlug: slug,
+          short: ch?.short || s.character,
+          title: `${ch?.short || s.character} · глава ${chapterNo(s.id)}`,
+        }
+      })
+      .sort((a, b) => a.charSlug.localeCompare(b.charSlug) || chapterNo(a.id) - chapterNo(b.id))
+  }, [gs])
 
   const toggleTold = useCallback((id, idx) => {
     setTold((prev) => {
@@ -175,16 +236,23 @@ export default function App() {
     if (owned === 'missing') return g === 0
     if (owned === 'partial') return g > 0 && g < 3
     if (owned === 'untold') return g > 0 && t === 0
+    if (owned === 'variants') return (s.variantCards || []).length === 2
     return true
   }
 
   // ---- wheel view data ----
   const card = data.cards[active]
   const wheelStories = useMemo(
-    () => (card.stories[mood] || []).filter((s) => matchQ(s) && matchOwned(s)),
-    [card, mood, q, owned, grades, told],
+    () =>
+      allEff.filter(
+        (s) => s.card.slug === card.slug && s.mood === mood && matchQ(s) && matchOwned(s),
+      ),
+    [allEff, card, mood, q, owned, grades, told],
   )
-  const hasMood = useCallback((c) => (c.stories[mood] || []).length > 0, [mood])
+  const hasMood = useCallback(
+    (c) => allEff.some((s) => s.card.slug === c.slug && s.mood === mood),
+    [allEff, mood],
+  )
 
   // ---- pointer follows cursor ----
   const aimAt = useCallback((cx, cy) => {
@@ -237,7 +305,7 @@ export default function App() {
 
   const exportJson = () => {
     const blob = new Blob(
-      [JSON.stringify({ app: 'golos-vody', version: 1, grades, told }, null, 2)],
+      [JSON.stringify({ app: 'golos-vody', version: 1, grades, told, variant }, null, 2)],
       { type: 'application/json' },
     )
     const a = document.createElement('a')
@@ -256,6 +324,8 @@ export default function App() {
         const g = parsed.grades && typeof parsed.grades === 'object' ? parsed.grades : parsed
         setGrades((prev) => ({ ...prev, ...g }))
         if (parsed.told && typeof parsed.told === 'object') setTold((prev) => ({ ...prev, ...parsed.told }))
+        if (parsed.variant && typeof parsed.variant === 'object')
+          setVariant((prev) => ({ ...prev, ...parsed.variant }))
       } catch {
         alert('Не получилось прочитать файл — нужен JSON, выгруженный этим приложением.')
       }
@@ -298,7 +368,7 @@ export default function App() {
             <div className="collbox">
               <button
                 className="ghost theme-btn"
-                onClick={() => setTheme((t) => (t === 'day' ? 'night' : 'day'))}
+                onClick={toggleTheme}
                 title={theme === 'day' ? 'Ночная тема' : 'Дневная тема'}
               >
                 {theme === 'day' ? '☾ Ночь' : '☀ День'}
@@ -403,7 +473,7 @@ export default function App() {
                   onPointerEnter={() => setAim(i)}
                   onClick={() => openCard(i)}
                 >
-                  <img src={`${BASE}icons/${c.slug}.png`} alt="" draggable="false" />
+                  <img src={`${BASE}icons/${c.slug}.webp`} alt="" draggable="false" />
                 </button>
               )
             })}
@@ -432,6 +502,7 @@ export default function App() {
                 <span className="roman">{card.roman}</span>
                 <h2>{card.name}</h2>
                 <div className="en">{card.en}</div>
+                {card.meaning && <div className="card-meaning">{card.meaning}</div>}
                 <div className="teller">
                   <span className="lbl">История персонажа</span>
                   {card.character || '—'}
@@ -468,17 +539,26 @@ export default function App() {
           )}
         </main>
       ) : view === 'all' ? (
-        <GameCatalog
-          gs={gs}
-          lang={lang}
-          setLang={setLang}
-          mood={mood}
+        <AllView
+          stories={allEff}
           allMoods={allMoods}
-          query={query}
-          onOpen={setGModal}
+          mood={mood}
+          matchQ={matchQ}
+          matchOwned={matchOwned}
+          owned={owned}
+          setOwned={setOwned}
+          sort={sort}
+          setSort={setSort}
+          grades={grades}
+          cycle={cycle}
+          told={told}
+          onOpen={openStory}
+          wildcards={wildcards}
+          onOpenChapter={setGModal}
         />
       ) : (
         <CampView
+          stories={allEff}
           allMoods={allMoods}
           mood={mood}
           setMood={setMood}
@@ -488,6 +568,9 @@ export default function App() {
           told={told}
           toggleTold={toggleTold}
           onOpen={openStory}
+          gs={gs}
+          lang={lang}
+          setLang={setLang}
         />
       )}
 
@@ -503,6 +586,11 @@ export default function App() {
           onCycle={() => cycle(modal.story.id)}
           told={told[modal.story.id] || []}
           onToggleTold={(i) => toggleTold(modal.story.id, i)}
+          gs={gs}
+          lang={lang}
+          setLang={setLang}
+          variant={variant[modal.story.id] || null}
+          onSetVariant={(slug) => setStoryVariant(modal.story.id, slug)}
           onClose={() => setModal(null)}
         />
       )}
@@ -531,7 +619,7 @@ export default function App() {
         <div className="msheet-scrim" onClick={() => setMenuOpen(false)}>
           <div className="msheet" onClick={(e) => e.stopPropagation()}>
             <div className="msheet-grab" />
-            <button onClick={() => { setTheme((t) => (t === 'day' ? 'night' : 'day')) }}>
+            <button onClick={toggleTheme}>
               {theme === 'day' ? '☾ Ночная тема' : '☀ Дневная тема'}
             </button>
             <button onClick={() => { setOverlay('guide'); setMenuOpen(false) }}>Как играть</button>
@@ -578,7 +666,7 @@ function GameRow({ s, lang, onOpen }) {
         {s.icon ? (
           <img src={`${BASE}storyicons/${s.id}.webp`} alt="" loading="lazy" />
         ) : cards[0] ? (
-          <img src={`${BASE}icons/${cards[0].slug}.png`} alt="" />
+          <img src={`${BASE}icons/${cards[0].slug}.webp`} alt="" />
         ) : (
           <span className="gs-ico-none" />
         )}
@@ -646,16 +734,21 @@ function GameStoryModal({ story, meta, lang, setLang, onClose }) {
       <div className="modal gs-modal" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose} aria-label="Закрыть">×</button>
         <div className="gs-modal-head">
-          {story.icon && <img className="gs-modal-ico" src={`${BASE}storyicons/${story.id}.webp`} alt="" />}
+          {story.wildcard ? (
+            <img className="gs-modal-ico" src={`${BASE}chars/${story.charSlug}.webp`} alt="" />
+          ) : (
+            story.icon && <img className="gs-modal-ico" src={`${BASE}storyicons/${story.id}.webp`} alt="" />
+          )}
           <div className="gs-modal-title">
             <h2>{story.title}</h2>
             <div className="modal-sub">
               {KIND_LABEL[story.kind]}{story.character ? ` · ${story.character}` : ''}
             </div>
             <div className="gs-tags">
+              {story.wildcard && <span className="joker-badge">джокер · любое настроение</span>}
               {cards.map((c) => (
                 <span key={c.slug} className="gs-cardtag">
-                  <img src={`${BASE}icons/${c.slug}.png`} alt="" />
+                  <img src={`${BASE}icons/${c.slug}.webp`} alt="" />
                   <b>{c.name}</b>
                   {meta?.cardMeanings?.[c.slug] && <em>{meta.cardMeanings[c.slug].ru}</em>}
                 </span>
@@ -680,16 +773,23 @@ function GameStoryModal({ story, meta, lang, setLang, onClose }) {
   )
 }
 
-function AllView({ allMoods, mood, matchQ, matchOwned, owned, setOwned, sort, setSort, grades, cycle, told, onOpen }) {
+function AllView({ stories, allMoods, mood, matchQ, matchOwned, owned, setOwned, sort, setSort, grades, cycle, told, onOpen, wildcards = [], onOpenChapter }) {
   const CARD_ORDER = data.cards.map((c) => c.slug)
-  const list = ALL.filter(
-    (s) => (allMoods || s.mood === mood) && matchQ(s) && matchOwned(s),
-  ).sort((a, b) => {
-    if (sort === 'grade') return (grades[b.id] || 0) - (grades[a.id] || 0)
-    if (sort === 'told') return (told[b.id] || []).length - (told[a.id] || []).length
-    if (sort === 'az') return a.tellings[0].localeCompare(b.tellings[0], 'ru')
-    return CARD_ORDER.indexOf(a.card.slug) - CARD_ORDER.indexOf(b.card.slug)
-  })
+  const onlyWild = owned === 'wildcards'
+  const list = onlyWild
+    ? []
+    : stories
+        .filter((s) => (allMoods || s.mood === mood) && matchQ(s) && matchOwned(s))
+        .sort((a, b) => {
+          if (sort === 'grade') return (grades[b.id] || 0) - (grades[a.id] || 0)
+          if (sort === 'told') return (told[b.id] || []).length - (told[a.id] || []).length
+          if (sort === 'az') return a.tellings[0].localeCompare(b.tellings[0], 'ru')
+          return CARD_ORDER.indexOf(a.card.slug) - CARD_ORDER.indexOf(b.card.slug)
+        })
+  const wildList =
+    onlyWild || (owned === 'all' && allMoods)
+      ? wildcards.filter((w) => matchQ({ tellings: [w.title, ...(w.ru || [])] }))
+      : []
   return (
     <main className="allview">
       <div className="allbar">
@@ -700,6 +800,8 @@ function AllView({ allMoods, mood, matchQ, matchOwned, owned, setOwned, sort, se
             ['missing', 'Не собраны'],
             ['partial', 'Не полные'],
             ['untold', 'Не рассказаны'],
+            ['variants', 'Разные карты'],
+            ['wildcards', 'Джокеры'],
           ].map(([k, l]) => (
             <button key={k} className={owned === k ? 'on' : ''} onClick={() => setOwned(k)}>
               {l}
@@ -716,11 +818,13 @@ function AllView({ allMoods, mood, matchQ, matchOwned, owned, setOwned, sort, se
               <option value="az">А→Я</option>
             </select>
           </label>
-          <span className="allcount">{list.length} из {TOTAL}</span>
+          <span className="allcount">{list.length + wildList.length} из {TOTAL}</span>
         </div>
       </div>
       <div className="allgrid">
-        {list.length === 0 && <p className="empty-msg">Ничего не найдено под эти фильтры.</p>}
+        {list.length === 0 && wildList.length === 0 && (
+          <p className="empty-msg">Ничего не найдено под эти фильтры.</p>
+        )}
         {list.map((s) => (
           <StoryRow
             key={s.id}
@@ -734,8 +838,33 @@ function AllView({ allMoods, mood, matchQ, matchOwned, owned, setOwned, sort, se
             onOpen={() => onOpen(s, s.card, s.mood)}
           />
         ))}
+        {wildList.map((w) => (
+          <WildcardRow key={w.id} w={w} onOpen={() => onOpenChapter(w)} />
+        ))}
       </div>
     </main>
+  )
+}
+
+function WildcardRow({ w, onOpen }) {
+  return (
+    <article className="story wildcard" onClick={onOpen}>
+      <div className="story-row">
+        <span className="eye-btn joker-eye" aria-hidden title="джокер — без грейдов">
+          <Eye grade={0} />
+        </span>
+        <span className="story-icon joker">
+          <img src={`${BASE}chars/${w.charSlug}.webp`} alt="" loading="lazy" />
+        </span>
+        <span className="story-main">
+          <span className="story-title">{w.title}</span>
+          <span className="story-meta">
+            <span className="joker-badge">джокер</span> история персонажа · подходит под любое настроение
+          </span>
+        </span>
+        <span className="chev" aria-hidden>›</span>
+      </div>
+    </article>
   )
 }
 
@@ -755,7 +884,11 @@ function StoryRow({ story, card, mood, showMeta, grade, onCycle, told = [], onOp
           <Eye grade={grade} />
         </button>
         <span className="story-icon">
-          <img src={`${BASE}icons/${card.slug}.png`} alt="" />
+          <img
+            src={story.icon ? `${BASE}storyicons/${story.icon}.webp` : `${BASE}icons/${card.slug}.webp`}
+            alt=""
+            loading="lazy"
+          />
         </span>
         <span className="story-main" onClick={onOpen}>
           <span className="story-title">{story.tellings[0]}</span>
@@ -771,7 +904,7 @@ function StoryRow({ story, card, mood, showMeta, grade, onCycle, told = [], onOp
               .sort((a, b) => a - b)
               .slice(0, 5)
               .map((i) => (
-                <img key={i} src={`${BASE}chars/${CHARACTERS[i].slug}.png`} alt={CHARACTERS[i].short} />
+                <img key={i} src={`${BASE}chars/${CHARACTERS[i].slug}.webp`} alt={CHARACTERS[i].short} loading="lazy" />
               ))}
             {told.length > 5 && <em>+{told.length - 5}</em>}
           </span>
@@ -795,22 +928,38 @@ function StoryRow({ story, card, mood, showMeta, grade, onCycle, told = [], onOp
   )
 }
 
-function StoryModal({ story, card, mood, grade, onSetGrade, onCycle, told, onToggleTold, onClose }) {
+function StoryModal({ story, card, mood, grade, onSetGrade, onCycle, told, onToggleTold, gs, lang, setLang, variant, onSetVariant, onClose }) {
   const t = story.tellings
+  const g = story.icon && gs && !gs.error ? gs.stories.find((s) => s.id === story.icon) : null
+  const variantCards = (story.variantCards || []).map((sl) => CARD_BY_SLUG[sl]).filter(Boolean)
+  const shownCard = (variant && CARD_BY_SLUG[variant]) || card
+  const hasRu = g && g.ru && g.ru.length > 0
+  const showLang = lang === 'ru' && !hasRu ? 'en' : lang
+  const gText = g ? g[showLang] || g.en || [] : []
   return (
     <div className="modal-scrim" onClick={onClose}>
       <div className="modal" role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose} aria-label="Закрыть">
           ✕
         </button>
-        <div className="modal-hero">
-          <img className="modal-card" src={`${BASE}cards/${card.slug}.webp`} alt={card.name} />
+        <div className={`modal-hero ${story.icon ? 'has-vignette' : ''}`}>
+          {story.icon ? (
+            <img
+              className="modal-vignette"
+              src={`${BASE}storyicons/${story.icon}.webp`}
+              alt={story.tellings[0]}
+            />
+          ) : (
+            <img className="modal-card" src={`${BASE}cards/${shownCard.slug}.webp`} alt={shownCard.name} />
+          )}
           <div className="modal-head">
-            <span className="roman">{card.roman}</span>
+            <span className="roman">{shownCard.roman}</span>
             <div className={`tag ${moodCls(mood)}`}>{mood}</div>
             <h2>{story.tellings[0]}</h2>
             <div className="modal-sub">
-              <span>{card.name}</span> · <span className="en">{card.en}</span>
+              <img className="modal-cardicon" src={`${BASE}icons/${shownCard.slug}.webp`} alt="" />
+              <span>{shownCard.name}</span> · <span className="en">{shownCard.en}</span>
+              {shownCard.meaning && <span className="card-meaning"> · {shownCard.meaning}</span>}
             </div>
             <button className="grade-set" onClick={onCycle}>
               <Eye grade={grade} />
@@ -844,6 +993,44 @@ function StoryModal({ story, card, mood, grade, onSetGrade, onCycle, told, onTog
           })}
         </div>
 
+        {variantCards.length === 2 && (
+          <div className="modal-section">
+            <div className="section-lbl">
+              Разные карты{' '}
+              <span className="told-hint">
+                · отметь, какой вариант выпал у тебя — история встанет под эту карту
+              </span>
+            </div>
+            <div className="variant-cards">
+              {variantCards.map((c) => (
+                <button
+                  key={c.slug}
+                  className={`variant-card ${variant === c.slug ? 'on' : ''}`}
+                  onClick={() => onSetVariant(c.slug)}
+                  title={variant === c.slug ? 'снять отметку' : 'у меня выпал этот вариант'}
+                >
+                  <img src={`${BASE}icons/${c.slug}.webp`} alt="" />
+                  <b>{c.name}</b>
+                  {c.meaning && <em>{c.meaning}</em>}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {g && gText.length > 0 && (
+          <div className="modal-section">
+            <div className="section-lbl gs-orig-lbl">
+              Оригинал из игры
+              <LangToggle lang={lang} setLang={setLang} />
+              {lang === 'ru' && !hasRu && <span className="gs-noru">рус. перевода нет — оригинал</span>}
+            </div>
+            <div className="gs-text">
+              {gText.map((p, i) => <p key={i}>{p}</p>)}
+            </div>
+          </div>
+        )}
+
         <div className="modal-section">
           <div className="section-lbl">Где искать</div>
           <p className="where-text">{story.location || WHERE}</p>
@@ -861,7 +1048,7 @@ function StoryModal({ story, card, mood, grade, onSetGrade, onCycle, told, onTog
                 onClick={() => onToggleTold(i)}
                 title={ch.short}
               >
-                <img src={`${BASE}chars/${ch.slug}.png`} alt="" />
+                <img src={`${BASE}chars/${ch.slug}.webp`} alt="" loading="lazy" />
                 <span>{ch.short}</span>
               </button>
             ))}
@@ -872,13 +1059,13 @@ function StoryModal({ story, card, mood, grade, onSetGrade, onCycle, told, onTog
   )
 }
 
-function CampView({ allMoods, mood, matchQ, grades, told, toggleTold, onOpen, setMood, setAllMoods }) {
+function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, onOpen, setMood, setAllMoods, gs, lang, setLang }) {
   const [char, setChar] = useState(0)
   const [used, setUsed] = useState(() => new Set())
   const [infoOpen, setInfoOpen] = useState(false)
   const ch = CHARACTERS[char]
 
-  const avail = ALL.filter(
+  const avail = stories.filter(
     (s) => (grades[s.id] || 0) >= 1 && !(told[s.id] || []).includes(char) && matchQ(s),
   )
   const matchesN = allMoods ? 0 : avail.filter((s) => s.mood === mood).length
@@ -910,7 +1097,7 @@ function CampView({ allMoods, mood, matchQ, grades, told, toggleTold, onOpen, se
               onClick={() => setChar(i)}
               title={c.short}
             >
-              <img src={`${BASE}chars/${c.slug}.png`} alt="" />
+              <img src={`${BASE}chars/${c.slug}.webp`} alt="" loading="lazy" />
               <span>{c.short}</span>
             </button>
           ))}
@@ -919,7 +1106,16 @@ function CampView({ allMoods, mood, matchQ, grades, told, toggleTold, onOpen, se
         <div className="camp-info">
           <div className="camp-info-txt">
             <span className="camp-info-role">{ch.role}{ch.card ? ` · ${ch.card}` : ''}</span>
-            <span className="camp-info-loc"><em>где искать:</em> {ch.location}</span>
+            <span className="camp-info-loc">
+              <em>где искать:</em> {ch.location}
+              {ch.regions?.length > 0 && <span className="camp-regions"> · {ch.regions.join(', ')}</span>}
+            </span>
+            {(ch.conceptRu || ch.author) && (
+              <span className="camp-info-extra">
+                {ch.conceptRu && <><em>тема:</em> {ch.conceptRu}</>}
+                {ch.author && <span className="camp-author"><em>текст:</em> {ch.author}</span>}
+              </span>
+            )}
             {ch.moods?.length > 0 && (
               <span className="camp-info-moods">
                 <em>любит:</em>
@@ -971,7 +1167,7 @@ function CampView({ allMoods, mood, matchQ, grades, told, toggleTold, onOpen, se
             <section key={card.slug} className={`camp-card ${cardUsed ? 'used' : ''}`}>
               <div className="camp-card-head">
                 <span className="camp-card-icon">
-                  <img src={`${BASE}icons/${card.slug}.png`} alt="" />
+                  <img src={`${BASE}icons/${card.slug}.webp`} alt="" loading="lazy" />
                 </span>
                 <h3>{card.name}</h3>
                 {cardUsed && <span className="used-tag">карта занята</span>}
@@ -1007,18 +1203,37 @@ function CampView({ allMoods, mood, matchQ, grades, told, toggleTold, onOpen, se
         })}
       </div>
 
-      {infoOpen && <CharacterModal ch={ch} onClose={() => setInfoOpen(false)} />}
+      {infoOpen && (
+        <CharacterModal ch={ch} gs={gs} lang={lang} setLang={setLang} onClose={() => setInfoOpen(false)} />
+      )}
     </main>
   )
 }
 
-function CharacterModal({ ch, onClose }) {
+// game character name ("Dire Wolf", "Little Ben") -> app character slug
+const charSlug = (name) => {
+  const s = (name || '').toLowerCase().replace(/\s+/g, '-')
+  return s === 'dire-wolf' ? 'wolf' : s
+}
+const chapterNo = (id) => {
+  const m = /(\d+)\s*$/.exec(id || '')
+  return m ? +m[1] : 0
+}
+
+function CharacterModal({ ch, gs, lang, setLang, onClose }) {
+  const [open, setOpen] = useState(null)
+  const chapters =
+    gs && !gs.error
+      ? gs.stories
+          .filter((s) => s.kind === 'chapter' && charSlug(s.character) === ch.slug)
+          .sort((a, b) => chapterNo(a.id) - chapterNo(b.id))
+      : []
   return (
     <div className="modal-scrim" onClick={onClose}>
       <div className="modal char-modal" role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close" onClick={onClose} aria-label="Закрыть">✕</button>
         <div className="modal-hero">
-          <img className="char-portrait" src={`${BASE}chars/${ch.slug}.png`} alt={ch.short} />
+          <img className="char-portrait" src={`${BASE}chars/${ch.slug}.webp`} alt={ch.short} />
           <div className="modal-head">
             <span className="roman">{ch.role}</span>
             <h2>{ch.short}</h2>
@@ -1046,6 +1261,36 @@ function CharacterModal({ ch, onClose }) {
           <div className="section-lbl">О персонаже</div>
           <p className="guide-p">{ch.bio}</p>
         </div>
+        {chapters.length > 0 && (
+          <div className="modal-section">
+            <div className="section-lbl gs-orig-lbl">
+              История жизни · {chapters.length} {plural(chapters.length)} из игры
+              <LangToggle lang={lang} setLang={setLang} />
+            </div>
+            <div className="chapters">
+              {chapters.map((c, i) => {
+                const hasRu = c.ru && c.ru.length > 0
+                const show = lang === 'ru' && !hasRu ? 'en' : lang
+                const text = c[show] || c.en || []
+                const isOpen = open === i
+                return (
+                  <div key={c.id} className={`chapter ${isOpen ? 'open' : ''}`}>
+                    <button className="chapter-head" onClick={() => setOpen(isOpen ? null : i)}>
+                      <span className="chapter-no">Глава {chapterNo(c.id) || i + 1}</span>
+                      {lang === 'ru' && !hasRu && <span className="gs-noru">только оригинал</span>}
+                      <span className="chapter-toggle">{isOpen ? '−' : '+'}</span>
+                    </button>
+                    {isOpen && (
+                      <div className="chapter-body gs-text">
+                        {text.map((p, j) => <p key={j}>{p}</p>)}
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
