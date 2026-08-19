@@ -411,7 +411,7 @@ export default function App() {
               ×
             </button>
             <div className="reading-card">
-              <img className="bigcard" src={`${BASE}icons/${card.slug}.png`} alt={card.name} />
+              <img className="bigcard" src={`${BASE}cards/${card.slug}.webp`} alt={card.name} />
             </div>
             <div className="reading-body">
               <div className="card-head">
@@ -665,7 +665,7 @@ function StoryModal({ story, card, mood, grade, onSetGrade, onCycle, told, onTog
           ✕
         </button>
         <div className="modal-hero">
-          <img className="modal-card" src={`${BASE}icons/${card.slug}.png`} alt={card.name} />
+          <img className="modal-card" src={`${BASE}cards/${card.slug}.webp`} alt={card.name} />
           <div className="modal-head">
             <span className="roman">{card.roman}</span>
             <div className={`tag ${moodCls(mood)}`}>{mood}</div>
