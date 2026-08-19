@@ -2302,7 +2302,28 @@
 "location": "Эль-Пасо, Техас",
 "card": "Двойка Монет",
 "moods": [],
-"bio": "Сборщица фруктов, увлечённая набирающим силу рабочим движением; вставляет в речь испанские слова. Выросла в Сан-Габриэле (Эквадор)."
+"bio": "Сборщица фруктов, увлечённая набирающим силу рабочим движением; вставляет в речь испанские слова. Выросла в Сан-Габриэле (Эквадор).",
+"author": "Stuart Arias",
+"item": "pin",
+"regions": [
+"Юго-Восток"
+],
+"concept": "Joy",
+"conceptRu": "Радость",
+"chapters": [
+{
+"title": "You Can't Stand Still",
+"ink": "rocio-chapter-1"
+},
+{
+"title": "Broken Ground",
+"ink": "rocio-chapter-2"
+},
+{
+"title": "Eagles Fill the Sky",
+"ink": "rocio-chapter-3"
+}
+]
 },
 {
 "short": "Джимми",
@@ -2314,7 +2335,32 @@
 "Захватывающие приключения",
 "Страшные"
 ],
-"bio": "Настоящее имя — Джеймс Коутс, награждён за храбрость на войне. Ныне странствующий проповедник."
+"bio": "Настоящее имя — Джеймс Коутс, награждён за храбрость на войне. Ныне странствующий проповедник.",
+"author": "Austin Walker",
+"item": "acorn",
+"regions": [
+"Юго-Восток"
+],
+"concept": "Faith",
+"conceptRu": "Вера, доверие",
+"chapters": [
+{
+"title": "Paradise Waits",
+"ink": "jimmy-chapter-1"
+},
+{
+"title": "A Shallow Grave",
+"ink": "jimmy-chapter-2"
+},
+{
+"title": "Uncertain Pains of Hell",
+"ink": "jimmy-chapter-3"
+},
+{
+"title": "Broken Angel",
+"ink": "jimmy-chapter-4"
+}
+]
 },
 {
 "short": "Фиделина",
@@ -2327,7 +2373,28 @@
 "Страшные",
 "Счастливые/Оптимистичные"
 ],
-"bio": "Мексиканская народная целительница, колесит по Мексике и Юго-Западу США в поисках ученицы, которой передаст ремесло курандер."
+"bio": "Мексиканская народная целительница, колесит по Мексике и Юго-Западу США в поисках ученицы, которой передаст ремесло курандер.",
+"author": "Mari Landgrebe",
+"item": "milagro",
+"regions": [
+"Юго-Восток"
+],
+"concept": "Heaven",
+"conceptRu": "Рай, исполнение желаний",
+"chapters": [
+{
+"title": "Blacker Than Night",
+"ink": "fidelina-chapter-1"
+},
+{
+"title": "By the Grace of God",
+"ink": "fidelina-chapter-2"
+},
+{
+"title": "My Love Is Stronger",
+"ink": "fidelina-chapter-3"
+}
+]
 },
 {
 "short": "Кэссиди",
@@ -2338,7 +2405,36 @@
 "moods": [
 "Грустные"
 ],
-"bio": "Поэт-битник в пути, чтобы пережить расставание с возлюбленным Сайласом. «Внутри него буря»."
+"bio": "Поэт-битник в пути, чтобы пережить расставание с возлюбленным Сайласом. «Внутри него буря».",
+"author": "Matthew S Burns",
+"item": "sunflower",
+"regions": [
+"Северо-Восток",
+"Юго-Восток",
+"Средний Запад",
+"Северо-Запад",
+"Юго-Запад"
+],
+"concept": "Love",
+"conceptRu": "Любовь",
+"chapters": [
+{
+"title": "You and Me",
+"ink": "cassady-chapter-1"
+},
+{
+"title": "Moaning Low",
+"ink": "cassady-chapter-2"
+},
+{
+"title": "On the Country Miles",
+"ink": "cassady-chapter-3"
+},
+{
+"title": "Let the Words Be Yours",
+"ink": "cassady-chapter-4"
+}
+]
 },
 {
 "short": "Дюпри",
@@ -2351,7 +2447,30 @@
 "Страшные",
 "Весёлые"
 ],
-"bio": "Ушла из дома юной и с тех пор оттачивает искусство афёры."
+"bio": "Ушла из дома юной и с тех пор оттачивает искусство афёры.",
+"author": "Cara Ellison",
+"item": "dice",
+"regions": [
+"Северо-Восток",
+"Средний Запад",
+"Юго-Восток"
+],
+"concept": "Fortune",
+"conceptRu": "Удача, судьба",
+"chapters": [
+{
+"title": "Queen of Diamonds",
+"ink": "dupree-chapter-1"
+},
+{
+"title": "Trouble Ahead, Trouble Behind",
+"ink": "dupree-chapter-2"
+},
+{
+"title": "Loose with the Truth",
+"ink": "dupree-chapter-3"
+}
+]
 },
 {
 "short": "Роуз",
@@ -2364,7 +2483,34 @@
 "Счастливые/Оптимистичные",
 "Захватывающие приключения"
 ],
-"bio": "Хиппи эпохи Вьетнамской войны; её брата Джеймса призвали на фронт."
+"bio": "Хиппи эпохи Вьетнамской войны; её брата Джеймса призвали на фронт.",
+"author": "Johnnemann Nordhagen",
+"item": "pendant",
+"regions": [
+"Северо-Восток",
+"Юго-Запад",
+"Северо-Запад"
+],
+"concept": "TheFuture",
+"conceptRu": "Будущее",
+"chapters": [
+{
+"title": "Full of Hope, Full of Grace",
+"ink": "rose-chapter-1"
+},
+{
+"title": "Summer Flies and August Dies",
+"ink": "rose-chapter-2"
+},
+{
+"title": "The Golden Road",
+"ink": "rose-chapter-3"
+},
+{
+"title": "Faded Is the Crimson",
+"ink": "rose-chapter-4"
+}
+]
 },
 {
 "short": "Мал. Бен",
@@ -2375,7 +2521,29 @@
 "moods": [
 "Весёлые"
 ],
-"bio": "Шахтёр из Западной Виргинии; его старшего брата отправили в шахту в десять лет."
+"bio": "Шахтёр из Западной Виргинии; его старшего брата отправили в шахту в десять лет.",
+"author": "Leigh Alexander",
+"item": "gold",
+"regions": [
+"Северо-Восток",
+"Юго-Запад"
+],
+"concept": "Choice",
+"conceptRu": "Выбор, нравственность",
+"chapters": [
+{
+"title": "Cumberland Blues",
+"ink": "little-ben-chapter-1"
+},
+{
+"title": "Easy Wind",
+"ink": "little-ben-chapter-2"
+},
+{
+"title": "Union Dues",
+"ink": "little-ben-chapter-3"
+}
+]
 },
 {
 "short": "Рэй",
@@ -2387,7 +2555,28 @@
 "Весёлые",
 "Захватывающие приключения"
 ],
-"bio": "Ковбой-бродяга (Раймонд Эдвард Доусон), не мирящийся с наступлением цивилизации на Запад."
+"bio": "Ковбой-бродяга (Раймонд Эдвард Доусон), не мирящийся с наступлением цивилизации на Запад.",
+"author": "Jolie Menzel",
+"item": "flute",
+"regions": [
+"Юго-Восток"
+],
+"concept": "Freedom",
+"conceptRu": "Свобода",
+"chapters": [
+{
+"title": "White Sands",
+"ink": "ray-chapter-1"
+},
+{
+"title": "Green Glass",
+"ink": "ray-chapter-2"
+},
+{
+"title": "Red Sky",
+"ink": "ray-chapter-3"
+}
+]
 },
 {
 "short": "Квинн",
@@ -2400,7 +2589,32 @@
 "Страшные",
 "Весёлые"
 ],
-"bio": "Подросток, что катается на поездах, мечтая повидать все 48 штатов."
+"bio": "Подросток, что катается на поездах, мечтая повидать все 48 штатов.",
+"author": "Claris Cyarron and Silverstring Media",
+"item": "bandana",
+"regions": [
+"Северо-Восток",
+"Юго-Запад",
+"Средний Запад",
+"Юго-Восток",
+"Северо-Запад"
+],
+"concept": "Travel",
+"conceptRu": "Путешествие, дорога",
+"chapters": [
+{
+"title": "Nothin' Shaking",
+"ink": "quinn-chapter-1"
+},
+{
+"title": "I Will Get By",
+"ink": "quinn-chapter-2"
+},
+{
+"title": "So Many Roads",
+"ink": "quinn-chapter-3"
+}
+]
 },
 {
 "short": "Берта",
@@ -2412,7 +2626,29 @@
 "Весёлые",
 "Счастливые/Оптимистичные"
 ],
-"bio": "Беженка Пыльного котла из Оклахомы, сборщица фруктов, сочувствует рабочему движению."
+"bio": "Беженка Пыльного котла из Оклахомы, сборщица фруктов, сочувствует рабочему движению.",
+"author": "Emily Short",
+"item": "carving",
+"regions": [
+"Средний Запад",
+"Юго-Восток"
+],
+"concept": "Family",
+"conceptRu": "Семья",
+"chapters": [
+{
+"title": "Where the Four Winds Dwell",
+"ink": "bertha-chapter-1"
+},
+{
+"title": "Crying Like The Wind",
+"ink": "bertha-chapter-2"
+},
+{
+"title": "Where the Wind Don't Blow So Strange",
+"ink": "bertha-chapter-3"
+}
+]
 },
 {
 "short": "Дехайя",
@@ -2425,7 +2661,28 @@
 "Весёлые",
 "Страшные"
 ],
-"bio": "Из племени навахо, пережившая «Долгий поход»."
+"bio": "Из племени навахо, пережившая «Долгий поход».",
+"author": "Demian DinéYazhi'",
+"item": "turquoise",
+"regions": [
+"Юго-Восток"
+],
+"concept": "Place",
+"conceptRu": "Дом, родные места",
+"chapters": [
+{
+"title": "Wildflower Seed",
+"ink": "dehayaa-chapter-1"
+},
+{
+"title": "The Hardest Days",
+"ink": "dehayaa-chapter-2"
+},
+{
+"title": "Mountains of the Moon",
+"ink": "dehayaa-chapter-3"
+}
+]
 },
 {
 "short": "Мэйсон",
@@ -2436,7 +2693,29 @@
 "moods": [
 "Грустные"
 ],
-"bio": "Ветеран Первой мировой; на фронте погиб его брат Пол, сам он потерял ногу."
+"bio": "Ветеран Первой мировой; на фронте погиб его брат Пол, сам он потерял ногу.",
+"author": "Sydney Meeker",
+"item": "shell",
+"regions": [
+"Северо-Восток",
+"Средний Запад"
+],
+"concept": "Death",
+"conceptRu": "Смерть, перемены, конец",
+"chapters": [
+{
+"title": "Pay For Your Lie",
+"ink": "mason-chapter-1"
+},
+{
+"title": "He's Gone",
+"ink": "mason-chapter-2"
+},
+{
+"title": "Crippled but Free",
+"ink": "mason-chapter-3"
+}
+]
 },
 {
 "short": "Алтея",
@@ -2447,7 +2726,29 @@
 "moods": [
 "Страшные"
 ],
-"bio": "Некогда знаменитая блюзовая певица, заключившая сделку с Дьяволом. Родом из Мемфиса."
+"bio": "Некогда знаменитая блюзовая певица, заключившая сделку с Дьяволом. Родом из Мемфиса.",
+"author": "Gita Jackson",
+"item": "soul",
+"regions": [
+"Средний Запад",
+"Юго-Восток"
+],
+"concept": "Bondage",
+"conceptRu": "Неволя, плен",
+"chapters": [
+{
+"title": "Full of the Blues",
+"ink": "althea-chapter-1"
+},
+{
+"title": "Friend of the Devil",
+"ink": "althea-chapter-2"
+},
+{
+"title": "Shadows in the Flames",
+"ink": "althea-chapter-3"
+}
+]
 },
 {
 "short": "Шоу",
@@ -2460,7 +2761,29 @@
 "Страшные",
 "Грустные"
 ],
-"bio": "В юности мечтал стать фермером, вступил в союз издольщиков, позже угодил в тюрьму."
+"bio": "В юности мечтал стать фермером, вступил в союз издольщиков, позже угодил в тюрьму.",
+"author": "Gita Jackson",
+"item": "feather",
+"regions": [
+"Средний Запад",
+"Юго-Восток"
+],
+"concept": "Authority",
+"conceptRu": "Власть, порядок",
+"chapters": [
+{
+"title": "Down in the Valley of the Shadow",
+"ink": "shaw-chapter-1"
+},
+{
+"title": "Cold Iron Shackles and a Ball and Chain",
+"ink": "shaw-chapter-2"
+},
+{
+"title": "Promised Land Calling",
+"ink": "shaw-chapter-3"
+}
+]
 },
 {
 "short": "Август",
@@ -2469,7 +2792,35 @@
 "location": "Сиэтл, Вашингтон",
 "card": "Солнце",
 "moods": [],
-"bio": "Бывший моряк торгового флота, спившийся после того, как потерял всё."
+"bio": "Бывший моряк торгового флота, спившийся после того, как потерял всё.",
+"author": "Anne Toole",
+"item": "book",
+"regions": [
+"Северо-Восток",
+"Юго-Запад",
+"Юго-Восток",
+"Северо-Запад"
+],
+"concept": "ThePast",
+"conceptRu": "Прошлое, воспоминания",
+"chapters": [
+{
+"title": "Wharf Rat",
+"ink": "august-chapter-1"
+},
+{
+"title": "Like An Angel",
+"ink": "august-chapter-2"
+},
+{
+"title": "Can't Win for Losing",
+"ink": "august-chapter-3"
+},
+{
+"title": "Fly Away",
+"ink": "august-chapter-4"
+}
+]
 },
 {
 "short": "Франклин",
@@ -2478,7 +2829,32 @@
 "location": "Кливленд, Огайо",
 "card": "Девятка Мечей",
 "moods": [],
-"bio": "Проводник пульмановских вагонов, член Братства проводников спальных вагонов."
+"bio": "Проводник пульмановских вагонов, член Братства проводников спальных вагонов.",
+"author": "Jordan Minor",
+"item": "watch",
+"regions": [
+"Северо-Восток",
+"Юго-Восток",
+"Средний Запад",
+"Северо-Запад",
+"Юго-Запад"
+],
+"concept": "Sadness",
+"conceptRu": "Печаль, грусть",
+"chapters": [
+{
+"title": "Nothing Left to Do But Smile, Smile, Smile",
+"ink": "franklin-chapter-1"
+},
+{
+"title": "The Whistle of the Evening Train",
+"ink": "franklin-chapter-2"
+},
+{
+"title": "Rising Up To Paradise",
+"ink": "franklin-chapter-3"
+}
+]
 },
 {
 "short": "Волк",
@@ -2488,7 +2864,26 @@
 "location": "Только в начале и конце пути (и после смерти)",
 "card": null,
 "moods": [],
-"bio": "Задаёт тебе задание в начале и встречает в конце. Ему можно рассказать любые пять историй — на прогресс не влияет, зато идеально для фарма грейдов. Чтобы встретить его посреди пути, нужно умереть."
+"bio": "Задаёт тебе задание в начале и встречает в конце. Ему можно рассказать любые пять историй — на прогресс не влияет, зато идеально для фарма грейдов. Чтобы встретить его посреди пути, нужно умереть.",
+"author": "",
+"item": null,
+"regions": [],
+"concept": "TheFuture",
+"conceptRu": "Будущее",
+"chapters": [
+{
+"title": "Where the Water Tastes Like Wine",
+"ink": "dire-wolf-intro-2"
+},
+{
+"title": "Where the Water Tastes Like Wine",
+"ink": "dire-wolf-chapter-2"
+},
+{
+"title": "Where the Water Tastes Like Wine",
+"ink": "dire-wolf-chapter-3"
+}
+]
 }
 ]
 }
