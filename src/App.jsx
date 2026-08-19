@@ -1,56 +1,31 @@
 import { useMemo, useRef, useState, useEffect, useCallback } from 'react'
 import data from './data.json'
 import { Eye } from './Eye.jsx'
+import { tr, moodShort, moodFull, MOOD_HINTS, cardName, cardAlt, cardMeaning } from './i18n.js'
 
 // base path so /icons and /chars resolve under a GitHub Pages sub-path too
 const BASE = import.meta.env.BASE_URL
 
+// mood keys are Russian because they double as the join key against story data;
+// their display labels are localized via moodShort/moodFull
 const MOODS = [
-  { key: 'Страшные', short: 'Страшные', cls: 'm-scary' },
-  { key: 'Захватывающие приключения', short: 'Приключения', cls: 'm-adv' },
-  { key: 'Весёлые', short: 'Весёлые', cls: 'm-fun' },
-  { key: 'Грустные', short: 'Грустные', cls: 'm-sad' },
-  { key: 'Счастливые/Оптимистичные', short: 'Светлые', cls: 'm-hope' },
+  { key: 'Страшные', cls: 'm-scary' },
+  { key: 'Захватывающие приключения', cls: 'm-adv' },
+  { key: 'Весёлые', cls: 'm-fun' },
+  { key: 'Грустные', cls: 'm-sad' },
+  { key: 'Счастливые/Оптимистичные', cls: 'm-hope' },
 ]
 const moodCls = (k) => MOODS.find((m) => m.key === k)?.cls || 'm-fun'
-const GRADE_LABEL = ['грейд I', 'грейд II', 'грейд III']
-const WHERE =
-  'Ищи на карте домики с иконкой глаза. Большинство историй встречается случайно в фиксированном порядке сбора; часть привязана к конкретному городу или региону. Быстро поднимать грейды удобно в Джексонвилле (юго-восток, у Майами) — там два дома рядом.'
 
-// как персонажи (особенно в русской локализации) просят каждое настроение
-const MOOD_HINTS = {
-  Весёлые: {
-    en: 'humorous',
-    phrases: ['расскажи шутку', 'что-нибудь смешное', 'рассмеши меня'],
-    note: 'Не каждая весёлая история — шутка: петух или корова насмешат, а женщина с письмом — нет.',
-  },
-  'Захватывающие приключения': {
-    en: 'thrilling / adventurous',
-    phrases: ['дикая история', 'чтоб сердце колотилось', 'захватывающая'],
-    note: 'Золотая середина между смешным и страшным: фолк-герой, странное существо, необычное событие.',
-  },
-  'Счастливые/Оптимистичные': {
-    en: 'hopeful',
-    phrases: ['с хорошим концом', 'история, которая дарит силы', 'что-то обнадёживающее'],
-    note: 'Эскапизм, покой, преодоление бед. Пример из гайда: астроном в пустыне.',
-  },
-  Грустные: {
-    en: 'tragic',
-    phrases: ['грустная', 'с плохим концом', 'печальная'],
-    note: 'Зеркало оптимистичных: смерть, нигилизм, горькая нота.',
-  },
-  Страшные: {
-    en: 'scary',
-    phrases: ['от которой кровь стынет в жилах', 'жуткая', 'страшная'],
-    note: 'Убийцы, призраки, чудовища, сверхъестественное.',
-  },
-}
-
-const RX = 43
-const RY = 45
+const RX = 42
+const RY = 46
+// как в игре: карты жмутся к бокам двумя дугами по ~90°, с широкими разрывами
+// сверху (меню-бар) и снизу (EXIT). правая дуга сверху→вниз, левая снизу→вверх —
+// так индексы идут непрерывным кольцом для навигации стрелками
 const NODE_ANGLES = (() => {
-  const right = Array.from({ length: 8 }, (_, i) => 68 - i * (136 / 7))
-  const left = Array.from({ length: 8 }, (_, i) => 248 - i * (136 / 7))
+  const step = 90 / 7
+  const right = Array.from({ length: 8 }, (_, i) => 45 - i * step)
+  const left = Array.from({ length: 8 }, (_, i) => 225 - i * step)
   return [...right, ...left]
 })()
 const nodePos = (deg) => {
@@ -73,7 +48,6 @@ const CARD_BY_SLUG = Object.fromEntries(data.cards.map((c) => [c.slug, c]))
 // has no English/title for that level
 const titleAt = (s, lang, i = 0) => (lang === 'en' && s.tellingsEn?.[i]) || s.tellings[i]
 const titlesFor = (s, lang) => s.tellings.map((t, i) => (lang === 'en' && s.tellingsEn?.[i]) || t)
-const KIND_LABEL = { traveling: 'кочующая', chapter: 'история персонажа', folklore: 'фольклор', other: '' }
 const GKEY = 'gv-grades-v1'
 const TKEY = 'gv-told-v1'
 const VKEY = 'gv-variant-v1'
@@ -122,7 +96,11 @@ export default function App() {
   const [gModal, setGModal] = useState(null) // opened game story
   const stageRef = useRef(null)
   const fileRef = useRef(null)
+  const L = tr(lang)
 
+  useEffect(() => {
+    document.documentElement.lang = lang
+  }, [lang])
   useEffect(() => {
     const bg = theme === 'night' ? '#18130d' : '#e7ddc6'
     document.getElementById('theme-color')?.setAttribute('content', bg)
@@ -205,11 +183,11 @@ export default function App() {
           wildcard: true,
           charSlug: slug,
           short: ch?.short || s.character,
-          title: `${ch?.short || s.character} · глава ${chapterNo(s.id)}`,
+          title: `${ch?.short || s.character} · ${L.chapter.toLowerCase()} ${chapterNo(s.id)}`,
         }
       })
       .sort((a, b) => a.charSlug.localeCompare(b.charSlug) || chapterNo(a.id) - chapterNo(b.id))
-  }, [gs])
+  }, [gs, L])
 
   const toggleTold = useCallback((id, idx) => {
     setTold((prev) => {
@@ -337,7 +315,7 @@ export default function App() {
         if (parsed.variant && typeof parsed.variant === 'object')
           setVariant((prev) => ({ ...prev, ...parsed.variant }))
       } catch {
-        alert('Не получилось прочитать файл — нужен JSON, выгруженный этим приложением.')
+        alert(L.import_fail)
       }
     }
     reader.readAsText(f)
@@ -350,13 +328,13 @@ export default function App() {
         <div className="title-block">
           <div className="kicker">Where the Water Tastes Like Wine</div>
           <h1>Голос&nbsp;воды</h1>
-          <div className="sub">альманах кочующих историй · сбор по картам Таро</div>
+          <div className="sub">{L.tagline}</div>
         </div>
 
         <button
           className="hamburger"
           onClick={() => setMenuOpen((o) => !o)}
-          aria-label="Меню"
+          aria-label={L.menu}
           aria-expanded={menuOpen}
         >
           <span /><span /><span />
@@ -366,42 +344,42 @@ export default function App() {
           <div className="toprow">
             <div className="views">
               <button className={view === 'wheel' ? 'on' : ''} onClick={() => setView('wheel')}>
-                Колесо
+                {L.view_wheel}
               </button>
               <button className={view === 'all' ? 'on' : ''} onClick={() => setView('all')}>
-                Все истории
+                {L.view_all}
               </button>
               <button className={view === 'camp' ? 'on' : ''} onClick={() => setView('camp')}>
-                Костёр
+                {L.view_camp}
               </button>
             </div>
             <div className="collbox">
-              <LangToggle lang={lang} setLang={setLang} title="Язык названий историй" />
+              <LangToggle lang={lang} setLang={setLang} title={L.lang_label} />
               <button
                 className="ghost theme-btn"
                 onClick={toggleTheme}
-                title={theme === 'day' ? 'Ночная тема' : 'Дневная тема'}
+                title={theme === 'day' ? L.theme_to_night : L.theme_to_day}
               >
-                {theme === 'day' ? '☾ Ночь' : '☀ День'}
+                {theme === 'day' ? L.theme_night : L.theme_day}
               </button>
-              <button className="ghost" onClick={() => setOverlay('guide')} title="Как играть: механики игры">
-                Как играть
+              <button className="ghost" onClick={() => setOverlay('guide')} title={L.howto_title}>
+                {L.howto}
               </button>
-              <button className="ghost" onClick={() => setOverlay('hint')} title="Какое настроение просит персонаж">
-                Подсказка
+              <button className="ghost" onClick={() => setOverlay('hint')} title={L.hint_title}>
+                {L.hint}
               </button>
               <button
                 className="collcount"
                 onClick={() => setOverlay('stats')}
-                title="Открыть статистику прогресса"
+                title={L.collected_title}
               >
-                собрано <b>{collected}</b> / {TOTAL}
+                {L.collected} <b>{collected}</b> / {TOTAL}
               </button>
-              <button className="ghost" onClick={exportJson} title="Выгрузить прогресс в JSON">
-                Экспорт
+              <button className="ghost" onClick={exportJson} title={L.export_title}>
+                {L.export}
               </button>
-              <button className="ghost" onClick={() => fileRef.current?.click()} title="Загрузить прогресс из JSON">
-                Импорт
+              <button className="ghost" onClick={() => fileRef.current?.click()} title={L.import_title}>
+                {L.import}
               </button>
               <input
                 ref={fileRef}
@@ -414,14 +392,14 @@ export default function App() {
           </div>
 
           <div className="filterrow">
-            <div className="moods" role="group" aria-label="Тип истории">
+            <div className="moods" role="group" aria-label={L.type_group}>
               {view !== 'wheel' && (
                 <button
                   className={`mood all ${allMoods ? 'on' : ''}`}
                   onClick={() => setAllMoods((v) => !v)}
-                  title={view === 'camp' ? 'любое настроение' : 'все настроения'}
+                  title={view === 'camp' ? L.filter_all_camp : L.filter_all_wheel}
                 >
-                  {view === 'camp' ? 'Любое' : 'Все'}
+                  {view === 'camp' ? L.filter_any : L.filter_all}
                 </button>
               )}
               {MOODS.map((m) => (
@@ -434,7 +412,7 @@ export default function App() {
                     setAllMoods(false)
                   }}
                 >
-                  {m.short}
+                  {moodShort(m.key, lang)}
                 </button>
               ))}
             </div>
@@ -443,7 +421,7 @@ export default function App() {
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="искать по словам в истории…"
+                placeholder={L.search_ph}
                 autoComplete="off"
               />
             </label>
@@ -479,8 +457,8 @@ export default function App() {
                     hasMood(c) ? 'has' : 'empty'
                   }`}
                   style={{ left: `${p.x}%`, top: `${p.y}%` }}
-                  title={c.name}
-                  aria-label={c.name}
+                  title={cardName(c, lang)}
+                  aria-label={cardName(c, lang)}
                   onPointerEnter={() => setAim(i)}
                   onClick={() => openCard(i)}
                 >
@@ -496,41 +474,39 @@ export default function App() {
               className="wheel-hint"
               onClick={() => openCard(aim)}
             >
-              наведи и кликни карту
+              {L.wheel_hint}
             </button>
           )}
 
           {reading && (
           <section className="reading" key={active + mood}>
-            <button className="reading-close" onClick={() => setReading(false)} aria-label="Закрыть">
+            <button className="reading-close" onClick={() => setReading(false)} aria-label={L.close}>
               ×
             </button>
             <div className="reading-card">
-              <img className="bigcard" src={`${BASE}cards/${card.slug}.webp`} alt={card.name} />
+              <img className="bigcard" src={`${BASE}cards/${card.slug}.webp`} alt={cardName(card, lang)} />
             </div>
             <div className="reading-body">
               <div className="card-head">
                 <span className="roman">{card.roman}</span>
-                <h2>{card.name}</h2>
-                <div className="en">{card.en}</div>
-                {card.meaning && <div className="card-meaning">{card.meaning}</div>}
+                <h2>{cardName(card, lang)}</h2>
+                <div className="en">{cardAlt(card, lang)}</div>
+                {cardMeaning(card, lang) && <div className="card-meaning">{cardMeaning(card, lang)}</div>}
                 <div className="teller">
-                  <span className="lbl">История персонажа</span>
+                  <span className="lbl">{L.char_story}</span>
                   {card.character || '—'}
                 </div>
               </div>
               <div className="list-head">
-                <span className={`tag ${moodCls(mood)}`}>{mood}</span>
+                <span className={`tag ${moodCls(mood)}`}>{moodFull(mood, lang)}</span>
                 <span className="count">
-                  {wheelStories.length ? `${wheelStories.length} ${plural(wheelStories.length)}` : 'пусто'}
+                  {wheelStories.length ? `${wheelStories.length} ${L.story_word(wheelStories.length)}` : L.empty}
                 </span>
               </div>
               <div className="stories">
                 {wheelStories.length === 0 && (
                   <p className="empty-msg">
-                    {q || owned !== 'all'
-                      ? 'Под фильтры ничего не попало.'
-                      : 'Для этой карты в выбранном настроении историй нет. Поверни колесо — карты с историями отмечены красным.'}
+                    {q || owned !== 'all' ? L.empty_filtered : L.empty_card}
                   </p>
                 )}
                 {wheelStories.map((s) => (
@@ -587,9 +563,9 @@ export default function App() {
         />
       )}
 
-      {overlay === 'guide' && <GuideModal onClose={() => setOverlay(null)} onMoods={() => setOverlay('hint')} />}
-      {overlay === 'hint' && <HintModal onClose={() => setOverlay(null)} />}
-      {overlay === 'stats' && <StatsModal grades={grades} told={told} onClose={() => setOverlay(null)} />}
+      {overlay === 'guide' && <GuideModal lang={lang} onClose={() => setOverlay(null)} onMoods={() => setOverlay('hint')} />}
+      {overlay === 'hint' && <HintModal lang={lang} onClose={() => setOverlay(null)} />}
+      {overlay === 'stats' && <StatsModal grades={grades} told={told} lang={lang} onClose={() => setOverlay(null)} />}
 
       {modal && (
         <StoryModal
@@ -620,11 +596,11 @@ export default function App() {
 
       <footer className="hint">
         {view === 'wheel' ? (
-          <>стрелка идёт за курсором · <b>клик</b> открывает истории · <b>← →</b> целься, <b>Enter</b> открой · глаз у истории — <b>грейд эволюции</b></>
+          <>{L.footer_wheel_1}<b>{lang === 'en' ? 'click' : 'клик'}</b>{L.footer_wheel_2}<b>← →</b>{L.footer_wheel_3}<b>Enter</b>{L.footer_wheel_4}<b>{lang === 'en' ? 'evolution grade' : 'грейд эволюции'}</b></>
         ) : view === 'camp' ? (
-          <>выбери персонажа и что он просит · <b>«Рассказал»</b> отметит историю и займёт карту на раунд · карту можно взять раз за 5 историй</>
+          <>{L.footer_camp_1}<b>«{L.tell_btn}»</b>{L.footer_camp_2}</>
         ) : (
-          <>клик по истории — детали, грейды и где искать · <b>глаз</b> — грейд эволюции · <b>аватары</b> — кому уже рассказал · прогресс хранится в браузере</>
+          <>{L.footer_all_1}<b>{lang === 'en' ? 'the eye' : 'глаз'}</b>{L.footer_all_2}<b>{lang === 'en' ? 'avatars' : 'аватары'}</b>{L.footer_all_3}</>
         )}
       </footer>
 
@@ -633,115 +609,49 @@ export default function App() {
           <div className="msheet" onClick={(e) => e.stopPropagation()}>
             <div className="msheet-grab" />
             <div className="msheet-lang">
-              <span>Язык названий</span>
+              <span>{L.lang_label}</span>
               <LangToggle lang={lang} setLang={setLang} />
             </div>
             <button onClick={toggleTheme}>
-              {theme === 'day' ? '☾ Ночная тема' : '☀ Дневная тема'}
+              {theme === 'day' ? L.theme_night_full : L.theme_day_full}
             </button>
-            <button onClick={() => { setOverlay('guide'); setMenuOpen(false) }}>Как играть</button>
-            <button onClick={() => { setOverlay('hint'); setMenuOpen(false) }}>Подсказка настроений</button>
+            <button onClick={() => { setOverlay('guide'); setMenuOpen(false) }}>{L.howto}</button>
+            <button onClick={() => { setOverlay('hint'); setMenuOpen(false) }}>{L.hint_menu}</button>
             <button onClick={() => { setOverlay('stats'); setMenuOpen(false) }}>
-              Статистика · собрано {collected}/{TOTAL}
+              {L.stats_menu} · {L.collected} {collected}/{TOTAL}
             </button>
-            <button onClick={() => { exportJson(); setMenuOpen(false) }}>Экспорт прогресса</button>
-            <button onClick={() => { fileRef.current?.click(); setMenuOpen(false) }}>Импорт прогресса</button>
+            <button onClick={() => { exportJson(); setMenuOpen(false) }}>{L.export_menu}</button>
+            <button onClick={() => { fileRef.current?.click(); setMenuOpen(false) }}>{L.import_menu}</button>
           </div>
         </div>
       )}
 
       <nav className="tabbar">
         <button className={view === 'wheel' ? 'on' : ''} onClick={() => setView('wheel')}>
-          <span className="tb-ico">✦</span>Колесо
+          <span className="tb-ico">✦</span>{L.view_wheel}
         </button>
         <button className={view === 'all' ? 'on' : ''} onClick={() => setView('all')}>
-          <span className="tb-ico">☰</span>Все истории
+          <span className="tb-ico">☰</span>{L.view_all}
         </button>
         <button className={view === 'camp' ? 'on' : ''} onClick={() => setView('camp')}>
-          <span className="tb-ico">✸</span>Костёр
+          <span className="tb-ico">✸</span>{L.view_camp}
         </button>
       </nav>
     </div>
   )
 }
 
-function LangToggle({ lang, setLang }) {
+function LangToggle({ lang, setLang, title }) {
   return (
-    <div className="lang-toggle" role="group" aria-label="Язык текста">
+    <div className="lang-toggle" role="group" aria-label={title || 'Language'} title={title}>
       <button className={lang === 'ru' ? 'on' : ''} onClick={() => setLang('ru')}>RU</button>
       <button className={lang === 'en' ? 'on' : ''} onClick={() => setLang('en')}>EN</button>
     </div>
   )
 }
 
-function GameRow({ s, lang, onOpen }) {
-  const cards = s.cards.map((sl) => CARD_BY_SLUG[sl]).filter(Boolean)
-  const preview = ((s[lang] && s[lang].length ? s[lang] : s.en) || [])[0] || ''
-  return (
-    <article className="gs-row" onClick={() => onOpen(s)}>
-      <div className="gs-ico">
-        {s.icon ? (
-          <img src={`${BASE}storyicons/${s.id}.webp`} alt="" loading="lazy" />
-        ) : cards[0] ? (
-          <img src={`${BASE}icons/${cards[0].slug}.webp`} alt="" />
-        ) : (
-          <span className="gs-ico-none" />
-        )}
-      </div>
-      <div className="gs-main">
-        <div className="gs-title">{s.title}</div>
-        <div className="gs-preview">{preview.slice(0, 96)}{preview.length > 96 ? '…' : ''}</div>
-        <div className="gs-meta">
-          {cards.map((c) => <span key={c.slug} className="gs-card">{c.name}</span>)}
-          {(s.moodsApp || []).map((m) => (
-            <span key={m} className={`tag ${moodCls(m)}`}>{MOODS.find((x) => x.key === m)?.short}</span>
-          ))}
-          {s.character && <span className="gs-who">{s.character}</span>}
-        </div>
-      </div>
-      <span className="chev">›</span>
-    </article>
-  )
-}
-
-function GameCatalog({ gs, lang, setLang, mood, allMoods, query, onOpen }) {
-  const [cardFilter, setCardFilter] = useState('all')
-  if (!gs) return <main className="allview"><p className="empty-msg">Загружаю истории из игры…</p></main>
-  if (gs.error) return <main className="allview"><p className="empty-msg">Не удалось загрузить истории игры.</p></main>
-  const q = norm(query.trim())
-  const list = gs.stories.filter((s) => {
-    if (cardFilter !== 'all' && !s.cards.includes(cardFilter)) return false
-    if (!allMoods && !(s.moodsApp || []).includes(mood)) return false
-    if (q) {
-      const hay = norm(`${s.title} ${(s[lang] || []).join(' ')} ${(s.en || []).join(' ')}`)
-      if (!hay.includes(q)) return false
-    }
-    return true
-  })
-  return (
-    <main className="allview">
-      <div className="allbar">
-        <div className="allright gs-toolbar">
-          <LangToggle lang={lang} setLang={setLang} />
-          <label className="sortbox">
-            карта
-            <select value={cardFilter} onChange={(e) => setCardFilter(e.target.value)}>
-              <option value="all">все</option>
-              {data.cards.map((c) => <option key={c.slug} value={c.slug}>{c.name}</option>)}
-            </select>
-          </label>
-          <span className="allcount">{list.length} историй</span>
-        </div>
-      </div>
-      <div className="gs-list">
-        {list.length === 0 && <p className="empty-msg">Ничего не найдено под эти фильтры.</p>}
-        {list.map((s) => <GameRow key={s.id} s={s} lang={lang} onOpen={onOpen} />)}
-      </div>
-    </main>
-  )
-}
-
 function GameStoryModal({ story, meta, lang, setLang, onClose }) {
+  const L = tr(lang)
   const cards = story.cards.map((sl) => CARD_BY_SLUG[sl]).filter(Boolean)
   const hasRu = story.ru && story.ru.length > 0
   const showLang = lang === 'ru' && !hasRu ? 'en' : lang
@@ -749,7 +659,7 @@ function GameStoryModal({ story, meta, lang, setLang, onClose }) {
   return (
     <div className="modal-scrim" onClick={onClose}>
       <div className="modal gs-modal" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose} aria-label="Закрыть">×</button>
+        <button className="modal-close" onClick={onClose} aria-label={L.close}>×</button>
         <div className="gs-modal-head">
           {story.wildcard ? (
             <img className="gs-modal-ico" src={`${BASE}chars/${story.charSlug}.webp`} alt="" />
@@ -759,19 +669,19 @@ function GameStoryModal({ story, meta, lang, setLang, onClose }) {
           <div className="gs-modal-title">
             <h2>{story.title}</h2>
             <div className="modal-sub">
-              {KIND_LABEL[story.kind]}{story.character ? ` · ${story.character}` : ''}
+              {L.kinds[story.kind]}{story.character ? ` · ${story.character}` : ''}
             </div>
             <div className="gs-tags">
-              {story.wildcard && <span className="joker-badge">джокер · любое настроение</span>}
+              {story.wildcard && <span className="joker-badge">{L.joker_badge_full}</span>}
               {cards.map((c) => (
                 <span key={c.slug} className="gs-cardtag">
                   <img src={`${BASE}icons/${c.slug}.webp`} alt="" />
-                  <b>{c.name}</b>
-                  {meta?.cardMeanings?.[c.slug] && <em>{meta.cardMeanings[c.slug].ru}</em>}
+                  <b>{cardName(c, lang)}</b>
+                  {cardMeaning(c, lang) && <em>{cardMeaning(c, lang)}</em>}
                 </span>
               ))}
               {(story.moodsApp || []).map((m) => (
-                <span key={m} className={`tag ${moodCls(m)}`}>{MOODS.find((x) => x.key === m)?.short}</span>
+                <span key={m} className={`tag ${moodCls(m)}`}>{moodShort(m, lang)}</span>
               ))}
             </div>
           </div>
@@ -779,7 +689,7 @@ function GameStoryModal({ story, meta, lang, setLang, onClose }) {
 
         <div className="gs-modal-bar">
           <LangToggle lang={lang} setLang={setLang} />
-          {lang === 'ru' && !hasRu && <span className="gs-noru">рус. перевода нет — оригинал</span>}
+          {lang === 'ru' && !hasRu && <span className="gs-noru">{L.no_ru}</span>}
         </div>
 
         <div className="gs-text">
@@ -791,6 +701,7 @@ function GameStoryModal({ story, meta, lang, setLang, onClose }) {
 }
 
 function AllView({ stories, allMoods, mood, matchQ, matchOwned, owned, setOwned, sort, setSort, grades, cycle, told, onOpen, wildcards = [], onOpenChapter, lang = 'ru' }) {
+  const L = tr(lang)
   const CARD_ORDER = data.cards.map((c) => c.slug)
   const onlyWild = owned === 'wildcards'
   const list = onlyWild
@@ -812,13 +723,13 @@ function AllView({ stories, allMoods, mood, matchQ, matchOwned, owned, setOwned,
       <div className="allbar">
         <div className="ownfilter">
           {[
-            ['all', 'Все'],
-            ['have', 'В котомке'],
-            ['missing', 'Не собраны'],
-            ['partial', 'Не полные'],
-            ['untold', 'Не рассказаны'],
-            ['variants', 'Разные карты'],
-            ['wildcards', 'Джокеры'],
+            ['all', L.own_all],
+            ['have', L.own_have],
+            ['missing', L.own_missing],
+            ['partial', L.own_partial],
+            ['untold', L.own_untold],
+            ['variants', L.own_variants],
+            ['wildcards', L.own_wildcards],
           ].map(([k, l]) => (
             <button key={k} className={owned === k ? 'on' : ''} onClick={() => setOwned(k)}>
               {l}
@@ -827,20 +738,20 @@ function AllView({ stories, allMoods, mood, matchQ, matchOwned, owned, setOwned,
         </div>
         <div className="allright">
           <label className="sortbox">
-            сортировка
+            {L.sort_label}
             <select value={sort} onChange={(e) => setSort(e.target.value)}>
-              <option value="card">по карте</option>
-              <option value="grade">по грейду</option>
-              <option value="told">по адресатам</option>
-              <option value="az">А→Я</option>
+              <option value="card">{L.sort_card}</option>
+              <option value="grade">{L.sort_grade}</option>
+              <option value="told">{L.sort_told}</option>
+              <option value="az">{L.sort_az}</option>
             </select>
           </label>
-          <span className="allcount">{list.length + wildList.length} из {TOTAL}</span>
+          <span className="allcount">{L.of_flat(list.length + wildList.length, TOTAL)}</span>
         </div>
       </div>
       <div className="allgrid">
         {list.length === 0 && wildList.length === 0 && (
-          <p className="empty-msg">Ничего не найдено под эти фильтры.</p>
+          <p className="empty-msg">{L.nothing_found}</p>
         )}
         {list.map((s) => (
           <StoryRow
@@ -857,18 +768,19 @@ function AllView({ stories, allMoods, mood, matchQ, matchOwned, owned, setOwned,
           />
         ))}
         {wildList.map((w) => (
-          <WildcardRow key={w.id} w={w} onOpen={() => onOpenChapter(w)} />
+          <WildcardRow key={w.id} w={w} onOpen={() => onOpenChapter(w)} lang={lang} />
         ))}
       </div>
     </main>
   )
 }
 
-function WildcardRow({ w, onOpen }) {
+function WildcardRow({ w, onOpen, lang = 'ru' }) {
+  const L = tr(lang)
   return (
     <article className="story wildcard" onClick={onOpen}>
       <div className="story-row">
-        <span className="eye-btn joker-eye" aria-hidden title="джокер — без грейдов">
+        <span className="eye-btn joker-eye" aria-hidden title={L.joker_no_grades}>
           <Eye grade={0} />
         </span>
         <span className="story-icon joker">
@@ -877,7 +789,7 @@ function WildcardRow({ w, onOpen }) {
         <span className="story-main">
           <span className="story-title">{w.title}</span>
           <span className="story-meta">
-            <span className="joker-badge">джокер</span> история персонажа · подходит под любое настроение
+            <span className="joker-badge">{L.joker}</span> {L.joker_sub}
           </span>
         </span>
         <span className="chev" aria-hidden>›</span>
@@ -887,6 +799,7 @@ function WildcardRow({ w, onOpen }) {
 }
 
 function StoryRow({ story, card, mood, showMeta, grade, onCycle, told = [], onOpen, lang = 'ru' }) {
+  const L = tr(lang)
   return (
     <article className={`story ${grade ? 'have' : ''}`}>
       <div className="story-row">
@@ -896,8 +809,8 @@ function StoryRow({ story, card, mood, showMeta, grade, onCycle, told = [], onOp
             e.stopPropagation()
             onCycle()
           }}
-          title={grade ? `${GRADE_LABEL[grade - 1]} — клик, чтобы поднять грейд` : 'Отметить как собранную'}
-          aria-label="грейд истории"
+          title={grade ? `${L.grades[grade - 1]}${L.grade_up_suffix}` : L.grade_mark}
+          aria-label={L.grade_story_aria}
         >
           <Eye grade={grade} />
         </button>
@@ -912,12 +825,12 @@ function StoryRow({ story, card, mood, showMeta, grade, onCycle, told = [], onOp
           <span className="story-title">{titleAt(story, lang)}</span>
           {showMeta && (
             <span className="story-meta">
-              {card.name} · <span className={`dot ${moodCls(mood)}`} /> {MOODS.find((m) => m.key === mood)?.short}
+              {cardName(card, lang)} · <span className={`dot ${moodCls(mood)}`} /> {moodShort(mood, lang)}
             </span>
           )}
         </span>
         {told.length > 0 && (
-          <span className="told-avatars" onClick={onOpen} title={`рассказано: ${told.length}`}>
+          <span className="told-avatars" onClick={onOpen} title={`${L.told_title}: ${told.length}`}>
             {[...told]
               .sort((a, b) => a - b)
               .slice(0, 5)
@@ -928,8 +841,8 @@ function StoryRow({ story, card, mood, showMeta, grade, onCycle, told = [], onOp
           </span>
         )}
         {grade === 3 ? (
-          <span className="full-badge" onClick={onOpen} title="полная — собраны все 3 грейда">
-            полная
+          <span className="full-badge" onClick={onOpen} title={L.full_title}>
+            {L.full}
           </span>
         ) : (
           <span className="grade-pips" onClick={onOpen} aria-hidden>
@@ -947,6 +860,7 @@ function StoryRow({ story, card, mood, showMeta, grade, onCycle, told = [], onOp
 }
 
 function StoryModal({ story, card, mood, grade, onSetGrade, onCycle, told, onToggleTold, gs, lang, setLang, variant, onSetVariant, onClose }) {
+  const L = tr(lang)
   const t = titlesFor(story, lang)
   const g = story.icon && gs && !gs.error ? gs.stories.find((s) => s.id === story.icon) : null
   const variantCards = (story.variantCards || []).map((sl) => CARD_BY_SLUG[sl]).filter(Boolean)
@@ -957,7 +871,7 @@ function StoryModal({ story, card, mood, grade, onSetGrade, onCycle, told, onTog
   return (
     <div className="modal-scrim" onClick={onClose}>
       <div className="modal" role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose} aria-label="Закрыть">
+        <button className="modal-close" onClick={onClose} aria-label={L.close}>
           ✕
         </button>
         <div className={`modal-hero ${story.icon ? 'has-vignette' : ''}`}>
@@ -965,23 +879,23 @@ function StoryModal({ story, card, mood, grade, onSetGrade, onCycle, told, onTog
             <img
               className="modal-vignette"
               src={`${BASE}storyicons/${story.icon}.webp`}
-              alt={story.tellings[0]}
+              alt={t[0]}
             />
           ) : (
-            <img className="modal-card" src={`${BASE}cards/${shownCard.slug}.webp`} alt={shownCard.name} />
+            <img className="modal-card" src={`${BASE}cards/${shownCard.slug}.webp`} alt={cardName(shownCard, lang)} />
           )}
           <div className="modal-head">
             <span className="roman">{shownCard.roman}</span>
-            <div className={`tag ${moodCls(mood)}`}>{mood}</div>
+            <div className={`tag ${moodCls(mood)}`}>{moodFull(mood, lang)}</div>
             <h2>{t[0]}</h2>
             <div className="modal-sub">
               <img className="modal-cardicon" src={`${BASE}icons/${shownCard.slug}.webp`} alt="" />
-              <span>{shownCard.name}</span> · <span className="en">{shownCard.en}</span>
-              {shownCard.meaning && <span className="card-meaning"> · {shownCard.meaning}</span>}
+              <span>{cardName(shownCard, lang)}</span> · <span className="en">{cardAlt(shownCard, lang)}</span>
+              {cardMeaning(shownCard, lang) && <span className="card-meaning"> · {cardMeaning(shownCard, lang)}</span>}
             </div>
             <button className="grade-set" onClick={onCycle}>
               <Eye grade={grade} />
-              <span>{grade ? GRADE_LABEL[grade - 1] : 'нет в котомке'}</span>
+              <span>{grade ? L.grades[grade - 1] : L.not_in_bag}</span>
               <span className="grade-pips big">
                 {[1, 2, 3].map((n) => (
                   <i key={n} className={n <= grade ? 'on' : ''} />
@@ -992,7 +906,7 @@ function StoryModal({ story, card, mood, grade, onSetGrade, onCycle, told, onTog
         </div>
 
         <div className="modal-section">
-          <div className="section-lbl">Эволюция · 3 грейда</div>
+          <div className="section-lbl">{L.sec_evo}</div>
           {t.map((x, j) => {
             const known = j < grade
             return (
@@ -1000,11 +914,11 @@ function StoryModal({ story, card, mood, grade, onSetGrade, onCycle, told, onTog
                 <button
                   className="tmark"
                   onClick={() => onSetGrade(known && grade === j + 1 ? j : j + 1)}
-                  title={known ? 'услышана — клик, чтобы снять' : 'отметить как услышанную'}
+                  title={known ? L.tell_heard : L.tell_mark}
                 >
                   <Eye grade={known ? 3 : 0} />
                 </button>
-                <span className="tier">{GRADE_LABEL[j] || '···'}</span>
+                <span className="tier">{L.grades[j] || '···'}</span>
                 <span className="tell-text">{x}</span>
               </div>
             )
@@ -1014,10 +928,8 @@ function StoryModal({ story, card, mood, grade, onSetGrade, onCycle, told, onTog
         {variantCards.length === 2 && (
           <div className="modal-section">
             <div className="section-lbl">
-              Разные карты{' '}
-              <span className="told-hint">
-                · отметь, какой вариант выпал у тебя — история встанет под эту карту
-              </span>
+              {L.sec_variants}{' '}
+              <span className="told-hint">{L.variants_hint}</span>
             </div>
             <div className="variant-cards">
               {variantCards.map((c) => (
@@ -1025,11 +937,11 @@ function StoryModal({ story, card, mood, grade, onSetGrade, onCycle, told, onTog
                   key={c.slug}
                   className={`variant-card ${variant === c.slug ? 'on' : ''}`}
                   onClick={() => onSetVariant(c.slug)}
-                  title={variant === c.slug ? 'снять отметку' : 'у меня выпал этот вариант'}
+                  title={variant === c.slug ? L.variant_untake : L.variant_take}
                 >
                   <img src={`${BASE}icons/${c.slug}.webp`} alt="" />
-                  <b>{c.name}</b>
-                  {c.meaning && <em>{c.meaning}</em>}
+                  <b>{cardName(c, lang)}</b>
+                  {cardMeaning(c, lang) && <em>{cardMeaning(c, lang)}</em>}
                 </button>
               ))}
             </div>
@@ -1039,9 +951,9 @@ function StoryModal({ story, card, mood, grade, onSetGrade, onCycle, told, onTog
         {g && gText.length > 0 && (
           <div className="modal-section">
             <div className="section-lbl gs-orig-lbl">
-              Оригинал из игры
+              {L.sec_original}
               <LangToggle lang={lang} setLang={setLang} />
-              {lang === 'ru' && !hasRu && <span className="gs-noru">рус. перевода нет — оригинал</span>}
+              {lang === 'ru' && !hasRu && <span className="gs-noru">{L.no_ru}</span>}
             </div>
             <div className="gs-text">
               {gText.map((p, i) => <p key={i}>{p}</p>)}
@@ -1050,13 +962,13 @@ function StoryModal({ story, card, mood, grade, onSetGrade, onCycle, told, onTog
         )}
 
         <div className="modal-section">
-          <div className="section-lbl">Где искать</div>
-          <p className="where-text">{story.location || WHERE}</p>
+          <div className="section-lbl">{L.sec_where}</div>
+          <p className="where-text">{story.location || L.where_default}</p>
         </div>
 
         <div className="modal-section">
           <div className="section-lbl">
-            Кому рассказано <span className="told-hint">· персонаж не слушает историю дважды</span>
+            {L.sec_told} <span className="told-hint">{L.told_hint}</span>
           </div>
           <div className="chars">
             {CHARACTERS.map((ch, i) => (
@@ -1078,6 +990,7 @@ function StoryModal({ story, card, mood, grade, onSetGrade, onCycle, told, onTog
 }
 
 function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, onOpen, setMood, setAllMoods, gs, lang, setLang }) {
+  const L = tr(lang)
   const [char, setChar] = useState(0)
   const [used, setUsed] = useState(() => new Set())
   const [infoOpen, setInfoOpen] = useState(false)
@@ -1106,7 +1019,7 @@ function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, o
   return (
     <main className="campview">
       <div className="camp-top">
-        <div className="camp-lbl">Сижу у костра с</div>
+        <div className="camp-lbl">{L.camp_with}</div>
         <div className="camp-chars">
           {CHARACTERS.map((c, i) => (
             <button
@@ -1125,18 +1038,18 @@ function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, o
           <div className="camp-info-txt">
             <span className="camp-info-role">{ch.role}{ch.card ? ` · ${ch.card}` : ''}</span>
             <span className="camp-info-loc">
-              <em>где искать:</em> {ch.location}
+              <em>{L.camp_where}</em> {ch.location}
               {ch.regions?.length > 0 && <span className="camp-regions"> · {ch.regions.join(', ')}</span>}
             </span>
             {(ch.conceptRu || ch.author) && (
               <span className="camp-info-extra">
-                {ch.conceptRu && <><em>тема:</em> {ch.conceptRu}</>}
-                {ch.author && <span className="camp-author"><em>текст:</em> {ch.author}</span>}
+                {ch.conceptRu && <><em>{L.camp_theme}</em> {ch.conceptRu}</>}
+                {ch.author && <span className="camp-author"><em>{L.camp_text}</em> {ch.author}</span>}
               </span>
             )}
             {ch.moods?.length > 0 && (
               <span className="camp-info-moods">
-                <em>любит:</em>
+                <em>{L.camp_likes}</em>
                 {ch.moods.map((mk) => {
                   const m = MOODS.find((x) => x.key === mk)
                   return (
@@ -1147,37 +1060,34 @@ function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, o
                         setMood(mk)
                         setAllMoods(false)
                       }}
-                      title="выбрать это настроение"
+                      title={L.camp_pick_mood}
                     >
-                      {m.short}
+                      {moodShort(mk, lang)}
                     </button>
                   )
                 })}
               </span>
             )}
           </div>
-          <button className="ghost" onClick={() => setInfoOpen(true)}>О персонаже</button>
+          <button className="ghost" onClick={() => setInfoOpen(true)}>{L.camp_about}</button>
         </div>
 
         <div className="camp-round">
           {!allMoods && (
             <span className="camp-match">
-              подходящих по настроению: <b>{matchesN}</b>
+              {L.camp_matches} <b>{matchesN}</b>
             </span>
           )}
-          <span>карт занято: <b>{used.size}</b> / 5</span>
+          <span>{L.camp_cards_used()}<b>{used.size}</b>{L.camp_of5}</span>
           <button className="ghost" onClick={() => setUsed(new Set())}>
-            Новый костёр
+            {L.camp_new}
           </button>
         </div>
       </div>
 
       <div className="camp-body">
         {byCard.length === 0 && (
-          <p className="empty-msg">
-            У тебя нет собранных историй, которых {ch.short} ещё не слышал(а). Собери ещё — или отметь
-            грейды в каталоге.
-          </p>
+          <p className="empty-msg">{L.camp_empty(ch.short)}</p>
         )}
         {byCard.map(({ card, list }) => {
           const cardUsed = used.has(card.slug)
@@ -1187,8 +1097,8 @@ function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, o
                 <span className="camp-card-icon">
                   <img src={`${BASE}icons/${card.slug}.webp`} alt="" loading="lazy" />
                 </span>
-                <h3>{card.name}</h3>
-                {cardUsed && <span className="used-tag">карта занята</span>}
+                <h3>{cardName(card, lang)}</h3>
+                {cardUsed && <span className="used-tag">{L.camp_card_locked}</span>}
                 <span className="camp-card-count">{list.length}</span>
               </div>
               <div className="camp-stories">
@@ -1202,15 +1112,15 @@ function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, o
                         {titleAt(s, lang, Math.max(0, g - 1))}
                       </span>
                       <span className="camp-story-mood">
-                        {MOODS.find((m) => m.key === s.mood)?.short}
+                        {moodShort(s.mood, lang)}
                       </span>
                       <button
                         className="tell-btn"
                         onClick={() => tell(s)}
                         disabled={cardUsed}
-                        title={cardUsed ? 'карта уже занята в этом раунде' : 'отметить рассказанной этому персонажу'}
+                        title={cardUsed ? L.tell_btn_locked : L.tell_btn_do}
                       >
-                        Рассказал
+                        {L.tell_btn}
                       </button>
                     </div>
                   )
@@ -1239,6 +1149,7 @@ const chapterNo = (id) => {
 }
 
 function CharacterModal({ ch, gs, lang, setLang, onClose }) {
+  const L = tr(lang)
   const [open, setOpen] = useState(null)
   const chapters =
     gs && !gs.error
@@ -1249,40 +1160,40 @@ function CharacterModal({ ch, gs, lang, setLang, onClose }) {
   return (
     <div className="modal-scrim" onClick={onClose}>
       <div className="modal char-modal" role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose} aria-label="Закрыть">✕</button>
+        <button className="modal-close" onClick={onClose} aria-label={L.close}>✕</button>
         <div className="modal-hero">
           <img className="char-portrait" src={`${BASE}chars/${ch.slug}.webp`} alt={ch.short} />
           <div className="modal-head">
             <span className="roman">{ch.role}</span>
             <h2>{ch.short}</h2>
             {ch.card && (
-              <div className="modal-sub">карта: <b>{ch.card}</b></div>
+              <div className="modal-sub">{L.card_word}: <b>{ch.card}</b></div>
             )}
           </div>
         </div>
         <div className="modal-section">
-          <div className="section-lbl">Где искать</div>
+          <div className="section-lbl">{L.ch_where}</div>
           <p className="where-text">{ch.location}</p>
         </div>
         {ch.moods?.length > 0 && (
           <div className="modal-section">
-            <div className="section-lbl">Любимые настроения</div>
+            <div className="section-lbl">{L.ch_moods}</div>
             <div className="char-moods">
               {ch.moods.map((mk) => {
                 const m = MOODS.find((x) => x.key === mk)
-                return <span key={mk} className={`tag ${m.cls}`}>{m.short}</span>
+                return <span key={mk} className={`tag ${m.cls}`}>{moodShort(mk, lang)}</span>
               })}
             </div>
           </div>
         )}
         <div className="modal-section">
-          <div className="section-lbl">О персонаже</div>
+          <div className="section-lbl">{L.ch_about}</div>
           <p className="guide-p">{ch.bio}</p>
         </div>
         {chapters.length > 0 && (
           <div className="modal-section">
             <div className="section-lbl gs-orig-lbl">
-              История жизни · {chapters.length} {plural(chapters.length)} из игры
+              {L.ch_life(chapters.length, L.story_word(chapters.length))}
               <LangToggle lang={lang} setLang={setLang} />
             </div>
             <div className="chapters">
@@ -1294,8 +1205,8 @@ function CharacterModal({ ch, gs, lang, setLang, onClose }) {
                 return (
                   <div key={c.id} className={`chapter ${isOpen ? 'open' : ''}`}>
                     <button className="chapter-head" onClick={() => setOpen(isOpen ? null : i)}>
-                      <span className="chapter-no">Глава {chapterNo(c.id) || i + 1}</span>
-                      {lang === 'ru' && !hasRu && <span className="gs-noru">только оригинал</span>}
+                      <span className="chapter-no">{L.chapter} {chapterNo(c.id) || i + 1}</span>
+                      {lang === 'ru' && !hasRu && <span className="gs-noru">{L.only_original}</span>}
                       <span className="chapter-toggle">{isOpen ? '−' : '+'}</span>
                     </button>
                     {isOpen && (
@@ -1314,90 +1225,105 @@ function CharacterModal({ ch, gs, lang, setLang, onClose }) {
   )
 }
 
-function GuideModal({ onClose, onMoods }) {
+function GuideModal({ lang = 'ru', onClose, onMoods }) {
+  const en = lang === 'en'
   return (
     <div className="modal-scrim" onClick={onClose}>
       <div className="modal guide-modal" role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose} aria-label="Закрыть">✕</button>
-        <h2 className="overlay-title">Как играть</h2>
+        <button className="modal-close" onClick={onClose} aria-label={en ? 'Close' : 'Закрыть'}>✕</button>
+        <h2 className="overlay-title">{en ? 'How to play' : 'Как играть'}</h2>
         <p className="overlay-intro">
-          Where the Water Tastes Like Wine — про сбор и пересказ американских баек эпохи Великой
-          депрессии. Ты бродишь по стране, собираешь истории и рассказываешь их случайным попутчикам
-          у костра, чтобы раскрыть их судьбы.
+          {en
+            ? 'Where the Water Tastes Like Wine is about collecting and retelling American tall tales of the Great Depression. You wander the country, gather stories and tell them to the travelers you meet by the fire to unlock their fates.'
+            : 'Where the Water Tastes Like Wine — про сбор и пересказ американских баек эпохи Великой депрессии. Ты бродишь по стране, собираешь истории и рассказываешь их случайным попутчикам у костра, чтобы раскрыть их судьбы.'}
         </p>
 
         <div className="guide-sec">
-          <div className="section-lbl">Как получить истории</div>
+          <div className="section-lbl">{en ? 'How to get stories' : 'Как получить истории'}</div>
           <p className="guide-p">
-            Ищи на карте <b>домики с иконкой глаза</b> и исследуй города — запустится мини-игра
-            встречи. Ещё историю жизни даёт <b>первая ночь у костра</b> с каждым персонажем.
+            {en ? (
+              <>Look for <b>houses with an eye icon</b> on the map and explore cities — an encounter mini-game starts. The <b>first night by the fire</b> with each character also gives their life story.</>
+            ) : (
+              <>Ищи на карте <b>домики с иконкой глаза</b> и исследуй города — запустится мини-игра встречи. Ещё историю жизни даёт <b>первая ночь у костра</b> с каждым персонажем.</>
+            )}
           </p>
         </div>
 
         <div className="guide-sec">
-          <div className="section-lbl">Карты и настроения</div>
+          <div className="section-lbl">{en ? 'Cards and moods' : 'Карты и настроения'}</div>
           <p className="guide-p">
-            Каждая история относится к одной из <b>16 карт Таро</b> (карта = тема: семья, свобода,
-            рок…) и к одному из <b>5 настроений</b>: страшные, приключения, весёлые, грустные,
-            светлые.
+            {en ? (
+              <>Every story belongs to one of <b>16 tarot cards</b> (a card = a theme: family, freedom, fate…) and one of <b>5 moods</b>: scary, adventurous, funny, sad, hopeful.</>
+            ) : (
+              <>Каждая история относится к одной из <b>16 карт Таро</b> (карта = тема: семья, свобода, рок…) и к одному из <b>5 настроений</b>: страшные, приключения, весёлые, грустные, светлые.</>
+            )}
           </p>
         </div>
 
         <div className="guide-sec">
-          <div className="section-lbl">Эволюция историй · 3 грейда</div>
+          <div className="section-lbl">{en ? 'Story evolution · 3 grades' : 'Эволюция историй · 3 грейда'}</div>
           <p className="guide-p">
-            Это неочевидно: после того как ты рассказал историю, она <b>обрастает слухами</b> и
-            меняется. Услышь её снова в мире (тот самый домик с глазом) — и она эволюционирует:{' '}
-            <b>грейд&nbsp;I → II → III</b>. Прогресс показывает иконка глаза:
+            {en ? (
+              <>Not obvious: once you tell a story, it <b>gathers rumors</b> and changes. Hear it again out in the world (that same eye house) and it evolves: <b>grade&nbsp;I → II → III</b>. The eye icon shows the progress:</>
+            ) : (
+              <>Это неочевидно: после того как ты рассказал историю, она <b>обрастает слухами</b> и меняется. Услышь её снова в мире (тот самый домик с глазом) — и она эволюционирует:{' '}<b>грейд&nbsp;I → II → III</b>. Прогресс показывает иконка глаза:</>
+            )}
           </p>
           <div className="guide-eyes">
-            <span><Eye grade={1} /> закрытый — I</span>
-            <span><Eye grade={2} /> приоткрытый — II</span>
-            <span><Eye grade={3} /> открытый — III</span>
+            <span><Eye grade={1} /> {en ? 'closed — I' : 'закрытый — I'}</span>
+            <span><Eye grade={2} /> {en ? 'half-open — II' : 'приоткрытый — II'}</span>
+            <span><Eye grade={3} /> {en ? 'open — III' : 'открытый — III'}</span>
           </div>
           <p className="guide-p">
-            В приложении это <b>глаз у каждой истории</b> — отмечай грейд кликом. Персонаж не станет
-            слушать одну историю дважды <b>вне зависимости от грейда</b>.
+            {en ? (
+              <>In this app that's the <b>eye on each story</b> — click to mark the grade. A character won't hear the same story twice <b>regardless of grade</b>.</>
+            ) : (
+              <>В приложении это <b>глаз у каждой истории</b> — отмечай грейд кликом. Персонаж не станет слушать одну историю дважды <b>вне зависимости от грейда</b>.</>
+            )}
           </p>
         </div>
 
         <div className="guide-sec">
-          <div className="section-lbl">Одна история — разные карты</div>
+          <div className="section-lbl">{en ? 'One story — different cards' : 'Одна история — разные карты'}</div>
           <p className="guide-p">
-            Тоже неочевидно: в мини-игре встречи <b>часть вариантов выбора помечена картой Таро</b>.
-            Твой выбор решает, под какую <b>карту и настроение</b> ляжет история (и как она будет
-            называться). Поэтому у разных игроков одна встреча даёт разные карты — меняющиеся иконки
-            при исследовании это и показывают.
+            {en ? (
+              <>Also not obvious: in the encounter mini-game <b>some of the choices are tagged with a tarot card</b>. Your choice decides which <b>card and mood</b> the story lands under (and what it's called). So one encounter gives different cards to different players — the changing icons while exploring show exactly that.</>
+            ) : (
+              <>Тоже неочевидно: в мини-игре встречи <b>часть вариантов выбора помечена картой Таро</b>. Твой выбор решает, под какую <b>карту и настроение</b> ляжет история (и как она будет называться). Поэтому у разных игроков одна встреча даёт разные карты — меняющиеся иконки при исследовании это и показывают.</>
+            )}
           </p>
         </div>
 
         <div className="guide-sec">
-          <div className="section-lbl">У костра</div>
+          <div className="section-lbl">{en ? 'By the fire' : 'У костра'}</div>
           <p className="guide-p">
-            Персонаж просит историю определённого <b>настроения</b> — угадай по его словам (жми{' '}
-            <button className="inline-link" onClick={onMoods}>«Подсказка»</button>). Попал → персонаж
-            «просыпается», открывается глава его жизни. За раунд можно рассказать <b>до 5 историй</b>,
-            каждую <b>карту — только раз за раунд</b>. Истории персонажей — <b>вайлдкарты</b>: подходят
-            под любое настроение и не имеют грейдов.
+            {en ? (
+              <>A character asks for a story of a certain <b>mood</b> — guess it from their words (hit{' '}<button className="inline-link" onClick={onMoods}>«Hint»</button>). Get it right → the character "wakes up" and a chapter of their life opens. Per round you can tell <b>up to 5 stories</b>, each <b>card only once per round</b>. Character stories are <b>wildcards</b>: they fit any mood and have no grades.</>
+            ) : (
+              <>Персонаж просит историю определённого <b>настроения</b> — угадай по его словам (жми{' '}<button className="inline-link" onClick={onMoods}>«Подсказка»</button>). Попал → персонаж «просыпается», открывается глава его жизни. За раунд можно рассказать <b>до 5 историй</b>, каждую <b>карту — только раз за раунд</b>. Истории персонажей — <b>вайлдкарты</b>: подходят под любое настроение и не имеют грейдов.</>
+            )}
           </p>
         </div>
 
         <div className="guide-sec">
-          <div className="section-lbl">Волк и смерть</div>
+          <div className="section-lbl">{en ? 'The Wolf and death' : 'Волк и смерть'}</div>
           <p className="guide-p">
-            Смерти не бойся — она почти ни на что не влияет. После неё будет раунд с <b>Волком</b>:
-            ему можно рассказать любые 5 историй (на прогресс не влияет), зато это <b>идеально для
-            фарма грейдов</b>. Быстрый способ умереть — кататься зайцем на поездах.
+            {en ? (
+              <>Don't fear death — it barely matters. After it comes a round with the <b>Wolf</b>: you can tell it any 5 stories (no effect on progress), which makes it <b>perfect for grinding grades</b>. The fast way to die is riding the rails as a stowaway.</>
+            ) : (
+              <>Смерти не бойся — она почти ни на что не влияет. После неё будет раунд с <b>Волком</b>: ему можно рассказать любые 5 историй (на прогресс не влияет), зато это <b>идеально для фарма грейдов</b>. Быстрый способ умереть — кататься зайцем на поездах.</>
+            )}
           </p>
         </div>
 
         <div className="guide-sec">
-          <div className="section-lbl">Что умеет это приложение</div>
+          <div className="section-lbl">{en ? 'What this app does' : 'Что умеет это приложение'}</div>
           <p className="guide-p">
-            <b>Колесо</b> — выбор истории как в игре · <b>Все истории</b> — каталог с фильтрами ·{' '}
-            <b>Костёр</b> — что рассказать конкретному персонажу · <b>глаз</b> — грейд · <b>аватары</b>{' '}
-            — кому уже рассказал · <b>Статистика</b> — прогресс. Всё хранится в браузере и выгружается
-            в JSON.
+            {en ? (
+              <><b>Wheel</b> — pick a story like in the game · <b>All stories</b> — catalogue with filters · <b>Campfire</b> — what to tell a specific character · <b>eye</b> — grade · <b>avatars</b> — who you already told · <b>Stats</b> — progress. Everything is stored in your browser and can be exported to JSON.</>
+            ) : (
+              <><b>Колесо</b> — выбор истории как в игре · <b>Все истории</b> — каталог с фильтрами ·{' '}<b>Костёр</b> — что рассказать конкретному персонажу · <b>глаз</b> — грейд · <b>аватары</b>{' '}— кому уже рассказал · <b>Статистика</b> — прогресс. Всё хранится в браузере и выгружается в JSON.</>
+            )}
           </p>
         </div>
       </div>
@@ -1405,23 +1331,23 @@ function GuideModal({ onClose, onMoods }) {
   )
 }
 
-function HintModal({ onClose }) {
+function HintModal({ lang = 'ru', onClose }) {
+  const L = tr(lang)
+  const H = MOOD_HINTS[lang] || MOOD_HINTS.ru
   return (
     <div className="modal-scrim" onClick={onClose}>
       <div className="modal hint-modal" role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose} aria-label="Закрыть">
+        <button className="modal-close" onClick={onClose} aria-label={L.close}>
           ✕
         </button>
-        <h2 className="overlay-title">Какое настроение просят?</h2>
-        <p className="overlay-intro">
-          Русская локализация формулирует просьбы иносказательно. Ориентируйся по фразе персонажа:
-        </p>
+        <h2 className="overlay-title">{L.hint_title}</h2>
+        <p className="overlay-intro">{H.intro}</p>
         {MOODS.map((m) => {
-          const h = MOOD_HINTS[m.key]
+          const h = H.moods[m.key]
           return (
             <div className="hint-row" key={m.key}>
               <div className="hint-mood">
-                <span className={`dot ${m.cls}`} /> {m.short} <em>· {h.en}</em>
+                <span className={`dot ${m.cls}`} /> {moodShort(m.key, lang)} <em>· {h.en}</em>
               </div>
               <div className="hint-phrases">
                 {h.phrases.map((p, i) => (
@@ -1437,7 +1363,8 @@ function HintModal({ onClose }) {
   )
 }
 
-function StatsModal({ grades, told, onClose }) {
+function StatsModal({ grades, told, lang = 'ru', onClose }) {
+  const L = tr(lang)
   const collected = ALL.filter((s) => grades[s.id]).length
   const full = ALL.filter((s) => grades[s.id] === 3).length
   const toldStories = ALL.filter((s) => (told[s.id] || []).length).length
@@ -1457,27 +1384,27 @@ function StatsModal({ grades, told, onClose }) {
   return (
     <div className="modal-scrim" onClick={onClose}>
       <div className="modal stats-modal" role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose} aria-label="Закрыть">
+        <button className="modal-close" onClick={onClose} aria-label={L.close}>
           ✕
         </button>
-        <h2 className="overlay-title">Прогресс альманаха</h2>
+        <h2 className="overlay-title">{L.stats_title}</h2>
         <div className="stat-tiles">
-          <div className="stat-tile"><b>{collected}</b><span>собрано из {TOTAL}</span></div>
-          <div className="stat-tile"><b>{full}</b><span>полных · грейд III</span></div>
-          <div className="stat-tile"><b>{toldStories}</b><span>кому-то рассказано</span></div>
+          <div className="stat-tile"><b>{collected}</b><span>{L.stats_collected(TOTAL)}</span></div>
+          <div className="stat-tile"><b>{full}</b><span>{L.stats_full}</span></div>
+          <div className="stat-tile"><b>{toldStories}</b><span>{L.stats_told}</span></div>
         </div>
-        <div className="section-lbl">По настроениям</div>
+        <div className="section-lbl">{L.stats_by_mood}</div>
         {byMood.map(({ m, total, c, f }) => (
           <div className="bar-row" key={m.key}>
-            <span className="bar-lbl">{m.short}</span>
+            <span className="bar-lbl">{moodShort(m.key, lang)}</span>
             <span className="bar"><i className={m.cls} style={{ width: `${total ? (c / total) * 100 : 0}%` }} /></span>
             <span className="bar-num">{c}/{total}{f ? ` · ${f}✦` : ''}</span>
           </div>
         ))}
-        <div className="section-lbl">По картам</div>
+        <div className="section-lbl">{L.stats_by_card}</div>
         {byCard.map(({ card, total, c }) => (
           <div className="bar-row" key={card.slug}>
-            <span className="bar-lbl">{card.name}</span>
+            <span className="bar-lbl">{cardName(card, lang)}</span>
             <span className="bar"><i style={{ width: `${total ? (c / total) * 100 : 0}%` }} /></span>
             <span className="bar-num">{c}/{total}</span>
           </div>
@@ -1487,10 +1414,3 @@ function StatsModal({ grades, told, onClose }) {
   )
 }
 
-function plural(n) {
-  const a = n % 10
-  const b = n % 100
-  if (a === 1 && b !== 11) return 'история'
-  if (a >= 2 && a <= 4 && (b < 10 || b >= 20)) return 'истории'
-  return 'историй'
-}
