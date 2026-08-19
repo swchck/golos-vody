@@ -14,7 +14,12 @@
 ],
 "id": "two-of-coins_adv_0",
 "location": null,
-"icon": "pecosbill1"
+"icon": "pecosbill1",
+"tellingsEn": [
+"Bill, the cowboy who rode into a storm",
+"Pecos Bill, the cowboy who tamed the wind",
+""
+]
 }
 ],
 "Весёлые": [
@@ -26,7 +31,12 @@
 ],
 "id": "two-of-coins_fun_0",
 "location": null,
-"icon": "basketgirl"
+"icon": "basketgirl",
+"tellingsEn": [
+"The girl with a basket of kittens",
+"A witch-girl and her kitten familiars",
+"A witch-girl who grew kittens on a tree in her backyard, like apples"
+]
 },
 {
 "tellings": [
@@ -36,7 +46,12 @@
 ],
 "id": "two-of-coins_fun_1",
 "location": null,
-"icon": "bottletree"
+"icon": "bottletree",
+"tellingsEn": [
+"The tree with bottles on its branches",
+"",
+""
+]
 },
 {
 "tellings": [
@@ -46,7 +61,12 @@
 ],
 "id": "two-of-coins_fun_2",
 "location": null,
-"icon": "girlwithcats"
+"icon": "girlwithcats",
+"tellingsEn": [
+"The girl with tons of cats",
+"The girl who could commune with cats",
+"The girl raised in the wild by a herd of over one hundred cunning feral cats"
+]
 },
 {
 "tellings": [
@@ -56,7 +76,12 @@
 ],
 "id": "two-of-coins_fun_3",
 "location": null,
-"icon": "composer"
+"icon": "composer",
+"tellingsEn": [
+"The music teacher with the bawdy songs",
+"The singers who sang their disgusting, lustful songs during a church service",
+"The sinners' church where, in worship of Satan, the congregation sings dirty songs during the service"
+]
 }
 ],
 "Грустные": [],
@@ -69,7 +94,12 @@
 ],
 "id": "two-of-coins_hope_0",
 "location": null,
-"icon": "memphis"
+"icon": "memphis",
+"tellingsEn": [
+"The ducks in the hotel fountain",
+"The duckmaster Edward D. Pembroke",
+"The royal march of the Peabody Ducks"
+]
 },
 {
 "tellings": [
@@ -79,7 +109,12 @@
 ],
 "id": "two-of-coins_hope_1",
 "location": null,
-"icon": "doublebat"
+"icon": "doublebat",
+"tellingsEn": [
+"The hidden sideshow exhibit",
+"Laurel and Hardy, the two-headed scourge of cowpokes everywhere",
+"The pair of bats who became successful slapstick comedy actors"
+]
 },
 {
 "tellings": [
@@ -89,7 +124,12 @@
 ],
 "id": "two-of-coins_hope_2",
 "location": null,
-"icon": "molassesman"
+"icon": "molassesman",
+"tellingsEn": [
+"The man who made molasses",
+"The man who ate only molasses",
+"The molasses that multiplied to feed a whole town"
+]
 },
 {
 "tellings": [
@@ -99,7 +139,12 @@
 ],
 "id": "two-of-coins_hope_3",
 "location": null,
-"icon": "notdrunk"
+"icon": "notdrunk",
+"tellingsEn": [
+"The man with the peculiar drink",
+"The potion that revealed the auras of living things",
+"The elixir that unmasked the soul"
+]
 },
 {
 "tellings": [
@@ -109,7 +154,12 @@
 ],
 "id": "two-of-coins_hope_4",
 "location": null,
-"icon": "butterflies"
+"icon": "butterflies",
+"tellingsEn": [
+"The beautiful butterflies",
+"",
+"A meadow of infinite butterflies, every color of the rainbow"
+]
 },
 {
 "tellings": [
@@ -119,7 +169,12 @@
 ],
 "id": "two-of-coins_hope_5",
 "location": null,
-"icon": "dog"
+"icon": "dog",
+"tellingsEn": [
+"The boy with the circus dog",
+"The dog who could bring you anything you wished",
+""
+]
 },
 {
 "tellings": [
@@ -129,7 +184,12 @@
 ],
 "id": "two-of-coins_hope_6",
 "location": null,
-"icon": "runciterscircus1"
+"icon": "runciterscircus1",
+"tellingsEn": [
+"The tiger cub born at Runciter's Circus",
+"The tiger cub that tried to escape Runciter's Circus the day it was born",
+"The tiger cub destined to lead circus animals out of captivity"
+]
 }
 ]
 },
@@ -154,7 +214,12 @@
 ],
 "id": "star_scary_0",
 "location": null,
-"icon": "wingdings"
+"icon": "wingdings",
+"tellingsEn": [
+"",
+"The town where gibberish symbols poxed people's bodies",
+""
+]
 },
 {
 "tellings": [
@@ -164,7 +229,12 @@
 ],
 "id": "star_scary_1",
 "location": null,
-"icon": "preacher"
+"icon": "preacher",
+"tellingsEn": [
+"",
+"The false preacher cursed to roam the land",
+"The Satan-worshipping preacher who poses as a man of God and preys on unsuspecting faithful"
+]
 },
 {
 "tellings": [
@@ -174,7 +244,12 @@
 ],
 "id": "star_scary_2",
 "location": null,
-"icon": "photography"
+"icon": "photography",
+"tellingsEn": [
+"The camera which revealed who was soon to die",
+"The camera which killed those it photographed",
+"The cursed camera, brimming with stolen souls"
+]
 },
 {
 "tellings": [
@@ -184,7 +259,12 @@
 ],
 "id": "star_scary_3",
 "location": null,
-"icon": "lovelynight"
+"icon": "lovelynight",
+"tellingsEn": [
+"The rider you met at night who loved the darkness",
+"The horse and rider made of pure shadow",
+"The Void and its shadowy steed, who bless the lost with the truth of the universe"
+]
 }
 ],
 "Захватывающие приключения": [
@@ -196,7 +276,12 @@
 ],
 "id": "star_adv_0",
 "location": null,
-"icon": "rodeo"
+"icon": "rodeo",
+"tellingsEn": [
+"The rodeo",
+"The unstoppable bronco",
+"The vicious wild horse of El Paso, and the only cowboy who could break him"
+]
 },
 {
 "tellings": [
@@ -206,7 +291,12 @@
 ],
 "id": "star_adv_1",
 "location": null,
-"icon": "snake"
+"icon": "snake",
+"tellingsEn": [
+"The idol guarded by a talking snake",
+"The cursed idol",
+"The cursed idol guarded by the devil himself"
+]
 }
 ],
 "Весёлые": [
@@ -218,7 +308,12 @@
 ],
 "id": "star_fun_0",
 "location": null,
-"icon": "leatherman"
+"icon": "leatherman",
+"tellingsEn": [
+"The Leatherman's cave",
+"The Leatherman, whose ghost haunts Connecticut",
+""
+]
 },
 {
 "tellings": [
@@ -228,7 +323,12 @@
 ],
 "id": "star_fun_1",
 "location": null,
-"icon": "guitarplayer"
+"icon": "guitarplayer",
+"tellingsEn": [
+"The guitar player who Believed",
+"The devoted guitar player who worshiped a pagan god",
+"The virtuoso whose talent came from a deal with the Devil"
+]
 },
 {
 "tellings": [
@@ -238,7 +338,12 @@
 ],
 "id": "star_fun_2",
 "location": null,
-"icon": "pigs"
+"icon": "pigs",
+"tellingsEn": [
+"The family of pig farmers",
+"The pig farmers haunted by memaw",
+"The haint who craves pigs feet"
+]
 }
 ],
 "Грустные": [],
@@ -251,7 +356,12 @@
 ],
 "id": "star_hope_0",
 "location": null,
-"icon": "prayercircle"
+"icon": "prayercircle",
+"tellingsEn": [
+"",
+"The women communing with wood spirits",
+"The wood fairies who helped rid women of the evil in their lives"
+]
 },
 {
 "tellings": [
@@ -261,7 +371,12 @@
 ],
 "id": "star_hope_1",
 "location": null,
-"icon": "woman"
+"icon": "woman",
+"tellingsEn": [
+"The mysterious woman who wanted to go to church",
+"The mysterious woman preaching the gospel to all who would listen",
+"The saint wandering the land pulling lost souls in to be saved"
+]
 },
 {
 "tellings": [
@@ -271,7 +386,12 @@
 ],
 "id": "star_hope_2",
 "location": null,
-"icon": "elpaso"
+"icon": "elpaso",
+"tellingsEn": [
+"The morality play at the Plaza Theatre in El Paso",
+"The Plaza Theatre, which often shows strange and uncanny documentaries",
+"El Paso, where everyone acts with kindness, lest their sins go on show at the theater"
+]
 },
 {
 "tellings": [
@@ -305,7 +425,12 @@
 ],
 "id": "justice_scary_0",
 "location": null,
-"icon": "alley"
+"icon": "alley",
+"tellingsEn": [
+"The spirit in the alleys",
+"The wish-granting devil that haunts the dark of the city streets",
+"The devil who'd sell you the world for the price of a kiss"
+]
 },
 {
 "tellings": [
@@ -315,7 +440,12 @@
 ],
 "id": "justice_scary_1",
 "location": null,
-"icon": "ladyinred"
+"icon": "ladyinred",
+"tellingsEn": [
+"The woman murdered by her lover",
+"The beautiful ghost who haunts the women of a hotel",
+"The murdered woman who wanders the Southwest, seeking vengeance"
+]
 }
 ],
 "Захватывающие приключения": [
@@ -327,7 +457,12 @@
 ],
 "id": "justice_adv_0",
 "location": null,
-"icon": "lunchbreak"
+"icon": "lunchbreak",
+"tellingsEn": [
+"The shady 'painters' who asked a favor",
+"The painters who, cheated of their fee, killed the man who hired them",
+"The crew of vigilante painters who attacked cheating bosses all over the country"
+]
 },
 {
 "tellings": [
@@ -337,7 +472,12 @@
 ],
 "id": "justice_adv_1",
 "location": null,
-"icon": "thedevil"
+"icon": "thedevil",
+"tellingsEn": [
+"The 'gentleman' scam artist",
+"The well-to-do man who kidnaps laborers off the street to lock in his mansion",
+"The bloodthirsty banker who kidnaps vagrants for his lavish cannibal meals"
+]
 },
 {
 "tellings": [
@@ -347,7 +487,12 @@
 ],
 "id": "justice_adv_2",
 "location": null,
-"icon": "ropingrevenge"
+"icon": "ropingrevenge",
+"tellingsEn": [
+"The man hunting his dead enemy's horse",
+"The man who sought to eradicate every trace of his dead enemy, even his horse",
+"The man who hunted his dead enemy, whose soul lived on in a horse"
+]
 },
 {
 "tellings": [
@@ -357,7 +502,12 @@
 ],
 "id": "justice_adv_3",
 "location": null,
-"icon": "loansharked"
+"icon": "loansharked",
+"tellingsEn": [
+"The handyman and the loan sharks",
+"The heroic handyman who fought off his creditors with a power drill",
+"The loan sharks who sawed a debtor's hand off with his own saw"
+]
 },
 {
 "tellings": [
@@ -367,7 +517,12 @@
 ],
 "id": "justice_adv_4",
 "location": null,
-"icon": "shellgame"
+"icon": "shellgame",
+"tellingsEn": [
+"The trickster who emptied bullets from lawmen's guns",
+"The trickster who forced lawmen to play Russian roulette with their own guns",
+""
+]
 }
 ],
 "Весёлые": [
@@ -378,7 +533,12 @@
 "Ведьма-креолка, которая через прохожих передает свои проклятия"
 ],
 "id": "justice_fun_0",
-"location": null
+"location": null,
+"tellingsEn": [
+"The mysterious woman with a letter delivery",
+"",
+"The Creole witch asking passersby to deliver her curses"
+]
 },
 {
 "tellings": [
@@ -388,7 +548,12 @@
 ],
 "id": "justice_fun_1",
 "location": null,
-"icon": "dustbowl"
+"icon": "dustbowl",
+"tellingsEn": [
+"The newspaper reporter with strictly positive views",
+"The newspaper that found the positive side of the dust storms",
+"The newspaper that made up stock prices after Black Tuesday to stave off the Depression"
+]
 },
 {
 "tellings": [
@@ -398,7 +563,12 @@
 ],
 "id": "justice_fun_2",
 "location": null,
-"icon": "sheeprustlers"
+"icon": "sheeprustlers",
+"tellingsEn": [
+"The twins who stole from local farms",
+"The vengeful twins who destroyed their father's business",
+""
+]
 },
 {
 "tellings": [
@@ -408,7 +578,12 @@
 ],
 "id": "justice_fun_3",
 "location": null,
-"icon": "gentleman"
+"icon": "gentleman",
+"tellingsEn": [
+"The dandy newspaper reporter who skipped out on his bill",
+"The grifter who pretends to be a reporter to cadge free drinks",
+"The trickster spirit who survives in the modern world by pretending to be a journalist"
+]
 },
 {
 "tellings": [
@@ -418,7 +593,12 @@
 ],
 "id": "justice_fun_4",
 "location": null,
-"icon": "brothers"
+"icon": "brothers",
+"tellingsEn": [
+"The brothers scheming to win at cards",
+"The cheating brothers who were run out of town on a splintery rail",
+""
+]
 }
 ],
 "Грустные": [
@@ -434,6 +614,11 @@
 "variantCards": [
 "justice",
 "nine-of-swords"
+],
+"tellingsEn": [
+"The grave-robber at the burial mound",
+"The vigilantes who hunt grave-robbers across the midwest",
+"The native Robin Hood who takes back the precious artifacts stolen from his people"
 ]
 }
 ],
@@ -459,7 +644,12 @@
 "Странное сияние из космоса"
 ],
 "id": "tower_scary_0",
-"location": null
+"location": null,
+"tellingsEn": [
+"The light from the sky",
+"The cloud tinged with a color no human had seen before",
+"The strange color from outer space"
+]
 },
 {
 "tellings": [
@@ -469,7 +659,12 @@
 ],
 "id": "tower_scary_1",
 "location": null,
-"icon": "sheepherd"
+"icon": "sheepherd",
+"tellingsEn": [
+"The gaunt shepherd",
+"Pale Death tending to his flock",
+"The growing flock of those dead at the hands of fascism"
+]
 },
 {
 "tellings": [
@@ -478,7 +673,12 @@
 "Ведьма у ручья, которая за небольшую плату превращает мужчин в крокодилов"
 ],
 "id": "tower_scary_2",
-"location": null
+"location": null,
+"tellingsEn": [
+"The man and the witch in the bayou",
+"The jilted witch of the bayou, and her cruelty towards men",
+"The witch in the bayou who transforms men to alligators for a song"
+]
 },
 {
 "tellings": [
@@ -488,7 +688,12 @@
 ],
 "id": "tower_scary_3",
 "location": null,
-"icon": "cigarettesmokingman"
+"icon": "cigarettesmokingman",
+"tellingsEn": [
+"The terrifying cigarette smoker in the dark",
+"The cursed smoker who haunts those who travel alone",
+"The cigarette smoker who appears before the doomed as a portent of death"
+]
 },
 {
 "tellings": [
@@ -498,7 +703,12 @@
 ],
 "id": "tower_scary_4",
 "location": null,
-"icon": "blackcat"
+"icon": "blackcat",
+"tellingsEn": [
+"The landlady's cat",
+"The murderous tomcat",
+"The black cat who consumes the souls of the dead"
+]
 },
 {
 "tellings": [
@@ -508,7 +718,12 @@
 ],
 "id": "tower_scary_5",
 "location": null,
-"icon": "sugarcane"
+"icon": "sugarcane",
+"tellingsEn": [
+"",
+"The haunted sugarcane-field that kills anyone who harvests it",
+"The sugarcane field tended and harvested by the roving skeletons of the dead"
+]
 },
 {
 "tellings": [
@@ -518,7 +733,12 @@
 ],
 "id": "tower_scary_6",
 "location": null,
-"icon": "gunshot"
+"icon": "gunshot",
+"tellingsEn": [
+"The gunshot man outside the saloon",
+"The invisible gunslinger",
+"Sharp-eye Jack, who could kill a man from 10 miles away"
+]
 },
 {
 "tellings": [
@@ -528,7 +748,12 @@
 ],
 "id": "tower_scary_7",
 "location": null,
-"icon": "farmhouse"
+"icon": "farmhouse",
+"tellingsEn": [
+"The abandoned farmhouse",
+"The maneating monster at the abandoned farmhouse",
+"Tailypo, the vengeful cat"
+]
 },
 {
 "tellings": [
@@ -537,7 +762,12 @@
 "Йорона, безликая женщина, бродившая по стране в поисках детей, которых можно утопить"
 ],
 "id": "tower_scary_8",
-"location": null
+"location": null,
+"tellingsEn": [
+"The woman who drowned her children",
+"The faceless woman who drowned her children",
+"La Llorona, the faceless woman who roamed the country looking for children to drown"
+]
 }
 ],
 "Захватывающие приключения": [
@@ -548,7 +778,12 @@
 "Писатель, который растворится в тумане, если хоть на секунду перестанет писать"
 ],
 "id": "tower_adv_0",
-"location": null
+"location": null,
+"tellingsEn": [
+"The dissolute writer looking for a story",
+"The drug-addled writer who survives on stories",
+"The writer who would dissolve into mist if he stopped writing for even one second"
+]
 },
 {
 "tellings": [
@@ -558,7 +793,12 @@
 ],
 "id": "tower_adv_1",
 "location": null,
-"icon": "bearattack"
+"icon": "bearattack",
+"tellingsEn": [
+"The bear that preys on travelers",
+"The bear that eats the rich",
+"The bear that roams the Northwest, seeking out the guilty"
+]
 },
 {
 "tellings": [
@@ -568,7 +808,12 @@
 ],
 "id": "tower_adv_2",
 "location": null,
-"icon": "peddler"
+"icon": "peddler",
+"tellingsEn": [
+"The peddler with poison wares",
+"The serial-murderer peddler who tested his poisons on unsuspecting customers",
+"The sinister peddler who killed entire towns with his cursed wares"
+]
 },
 {
 "tellings": [
@@ -578,7 +823,12 @@
 ],
 "id": "tower_adv_3",
 "location": null,
-"icon": "runciterscircus4"
+"icon": "runciterscircus4",
+"tellingsEn": [
+"The man who poisoned the animals at Runciter's Circus",
+"The poisoner fed to a tiger at Runciter's Circus",
+"The man who poisoned animals by feeding them his own tainted flesh"
+]
 }
 ],
 "Весёлые": [
@@ -590,7 +840,12 @@
 ],
 "id": "tower_fun_0",
 "location": null,
-"icon": "grifter"
+"icon": "grifter",
+"tellingsEn": [
+"The old grifter",
+"The violin con",
+"The con man, his plot, his ghost, and his lover"
+]
 },
 {
 "tellings": [
@@ -599,7 +854,12 @@
 "Зомби, который работал в варьете"
 ],
 "id": "tower_fun_1",
-"location": null
+"location": null,
+"tellingsEn": [
+"The clownish corpse who claimed he'd live forever",
+"The ghoul who frightened folks by screaming jokes from his grave",
+"The zombie who worked in vaudeville"
+]
 },
 {
 "tellings": [
@@ -609,7 +869,12 @@
 ],
 "id": "tower_fun_2",
 "location": null,
-"icon": "runciterscircus2"
+"icon": "runciterscircus2",
+"tellingsEn": [
+"Nolly, the prankster elephant at Runciter's Circus",
+"The alcoholic circus elephant at Runciter's Circus",
+"The restaurant run by alcoholic elephants"
+]
 }
 ],
 "Грустные": [
@@ -621,7 +886,12 @@
 ],
 "id": "tower_sad_0",
 "location": null,
-"icon": "cottonfield"
+"icon": "cottonfield",
+"tellingsEn": [
+"The boy who died in the fields, where no one could be called to collect his body",
+"",
+"The farmer who hexed young men so they would work themselves to death for him"
+]
 },
 {
 "tellings": [
@@ -631,7 +901,12 @@
 ],
 "id": "tower_sad_1",
 "location": null,
-"icon": "kudzu"
+"icon": "kudzu",
+"tellingsEn": [
+"The anonymous grave",
+"The sixty unidentified corpses buried together in one cemetary",
+"The empty town where they found one hundred smoothly-faceless unknown corpses"
+]
 },
 {
 "tellings": [
@@ -641,7 +916,12 @@
 ],
 "id": "tower_sad_2",
 "location": null,
-"icon": "coaltrain"
+"icon": "coaltrain",
+"tellingsEn": [
+"A small corpse on a coal train",
+"The negligent parents who fling their dead children onto trains, to hide the bodies",
+"The night trains which carry corpses across the dust bowl"
+]
 },
 {
 "tellings": [
@@ -651,7 +931,12 @@
 ],
 "id": "tower_sad_3",
 "location": null,
-"icon": "locustbait"
+"icon": "locustbait",
+"tellingsEn": [
+"The woman with the buckets of poison",
+"The mother known for her powerful, secret insecticide recipe",
+"The woman who ground her children's bones into an insecticide that could kill anything"
+]
 },
 {
 "tellings": [
@@ -661,7 +946,12 @@
 ],
 "id": "tower_sad_4",
 "location": null,
-"icon": "fortuneteller"
+"icon": "fortuneteller",
+"tellingsEn": [
+"The mystic who wanted to know her own destiny",
+"The mystic who could see anyone's destiny, except her own",
+"The mystic who'd interfered in the future so often, she'd shattered her own destiny"
+]
 }
 ],
 "Счастливые/Оптимистичные": []
@@ -687,7 +977,12 @@
 ],
 "id": "queen-of-cups_scary_0",
 "location": null,
-"icon": "lallorona"
+"icon": "lallorona",
+"tellingsEn": [
+"The children frightened of La Llorona",
+"The children struck mute by seeing La Llorona",
+"The children who had their tongues cut out by La Llorona"
+]
 },
 {
 "tellings": [
@@ -697,7 +992,12 @@
 ],
 "id": "queen-of-cups_scary_1",
 "location": null,
-"icon": "twins"
+"icon": "twins",
+"tellingsEn": [
+"The murdering twins",
+"The murdering twins who cannibalized their third brother",
+"The triplet who killed his brothers from beyond the grave"
+]
 }
 ],
 "Захватывающие приключения": [],
@@ -711,7 +1011,12 @@
 ],
 "id": "queen-of-cups_sad_0",
 "location": null,
-"icon": "childhood"
+"icon": "childhood",
+"tellingsEn": [
+"The woman who had forgotten her family",
+"The woman cursed to forget the faces of her children",
+"The changeling child who haunted the tired and sick"
+]
 },
 {
 "tellings": [
@@ -721,7 +1026,12 @@
 ],
 "id": "queen-of-cups_sad_1",
 "location": null,
-"icon": "deaddadcar"
+"icon": "deaddadcar",
+"tellingsEn": [
+"The children whose father died in the car",
+"The car haunted by the ghost of the father who'd owned it",
+"The father whose ghost possessed his car in order to drive his children across America"
+]
 }
 ],
 "Счастливые/Оптимистичные": [
@@ -733,7 +1043,12 @@
 ],
 "id": "queen-of-cups_hope_0",
 "location": null,
-"icon": "deathbones"
+"icon": "deathbones",
+"tellingsEn": [
+"The man who seemed alright with death",
+"The man who heard his death approaching",
+"The man whose death bones rattled"
+]
 },
 {
 "tellings": [
@@ -747,6 +1062,11 @@
 "variantCards": [
 "devil",
 "lovers"
+],
+"tellingsEn": [
+"The happy queer commune",
+"The secret farm for the downtrodden",
+"The fairies who steal the downtrodden away to protect them"
 ]
 },
 {
@@ -757,7 +1077,12 @@
 ],
 "id": "queen-of-cups_hope_2",
 "location": null,
-"icon": "newbaby"
+"icon": "newbaby",
+"tellingsEn": [
+"The new grandfather",
+"The superhuman strength of the happy new grandfather",
+"The family who were so strong, their newborn baby destroyed the house in a tantrum"
+]
 },
 {
 "tellings": [
@@ -776,7 +1101,12 @@
 ],
 "id": "queen-of-cups_hope_4",
 "location": null,
-"icon": "chickengirl"
+"icon": "chickengirl",
+"tellingsEn": [
+"The girl whose best friend was a chicken",
+"The girl who saved chickens from the stewpot",
+"The girl who lived with a family of chickens"
+]
 }
 ]
 },
@@ -801,7 +1131,12 @@
 ],
 "id": "high-priestess_scary_0",
 "location": null,
-"icon": "tentcity"
+"icon": "tentcity",
+"tellingsEn": [
+"The strangely clean tent city you found",
+"The tent city filled with members of a strange cult",
+"The sparkling tent city where once you enter, you can't ever leave"
+]
 }
 ],
 "Захватывающие приключения": [
@@ -813,7 +1148,12 @@
 ],
 "id": "high-priestess_adv_0",
 "location": null,
-"icon": "vwbus"
+"icon": "vwbus",
+"tellingsEn": [
+"The VW Bus parked and empty",
+"The suicide cult of acid-heads led by a charismatic man",
+"The Devil-possessed leader and his apocalypse cult"
+]
 },
 {
 "tellings": [
@@ -823,7 +1163,12 @@
 ],
 "id": "high-priestess_adv_1",
 "location": null,
-"icon": "nightshade"
+"icon": "nightshade",
+"tellingsEn": [
+"The girl who helped the desperate flee town",
+"The girl who ran a network helping the persecuted escape their oppressors",
+"The girl who used the trains to run a state-wide criminal network"
+]
 },
 {
 "tellings": [
@@ -833,7 +1178,12 @@
 ],
 "id": "high-priestess_adv_2",
 "location": null,
-"icon": "boston"
+"icon": "boston",
+"tellingsEn": [
+"The odd silent taxicab in Boston",
+"The taxi which shows its riders the future",
+"Future Boston, where taxi rides cost twenty dollars"
+]
 }
 ],
 "Весёлые": [
@@ -845,7 +1195,12 @@
 ],
 "id": "high-priestess_fun_0",
 "location": null,
-"icon": "tanks"
+"icon": "tanks",
+"tellingsEn": [
+"The little girl who wanted to work with the welder",
+"The little girl who worked as a mechanic, repairing trains before her thirteenth birthday",
+"The little girl who was as strong as a grown man"
+]
 }
 ],
 "Грустные": [
@@ -857,7 +1212,12 @@
 ],
 "id": "high-priestess_sad_0",
 "location": null,
-"icon": "miami"
+"icon": "miami",
+"tellingsEn": [
+"",
+"The man who swam into the ocean to escape his troubles",
+"The radio man who left his job on land to provide an AM station to mermaids"
+]
 },
 {
 "tellings": [
@@ -867,7 +1227,12 @@
 ],
 "id": "high-priestess_sad_1",
 "location": null,
-"icon": "singer"
+"icon": "singer",
+"tellingsEn": [
+"The singer fading into obscurity",
+"The beautiful woman who broke the hearts of musicians",
+"The siren who trapped artists in a dying, back-water town"
+]
 }
 ],
 "Счастливые/Оптимистичные": [
@@ -879,7 +1244,12 @@
 ],
 "id": "high-priestess_hope_0",
 "location": null,
-"icon": "seagulls"
+"icon": "seagulls",
+"tellingsEn": [
+"",
+"The fisherman and his fish-calling seagulls",
+"The talking seagulls who tell fishermen where to find the best catch"
+]
 },
 {
 "tellings": [
@@ -889,7 +1259,12 @@
 ],
 "id": "high-priestess_hope_1",
 "location": null,
-"icon": "singer3"
+"icon": "singer3",
+"tellingsEn": [
+"The singing workman",
+"The man whose voice cracked stone",
+"The man whose song could move mountains"
+]
 },
 {
 "tellings": [
@@ -899,7 +1274,12 @@
 ],
 "id": "high-priestess_hope_2",
 "location": null,
-"icon": "horsecart"
+"icon": "horsecart",
+"tellingsEn": [
+"The slow-going cart",
+"The travelers who move at the speed of a snail",
+""
+]
 },
 {
 "tellings": [
@@ -908,7 +1288,12 @@
 "Современный Робин Гуд, который устроил коммунистическую революцию"
 ],
 "id": "high-priestess_hope_3",
-"location": null
+"location": null,
+"tellingsEn": [
+"The man who robbed a bank for his father",
+"The man who robbed banks and gave the money to farmers",
+""
+]
 }
 ]
 },
@@ -937,6 +1322,11 @@
 "variantCards": [
 "world",
 "devil"
+],
+"tellingsEn": [
+"The horse with the eerily unconscious rider",
+"The horse with the disgusting human parasite",
+"The horse fungus spreading across the country"
 ]
 },
 {
@@ -947,7 +1337,12 @@
 ],
 "id": "world_scary_1",
 "location": null,
-"icon": "childrenofthecorn"
+"icon": "childrenofthecorn",
+"tellingsEn": [
+"The corn farmer and his children",
+"",
+"The cannibal corn cult of Nebraska"
+]
 },
 {
 "tellings": [
@@ -957,7 +1352,12 @@
 ],
 "id": "world_scary_2",
 "location": null,
-"icon": "lemonade"
+"icon": "lemonade",
+"tellingsEn": [
+"The farmers who gave you lemonade",
+"The farmers who hid their murdering son from the law",
+"The farmers who lured travelers to their home with lemonade, then fed them to their cannibal son"
+]
 },
 {
 "tellings": [
@@ -971,6 +1371,11 @@
 "variantCards": [
 "world",
 "tower"
+],
+"tellingsEn": [
+"The white rider in the desert",
+"The white rider bearing the souls of the dead",
+"The twelve white riders carrying off a sinful soul"
 ]
 }
 ],
@@ -983,7 +1388,12 @@
 ],
 "id": "world_adv_0",
 "location": null,
-"icon": "oilwoman"
+"icon": "oilwoman",
+"tellingsEn": [
+"The zealous mechanic",
+"",
+"The woman race car driver whose car moves like a streak of chrome lightning"
+]
 }
 ],
 "Весёлые": [
@@ -995,7 +1405,12 @@
 ],
 "id": "world_fun_0",
 "location": null,
-"icon": "cowhouse"
+"icon": "cowhouse",
+"tellingsEn": [
+"The woman who hid from cows under her house",
+"The intelligent cows who took over their owner's house",
+"The cow landlords who evicted their human tenant and lived indoors"
+]
 }
 ],
 "Грустные": [
@@ -1007,7 +1422,12 @@
 ],
 "id": "world_sad_0",
 "location": null,
-"icon": "johnnyappleseed"
+"icon": "johnnyappleseed",
+"tellingsEn": [
+"John Chapman, his orchard, and his dog",
+"The apple-orchard planter who planted ten thousand trees",
+"Johnny Appleseed, who roamed the country planting trees beneath his feet"
+]
 },
 {
 "tellings": [
@@ -1017,7 +1437,12 @@
 ],
 "id": "world_sad_1",
 "location": null,
-"icon": "sanantonio"
+"icon": "sanantonio",
+"tellingsEn": [
+"The dead soldier at the Alamo",
+"The ghosts who haunt the Alamo",
+"San Antonio, where wailing ghosts pour out of the Alamo every night to cry in the streets"
+]
 }
 ],
 "Счастливые/Оптимистичные": [
@@ -1029,7 +1454,12 @@
 ],
 "id": "world_hope_0",
 "location": null,
-"icon": "sleeper"
+"icon": "sleeper",
+"tellingsEn": [
+"The dreams in the cotton field at night",
+"The workers who sing and pick cotton without pausing, day and night",
+"The song which, if you sing it without pause, lets you work ceaselessly for weeks or years on end"
+]
 },
 {
 "tellings": [
@@ -1039,7 +1469,12 @@
 ],
 "id": "world_hope_1",
 "location": null,
-"icon": "crone"
+"icon": "crone",
+"tellingsEn": [
+"The old woman reminiscing of her lovers",
+"The crone who can seduce any traveler",
+""
+]
 },
 {
 "tellings": [
@@ -1049,7 +1484,12 @@
 ],
 "id": "world_hope_2",
 "location": null,
-"icon": "ophelia"
+"icon": "ophelia",
+"tellingsEn": [
+"The androgyne in the field of wildflowers",
+"The androgyne who stole the styles of men and women for a rebel cause",
+"The infamous gender outlaw who flouted rules, broke hearts, and changed the world"
+]
 },
 {
 "tellings": [
@@ -1059,7 +1499,12 @@
 ],
 "id": "world_hope_3",
 "location": null,
-"icon": "gleaners"
+"icon": "gleaners",
+"tellingsEn": [
+"The thirsty cotton-pickers",
+"The water that turned into wine for the thirsty pickers",
+"The miraculous canteen which provided water for a whole crew"
+]
 },
 {
 "tellings": [
@@ -1069,7 +1514,12 @@
 ],
 "id": "world_hope_4",
 "location": null,
-"icon": "musicians"
+"icon": "musicians",
+"tellingsEn": [
+"The two musicians with the interminable song",
+"The two bandits who hypnotized their victims with a song",
+"The magically-soporific song which put whole towns to sleep"
+]
 },
 {
 "tellings": [
@@ -1079,7 +1529,12 @@
 ],
 "id": "world_hope_5",
 "location": null,
-"icon": "ghosttrain"
+"icon": "ghosttrain",
+"tellingsEn": [
+"The 11.59 train that carried an old man to heaven",
+"The 11.59 train that carried railway workers to their final resting place",
+"The 11.59 train that killed all who heard its whistle"
+]
 },
 {
 "tellings": [
@@ -1089,7 +1544,12 @@
 ],
 "id": "world_hope_6",
 "location": null,
-"icon": "familymodelt"
+"icon": "familymodelt",
+"tellingsEn": [
+"The family searching for a new life",
+"The family journeying to a city of plenty",
+"New Jericho, the golden city founded 'round the fountain of youth"
+]
 }
 ]
 },
@@ -1113,7 +1573,12 @@
 "Неопознанные летающие объекты"
 ],
 "id": "three-of-staves_scary_0",
-"location": null
+"location": null,
+"tellingsEn": [
+"The missing people, and the strange lights in the desert",
+"The lights in the desert which abduct travelers",
+"The unidentified flying objects"
+]
 },
 {
 "tellings": [
@@ -1126,6 +1591,11 @@
 "variantCards": [
 "three-of-staves",
 "empress"
+],
+"tellingsEn": [
+"The strange men hiding from the rain",
+"A clan of lightning-dazzled mole-men",
+"The lightning goblins, who live in a house set amid thundercloud"
 ]
 },
 {
@@ -1135,7 +1605,12 @@
 "Самка койота, которая украдет вашу душу, если ей улыбнуться"
 ],
 "id": "three-of-staves_scary_2",
-"location": null
+"location": null,
+"tellingsEn": [
+"The strange coyote playing tag with her mate",
+"",
+"The coyote who would steal your soul as soon as you smile at her"
+]
 }
 ],
 "Захватывающие приключения": [
@@ -1147,7 +1622,12 @@
 ],
 "id": "three-of-staves_adv_0",
 "location": null,
-"icon": "caseyjones"
+"icon": "caseyjones",
+"tellingsEn": [
+"Casey Jones, the theatrical railroader",
+"Casey Jones, the fastest railroader in America",
+"The legend of Casey Jones"
+]
 }
 ],
 "Весёлые": [
@@ -1159,7 +1639,12 @@
 ],
 "id": "three-of-staves_fun_0",
 "location": null,
-"icon": "racer"
+"icon": "racer",
+"tellingsEn": [
+"The driving obsessive who didn't own a car",
+"The driver who planned to race coast-to-coast",
+"The fastest man ever to drive coast-to-coast"
+]
 },
 {
 "tellings": [
@@ -1169,7 +1654,12 @@
 ],
 "id": "three-of-staves_fun_1",
 "location": null,
-"icon": "walkingwillis"
+"icon": "walkingwillis",
+"tellingsEn": [
+"Walking Willis",
+"Walking Willis, the man who walked through every town in the state",
+"Walking Willis, the man cursed to walk forever, never stopping"
+]
 }
 ],
 "Грустные": [
@@ -1181,7 +1671,12 @@
 ],
 "id": "three-of-staves_sad_0",
 "location": null,
-"icon": "tickets"
+"icon": "tickets",
+"tellingsEn": [
+"The nervous man at the bus stop",
+"",
+"The bewildered ghost riding buses back and forth all over America"
+]
 },
 {
 "tellings": [
@@ -1191,7 +1686,12 @@
 ],
 "id": "three-of-staves_sad_1",
 "location": null,
-"icon": "vulture"
+"icon": "vulture",
+"tellingsEn": [
+"The dead man by the abandoned railway",
+"The wandering man murdered by his romantic rival",
+"The young man murdered by the girl with whom he eloped"
+]
 }
 ],
 "Счастливые/Оптимистичные": [
@@ -1203,7 +1703,12 @@
 ],
 "id": "three-of-staves_hope_0",
 "location": null,
-"icon": "children"
+"icon": "children",
+"tellingsEn": [
+"The bizarre children",
+"Miss Lynn's orphanage for curious boys and girls",
+"The strange shapes Americans will take in the future"
+]
 },
 {
 "tellings": [
@@ -1213,7 +1718,12 @@
 ],
 "id": "three-of-staves_hope_1",
 "location": null,
-"icon": "metalworker"
+"icon": "metalworker",
+"tellingsEn": [
+"The metalworker in the company house",
+"",
+""
+]
 },
 {
 "tellings": [
@@ -1223,7 +1733,12 @@
 ],
 "id": "three-of-staves_hope_2",
 "location": null,
-"icon": "daddyjoe"
+"icon": "daddyjoe",
+"tellingsEn": [
+"Joe, the Pullman Porter who protected the trains on his run",
+"Joe, the Pullman Porter so wise he could even talk bandits down",
+"Daddy Joe, the protector of the railroad"
+]
 }
 ]
 },
@@ -1248,7 +1763,12 @@
 ],
 "id": "nine-of-swords_scary_0",
 "location": null,
-"icon": "jerseydevil"
+"icon": "jerseydevil",
+"tellingsEn": [
+"The winged goat by pristine water",
+"The Devil of Leeds",
+"The Jersey Devil"
+]
 }
 ],
 "Захватывающие приключения": [],
@@ -1262,7 +1782,12 @@
 ],
 "id": "nine-of-swords_sad_0",
 "location": null,
-"icon": "laundry"
+"icon": "laundry",
+"tellingsEn": [
+"The mindless laundress who couldn't stop working",
+"The woman kept in thrall at the laundry",
+"The sorcerer who enthralled women to work in his laundry"
+]
 },
 {
 "tellings": [
@@ -1272,7 +1797,12 @@
 ],
 "id": "nine-of-swords_sad_1",
 "location": null,
-"icon": "washingtondc"
+"icon": "washingtondc",
+"tellingsEn": [
+"The strange street lost in time in Washington D.C.",
+"The street in Washington D.C. lost for a hundred years",
+"J Street in Washington D.C., which led travelers back to the city of the past"
+]
 },
 {
 "tellings": [
@@ -1282,7 +1812,12 @@
 ],
 "id": "nine-of-swords_sad_2",
 "location": null,
-"icon": "stlouis"
+"icon": "stlouis",
+"tellingsEn": [
+"A gun-shot man left to die on the streets of St Louis",
+"A man shot to death in St Louis because of a quarrel over a hat",
+""
+]
 },
 {
 "tellings": [
@@ -1292,7 +1827,12 @@
 ],
 "id": "nine-of-swords_sad_3",
 "location": null,
-"icon": "yellowribbon"
+"icon": "yellowribbon",
+"tellingsEn": [
+"The elegant woman in the small town",
+"The dead woman in the yellow ribbon",
+"The ghost of a woman executed in Paris long ago"
+]
 },
 {
 "tellings": [
@@ -1302,7 +1842,12 @@
 ],
 "id": "nine-of-swords_sad_4",
 "location": null,
-"icon": "thesilo"
+"icon": "thesilo",
+"tellingsEn": [
+"The dead boy in the grain silo",
+"The tyrannical farmer whose son killed himself in the grain silo",
+"The farmer who drowned his son in the grain silo"
+]
 },
 {
 "tellings": [
@@ -1312,7 +1857,12 @@
 ],
 "id": "nine-of-swords_sad_5",
 "location": null,
-"icon": "rottenfruit"
+"icon": "rottenfruit",
+"tellingsEn": [
+"The rotten orchard",
+"The selfish farmer who let his fruit rot rather than share it with others",
+"The farmer who denied an apple to an angel, so god punished him with rot"
+]
 },
 {
 "tellings": [
@@ -1322,7 +1872,12 @@
 ],
 "id": "nine-of-swords_sad_6",
 "location": null,
-"icon": "birdman"
+"icon": "birdman",
+"tellingsEn": [
+"The crow man holding on for a better tomorrow",
+"The crows that make a quilt for the future",
+""
+]
 }
 ],
 "Счастливые/Оптимистичные": [
@@ -1334,7 +1889,12 @@
 ],
 "id": "nine-of-swords_hope_0",
 "location": null,
-"icon": "stabbedbull"
+"icon": "stabbedbull",
+"tellingsEn": [
+"The stabbed and bleeding bull",
+"The bull that bled forever, without dying",
+"The bull whose blood could cure any sickness"
+]
 }
 ]
 },
@@ -1359,7 +1919,12 @@
 ],
 "id": "sun_scary_0",
 "location": null,
-"icon": "ghostlymill"
+"icon": "ghostlymill",
+"tellingsEn": [
+"The creepy mill",
+"The haunted mill",
+""
+]
 },
 {
 "tellings": [
@@ -1369,7 +1934,12 @@
 ],
 "id": "sun_scary_1",
 "location": null,
-"icon": "nashville"
+"icon": "nashville",
+"tellingsEn": [
+"The music-haunted store",
+"The haunted store that lured little children with its music",
+"The sweet music that would lure children away, never to be seen again"
+]
 },
 {
 "tellings": [
@@ -1379,7 +1949,12 @@
 ],
 "id": "sun_scary_2",
 "location": null,
-"icon": "confederateghost"
+"icon": "confederateghost",
+"tellingsEn": [
+"",
+"The bushwhacker's vengeful ghost",
+"The Confederate ghost who hunts, haunts, and murders Yankees"
+]
 },
 {
 "tellings": [
@@ -1389,7 +1964,12 @@
 ],
 "id": "sun_scary_3",
 "location": null,
-"icon": "eclipse"
+"icon": "eclipse",
+"tellingsEn": [
+"The eclipse on the farm",
+"The time the sun was blotted out for two days by a giant rooster",
+"The farm where it was always dark and they grew mushrooms and nightshade"
+]
 },
 {
 "tellings": [
@@ -1399,7 +1979,12 @@
 ],
 "id": "sun_scary_4",
 "location": null,
-"icon": "pigeons"
+"icon": "pigeons",
+"tellingsEn": [
+"The pigeon-keeper",
+"The killer pigeons",
+"The revenge of the passenger pigeon"
+]
 }
 ],
 "Захватывающие приключения": [],
@@ -1412,7 +1997,12 @@
 ],
 "id": "sun_fun_0",
 "location": null,
-"icon": "ravenandsalmon"
+"icon": "ravenandsalmon",
+"tellingsEn": [
+"The raven and the salmon",
+"The trickster raven who preys on travelers",
+"The hoary raven who got wise by eating the eyes of wise men"
+]
 }
 ],
 "Грустные": [
@@ -1424,7 +2014,12 @@
 ],
 "id": "sun_sad_0",
 "location": null,
-"icon": "moustacheman"
+"icon": "moustacheman",
+"tellingsEn": [
+"The old janitor in the abandoned school",
+"The dust-choked school haunted by the ghost of its old janitor",
+""
+]
 },
 {
 "tellings": [
@@ -1434,7 +2029,12 @@
 ],
 "id": "sun_sad_1",
 "location": null,
-"icon": "violin"
+"icon": "violin",
+"tellingsEn": [
+"Louise Ames' violin",
+"The violin which could only be played true by its owner",
+"The cursed violin forever haunted by Louise Ames"
+]
 },
 {
 "tellings": [
@@ -1444,7 +2044,12 @@
 ],
 "id": "sun_sad_2",
 "location": null,
-"icon": "soldier"
+"icon": "soldier",
+"tellingsEn": [
+"The young man who wore his dead brother's uniform",
+"The young man who, during the confusion of war, swapped identities with his dead brother",
+"The man who was possessed by the ghost of his dead soldier brother"
+]
 },
 {
 "tellings": [
@@ -1454,7 +2059,12 @@
 ],
 "id": "sun_sad_3",
 "location": null,
-"icon": "saxophone"
+"icon": "saxophone",
+"tellingsEn": [
+"The lonely man with the saxophone",
+"",
+"The musician who began to turn transparent as his friends forgot him"
+]
 },
 {
 "tellings": [
@@ -1464,7 +2074,12 @@
 ],
 "id": "sun_sad_4",
 "location": null,
-"icon": "twomen"
+"icon": "twomen",
+"tellingsEn": [
+"The feuding architects in Santa Fe",
+"The architects who came to blows in Santa Fe",
+"The architect ghost who haunts his rival's house in Santa Fe"
+]
 }
 ],
 "Счастливые/Оптимистичные": [
@@ -1476,7 +2091,12 @@
 ],
 "id": "sun_hope_0",
 "location": null,
-"icon": "medal"
+"icon": "medal",
+"tellingsEn": [
+"The old man seeking lost things",
+"The enchanted place where lost things are found",
+""
+]
 },
 {
 "tellings": [
@@ -1486,7 +2106,12 @@
 ],
 "id": "sun_hope_1",
 "location": null,
-"icon": "telescope"
+"icon": "telescope",
+"tellingsEn": [
+"The astronomer in the desert",
+"The man who discovered Pluto",
+"The astronomer who found a new star every time he looked to heaven"
+]
 }
 ]
 },
@@ -1511,7 +2136,12 @@
 ],
 "id": "emperor_scary_0",
 "location": null,
-"icon": "scarecrow"
+"icon": "scarecrow",
+"tellingsEn": [
+"Ol' Barney the scarecrow",
+"The scarecrow possessed by the ghost of a vagrant",
+"The farm dotted with scarecrows... made from the corpses of dead men"
+]
 },
 {
 "tellings": [
@@ -1520,7 +2150,12 @@
 "Город, в котором царит беззаконие, а чужаков убивают под покровом ночи"
 ],
 "id": "emperor_scary_1",
-"location": null
+"location": null,
+"tellingsEn": [
+"The time you were told to leave town",
+"The town where grifters are ridden out of town on a rail",
+"The lawless town where outsiders are murdered after dark"
+]
 },
 {
 "tellings": [
@@ -1530,7 +2165,12 @@
 ],
 "id": "emperor_scary_2",
 "location": null,
-"icon": "singers2"
+"icon": "singers2",
+"tellingsEn": [
+"The unnerving lounge-singer's brother",
+"The singer who never outraced his demon twin's reputation",
+"The two cursed singing brothers: the one with the power, and one who gifts that power into others"
+]
 },
 {
 "tellings": [
@@ -1540,7 +2180,12 @@
 ],
 "id": "emperor_scary_3",
 "location": null,
-"icon": "motherandchild"
+"icon": "motherandchild",
+"tellingsEn": [
+"The strange child who demanded a toll",
+"The child who lived a life of crime and grew weathered beyond his years",
+"The old gangster whose spirit is trapped in the body of a little boy"
+]
 }
 ],
 "Захватывающие приключения": [
@@ -1552,7 +2197,12 @@
 ],
 "id": "emperor_adv_0",
 "location": null,
-"icon": "bootleggers"
+"icon": "bootleggers",
+"tellingsEn": [
+"The women arrested for bootlegging",
+"The shootout between the female bootleggers and the cops",
+"The legendary Gwen Michet, the richest and most ruthless bootlegger ever"
+]
 },
 {
 "tellings": [
@@ -1561,7 +2211,12 @@
 "Уилли, преступный король, который на протяжении десяти лет ежедневно грабил по банку"
 ],
 "id": "emperor_adv_1",
-"location": null
+"location": null,
+"tellingsEn": [
+"Willie, the man who robbed the same bank every week",
+"Willie, the man who robbed a hundred banks and never got arrested",
+"Willie, the bandit king who robbed a bank every day for ten years"
+]
 },
 {
 "tellings": [
@@ -1571,7 +2226,12 @@
 ],
 "id": "emperor_adv_2",
 "location": null,
-"icon": "minneapolis"
+"icon": "minneapolis",
+"tellingsEn": [
+"The cops arming to take on the strike in Minneapolis",
+"The cops who went to war against strikers in Minneapolis",
+"Minneapolis, torn apart in a shooting war between strikers and cops"
+]
 },
 {
 "tellings": [
@@ -1581,7 +2241,12 @@
 ],
 "id": "emperor_adv_3",
 "location": null,
-"icon": "manymen"
+"icon": "manymen",
+"tellingsEn": [
+"The men planning a jail break",
+"The gang notorious for blowing up prisons",
+"The anarchist gang destroying prisons across the country"
+]
 },
 {
 "tellings": [
@@ -1591,7 +2256,12 @@
 ],
 "id": "emperor_adv_4",
 "location": null,
-"icon": "blindsteer"
+"icon": "blindsteer",
+"tellingsEn": [
+"The bull who terrorized travelers on the road",
+"The terrible King of Bulls, exacting revenge on those who imprison his people",
+"The Devil taken form as a bull, sent to terrorize sinners"
+]
 },
 {
 "tellings": [
@@ -1601,7 +2271,12 @@
 ],
 "id": "emperor_adv_5",
 "location": null,
-"icon": "bull"
+"icon": "bull",
+"tellingsEn": [
+"The bull with the flaming crown",
+"The bull king, who blessed the town where he lived",
+"The all-powerful king of bulls, whose human thralls protected him from harm"
+]
 }
 ],
 "Весёлые": [
@@ -1613,7 +2288,12 @@
 ],
 "id": "emperor_fun_0",
 "location": null,
-"icon": "truck"
+"icon": "truck",
+"tellingsEn": [
+"",
+"The army major who inherited lucky whiskey from his grandfather",
+"The army major whose luck in the great war came from his family's blessed whiskey"
+]
 },
 {
 "tellings": [
@@ -1623,7 +2303,12 @@
 ],
 "id": "emperor_fun_1",
 "location": null,
-"icon": "singer1"
+"icon": "singer1",
+"tellingsEn": [
+"The amateur young musician",
+"The young boy who could play every instrument in the world",
+"The child who could only communicate through music"
+]
 },
 {
 "tellings": [
@@ -1633,7 +2318,12 @@
 ],
 "id": "emperor_fun_2",
 "location": null,
-"icon": "clown"
+"icon": "clown",
+"tellingsEn": [
+"",
+"The eccentric banker who went to work each day dressed as a clown",
+"The rich man who believed he was a clown, and everyone humored his belief"
+]
 }
 ],
 "Грустные": [
@@ -1645,7 +2335,12 @@
 ],
 "id": "emperor_sad_0",
 "location": null,
-"icon": "chicago"
+"icon": "chicago",
+"tellingsEn": [
+"The killers on the streets",
+"The gunfire that fills the streets of Chicago all day and night",
+"Chicago, where the law means nothing and gangsters hunt the cops for sport"
+]
 },
 {
 "tellings": [
@@ -1655,7 +2350,12 @@
 ],
 "id": "emperor_sad_1",
 "location": null,
-"icon": "seattle"
+"icon": "seattle",
+"tellingsEn": [
+"The scab with the black eye",
+"The maritime strikers murdered by police",
+"The labor war all across the West Coast"
+]
 }
 ],
 "Счастливые/Оптимистичные": []
@@ -1681,7 +2381,12 @@
 ],
 "id": "lovers_scary_0",
 "location": null,
-"icon": "blindfoldedingraveyard"
+"icon": "blindfoldedingraveyard",
+"tellingsEn": [
+"The midnight ritual",
+"The witch and her lover, brought back to life",
+"The immortal witch and her zombie husband"
+]
 },
 {
 "tellings": [
@@ -1691,7 +2396,12 @@
 ],
 "id": "lovers_scary_1",
 "location": null,
-"icon": "seatedman"
+"icon": "seatedman",
+"tellingsEn": [
+"The unnerving lounge singer",
+"The lounge singer who passed on unknowable secrets in every song",
+""
+]
 }
 ],
 "Захватывающие приключения": [
@@ -1703,7 +2413,12 @@
 ],
 "id": "lovers_adv_0",
 "location": null,
-"icon": "skullgirl"
+"icon": "skullgirl",
+"tellingsEn": [
+"The girl wearing a bull skull who had you mail a letter to her dearest girlfriend",
+"The horn-y monster girl who sends bewitching tokens to maidens",
+""
+]
 }
 ],
 "Весёлые": [
@@ -1715,7 +2430,12 @@
 ],
 "id": "lovers_fun_0",
 "location": null,
-"icon": "fowlplay"
+"icon": "fowlplay",
+"tellingsEn": [
+"The farmer who dressed as a turkey",
+"The turkey who fell deeply in love with a human man",
+"The man who joined a wild turkey flock to be with his turkey lover"
+]
 },
 {
 "tellings": [
@@ -1725,7 +2445,12 @@
 ],
 "id": "lovers_fun_1",
 "location": null,
-"icon": "boxhead"
+"icon": "boxhead",
+"tellingsEn": [
+"The bitter lover carrying a box on her head",
+"The woman who drank a love potion and was bound to love a worthless man",
+""
+]
 },
 {
 "tellings": [
@@ -1734,7 +2459,12 @@
 "Тяжеловоз, который мог в одно мгновения обежать вокруг земли три раза"
 ],
 "id": "lovers_fun_2",
-"location": null
+"location": null,
+"tellingsEn": [
+"The man who loved his very special horse",
+"The carthorse faster than a steam train",
+""
+]
 }
 ],
 "Грустные": [
@@ -1746,7 +2476,12 @@
 ],
 "id": "lovers_sad_0",
 "location": null,
-"icon": "cornfieldchurch"
+"icon": "cornfieldchurch",
+"tellingsEn": [
+"The soldier who came home to find his girl getting married",
+"The soldier who journeyed twenty years for love",
+"The solder who came back from the dead for love"
+]
 },
 {
 "tellings": [
@@ -1756,7 +2491,12 @@
 ],
 "id": "lovers_sad_1",
 "location": null,
-"icon": "curse"
+"icon": "curse",
+"tellingsEn": [
+"",
+"The curse of nightshade",
+"The witch, her supplicant, and the poisonous road"
+]
 },
 {
 "tellings": [
@@ -1766,7 +2506,12 @@
 ],
 "id": "lovers_sad_2",
 "location": null,
-"icon": "catondeadhorse"
+"icon": "catondeadhorse",
+"tellingsEn": [
+"The cat and the dead horse",
+"The cat who ate an entire pony, who was his lover",
+"The cat who is aroused by the taste of flesh"
+]
 },
 {
 "tellings": [
@@ -1776,7 +2521,12 @@
 ],
 "id": "lovers_sad_3",
 "location": null,
-"icon": "imapotato"
+"icon": "imapotato",
+"tellingsEn": [
+"The man who lost an engagement ring",
+"The enchanted ring that tests the kindness of strangers",
+"The trickster god who baits travelers into sins, then steals their souls"
+]
 },
 {
 "tellings": [
@@ -1786,7 +2536,12 @@
 ],
 "id": "lovers_sad_4",
 "location": null,
-"icon": "breadline"
+"icon": "breadline",
+"tellingsEn": [
+"The couple parted by unemployment",
+"The man who had to travel six hundred miles to find a single job",
+"How there ain't been a man hired to any job anywhere in New York City in over a month"
+]
 }
 ],
 "Счастливые/Оптимистичные": [
@@ -1798,7 +2553,12 @@
 ],
 "id": "lovers_hope_0",
 "location": null,
-"icon": "lighthouse"
+"icon": "lighthouse",
+"tellingsEn": [
+"",
+"The blessed lighthouse sanctuary, where souls in love could find respite",
+"The lighthouse-lamp which would only burn in the presence of true love"
+]
 },
 {
 "tellings": [
@@ -1808,7 +2568,12 @@
 ],
 "id": "lovers_hope_1",
 "location": null,
-"icon": "samandlonnie"
+"icon": "samandlonnie",
+"tellingsEn": [
+"The two girls in the haunted house",
+"The girls who searched for haunted houses",
+"The girls who could talk to the dead"
+]
 },
 {
 "tellings": [
@@ -1818,7 +2583,12 @@
 ],
 "id": "lovers_hope_2",
 "location": null,
-"icon": "beardedlady"
+"icon": "beardedlady",
+"tellingsEn": [
+"The broker who loved the bearded lady",
+"The former Wall Street tycoon who became a bearded lady",
+"The circus composed entirely of former Wall Street brokers"
+]
 }
 ]
 },
@@ -1843,7 +2613,12 @@
 ],
 "id": "devil_scary_0",
 "location": null,
-"icon": "headlesshorseman"
+"icon": "headlesshorseman",
+"tellingsEn": [
+"The rider in the woods",
+"The headless Hessian of Sleepy Hollow",
+"The ghastly legend of Ichabod Crane"
+]
 },
 {
 "tellings": [
@@ -1852,7 +2627,12 @@
 "Гостиница, в которой проклятые духи детей закатывают Сатане истерики, мешая спать\nпостояльцам"
 ],
 "id": "devil_scary_1",
-"location": null
+"location": null,
+"tellingsEn": [
+"The silent twins",
+"The hotel haunted by the ghosts of twin toddlers",
+""
+]
 },
 {
 "tellings": [
@@ -1862,7 +2642,12 @@
 ],
 "id": "devil_scary_2",
 "location": null,
-"icon": "tailypo"
+"icon": "tailypo",
+"tellingsEn": [
+"",
+"The indescribable horror living in the farmhouse cellar",
+""
+]
 },
 {
 "tellings": [
@@ -1872,7 +2657,12 @@
 ],
 "id": "devil_scary_3",
 "location": null,
-"icon": "lakemonster"
+"icon": "lakemonster",
+"tellingsEn": [
+"The fish catching and killing humans",
+"The pond where swimmers are caught by land-walking fish",
+"The land-walking fish who delights in forcing innocents into cannibalism"
+]
 },
 {
 "tellings": [
@@ -1881,7 +2671,12 @@
 "Перевертыши, которые крадут детей из колыбелей и пожирают их заживо"
 ],
 "id": "devil_scary_4",
-"location": null
+"location": null,
+"tellingsEn": [
+"The town of grotesque children who stay young forever",
+"The village of changelings who slaughtered their masters",
+"The changelings who steal babies from their cradles and eat them alive"
+]
 },
 {
 "tellings": [
@@ -1891,7 +2686,12 @@
 ],
 "id": "devil_scary_5",
 "location": null,
-"icon": "cookhouse"
+"icon": "cookhouse",
+"tellingsEn": [
+"The cookhouse that serves hungry travelers",
+"The cookhouse where sinners work off their debt to hell",
+"The cookhouse where the Devil himself serves cursed meals to desperate travelers"
+]
 }
 ],
 "Захватывающие приключения": [
@@ -1903,7 +2703,12 @@
 ],
 "id": "devil_adv_0",
 "location": null,
-"icon": "dogcar"
+"icon": "dogcar",
+"tellingsEn": [
+"",
+"The man whom the witch-children transformed into a dog",
+"The witch-children in the forest who perpetually feud with a vicious, car-driving dog"
+]
 },
 {
 "tellings": [
@@ -1922,7 +2727,12 @@
 ],
 "id": "devil_adv_2",
 "location": null,
-"icon": "runciterscircus3"
+"icon": "runciterscircus3",
+"tellingsEn": [
+"The poisoned tiger at Runciter's Circus",
+"The scores of animals dying left and right at Runciter's Circus",
+"John Runciter, who exhibited dead animals at his circus"
+]
 }
 ],
 "Весёлые": [
@@ -1933,7 +2743,12 @@
 "Призрак аристократа, обреченного вечно якшаться с бродягами"
 ],
 "id": "devil_fun_0",
-"location": null
+"location": null,
+"tellingsEn": [
+"The last bottle of armagnac",
+"The ghost of the well-heeled hobo",
+"The aristocratic ghost doomed to mingle with hobos for eternity"
+]
 },
 {
 "tellings": [
@@ -1943,7 +2758,12 @@
 ],
 "id": "devil_fun_1",
 "location": null,
-"icon": "cincinnati"
+"icon": "cincinnati",
+"tellingsEn": [
+"The mischievous ghosts of Cincinnati Music Hall",
+"The ghosts who murdered the Cincinnati Symphony Orchestra",
+"The exorcist who drove ghosts from Cincinnati Music Hall with a triangle"
+]
 },
 {
 "tellings": [
@@ -1953,7 +2773,12 @@
 ],
 "id": "devil_fun_2",
 "location": null,
-"icon": "wheelbarrowgirl"
+"icon": "wheelbarrowgirl",
+"tellingsEn": [
+"The little girl with the wheelbarrow",
+"The little girl who raised a monster with love",
+"The woman who became a mother to monsters"
+]
 },
 {
 "tellings": [
@@ -1963,7 +2788,12 @@
 ],
 "id": "devil_fun_3",
 "location": null,
-"icon": "suddensheep"
+"icon": "suddensheep",
+"tellingsEn": [
+"The man who was strangely alluring to sheep",
+"The teacher who turned a rowdy class of children into a flock of sheep",
+"The man who turned wicked children into sheep and sold them for meat"
+]
 },
 {
 "tellings": [
@@ -1973,7 +2803,12 @@
 ],
 "id": "devil_fun_4",
 "location": null,
-"icon": "devil2"
+"icon": "devil2",
+"tellingsEn": [
+"The harebrained demon playing around with people's dreams",
+"The shanty town where every citizen had simply ludicrous dreams",
+"The Boogeyman and his insatiable appetite for the most outrageous dreams"
+]
 }
 ],
 "Грустные": [
@@ -1985,7 +2820,12 @@
 ],
 "id": "devil_sad_0",
 "location": null,
-"icon": "lineman"
+"icon": "lineman",
+"tellingsEn": [
+"",
+"The whippoorwill watching for death",
+"Black-winged death taking the soul of a drunkard"
+]
 },
 {
 "tellings": [
@@ -1995,7 +2835,12 @@
 ],
 "id": "devil_sad_1",
 "location": null,
-"icon": "johnhenry"
+"icon": "johnhenry",
+"tellingsEn": [
+"",
+"The death of John Henry, the strongest railroad worker ever",
+"The legendary John Henry, who outdrilled a machine and died in the attempt"
+]
 },
 {
 "tellings": [
@@ -2005,7 +2850,12 @@
 ],
 "id": "devil_sad_2",
 "location": null,
-"icon": "thedevilone"
+"icon": "thedevilone",
+"tellingsEn": [
+"The man with the midnight wings",
+"The devil collecting his debt",
+"The devil's soul on the lam"
+]
 },
 {
 "tellings": [
@@ -2015,7 +2865,12 @@
 ],
 "id": "devil_sad_3",
 "location": null,
-"icon": "losangeles"
+"icon": "losangeles",
+"tellingsEn": [
+"The lingering voices of the repatriades in Los Angeles",
+"The trees that sing stories of those deported from Los Angeles",
+"The hot summer winds that scream the violence of repatriation in Los Angeles"
+]
 }
 ],
 "Счастливые/Оптимистичные": [
@@ -2027,7 +2882,12 @@
 ],
 "id": "devil_hope_0",
 "location": null,
-"icon": "plane"
+"icon": "plane",
+"tellingsEn": [
+"The girl who waited for her father's plane at the pond",
+"The pond that held the ghost of an aeroplane pilot",
+"The pilot whose aeroplane could fly as well in the water as in the air"
+]
 }
 ]
 },
@@ -2053,7 +2913,12 @@
 ],
 "id": "fool_adv_0",
 "location": null,
-"icon": "bridgebuilders"
+"icon": "bridgebuilders",
+"tellingsEn": [
+"The bridge builders",
+"The Thunderbird people, who fly when they fall from heights",
+"The Thunderbirds, swooping and darting around the high places"
+]
 },
 {
 "tellings": [
@@ -2063,7 +2928,12 @@
 ],
 "id": "fool_adv_1",
 "location": null,
-"icon": "meatsacks"
+"icon": "meatsacks",
+"tellingsEn": [
+"The man who cured meat for a living",
+"The man who fed travelers to his dogs",
+"The man who killed travelers and cured their meat"
+]
 },
 {
 "tellings": [
@@ -2073,7 +2943,12 @@
 ],
 "id": "fool_adv_2",
 "location": null,
-"icon": "bus"
+"icon": "bus",
+"tellingsEn": [
+"That strange bus",
+"The bus which only lost souls can see",
+"The secret bus route which ferries mythic creatures across America"
+]
 }
 ],
 "Весёлые": [
@@ -2085,7 +2960,12 @@
 ],
 "id": "fool_fun_0",
 "location": null,
-"icon": "boxfiend"
+"icon": "boxfiend",
+"tellingsEn": [
+"The box with the strange creature inside",
+"The man who caught a fiend from another world in a box",
+"The boxed shoggoth"
+]
 }
 ],
 "Грустные": [
@@ -2097,7 +2977,12 @@
 ],
 "id": "fool_sad_0",
 "location": null,
-"icon": "boyanddog"
+"icon": "boyanddog",
+"tellingsEn": [
+"The boy and his dog",
+"The boy and the dog whose souls were bound by fate",
+"The dog who tracked his boy across America on an incredible journey"
+]
 },
 {
 "tellings": [
@@ -2107,7 +2992,12 @@
 ],
 "id": "fool_sad_1",
 "location": null,
-"icon": "whitedeer"
+"icon": "whitedeer",
+"tellingsEn": [
+"The white deer",
+"The deer which chose death over enslavement",
+"The deer that could not be touched by human hands"
+]
 },
 {
 "tellings": [
@@ -2116,7 +3006,12 @@
 "Мальчик, который живет в лесу и хранит кости отца"
 ],
 "id": "fool_sad_2",
-"location": null
+"location": null,
+"tellingsEn": [
+"",
+"The boy whose shiftless father left him alone in the woods",
+"The boy who lives wild in the woods with the bones of his father"
+]
 },
 {
 "tellings": [
@@ -2126,7 +3021,12 @@
 ],
 "id": "fool_sad_3",
 "location": null,
-"icon": "trainpassengers"
+"icon": "trainpassengers",
+"tellingsEn": [
+"The dead passenger outside the stalled train",
+"",
+"The railway clogged with the corpses of people who've jumped"
+]
 }
 ],
 "Счастливые/Оптимистичные": []
@@ -2152,7 +3052,12 @@
 ],
 "id": "empress_scary_0",
 "location": null,
-"icon": "soilsurveyor"
+"icon": "soilsurveyor",
+"tellingsEn": [
+"The strange soil surveyor",
+"The traveler who visited the USA from another world",
+"The alien traveler who's taking notes on our world for a dark reason"
+]
 },
 {
 "tellings": [
@@ -2162,7 +3067,12 @@
 ],
 "id": "empress_scary_1",
 "location": null,
-"icon": "sasquatch"
+"icon": "sasquatch",
+"tellingsEn": [
+"",
+"The wild man of the forest",
+"The northwestern sasquatch"
+]
 },
 {
 "tellings": [
@@ -2172,7 +3082,12 @@
 ],
 "id": "empress_scary_2",
 "location": null,
-"icon": "boise"
+"icon": "boise",
+"tellingsEn": [
+"",
+"The Scaled Shorthorn in Boise, Idaho, whose milk corrupted flesh",
+"The Scaled Shorthorn of Boise, Idaho, whose milk transformed people into lizards"
+]
 },
 {
 "tellings": [
@@ -2182,7 +3097,12 @@
 ],
 "id": "empress_scary_3",
 "location": null,
-"icon": "unendinghunger"
+"icon": "unendinghunger",
+"tellingsEn": [
+"The three-headed bird of never-ending hunger",
+"The flock of grackles that ate human flesh",
+"The spirit of hunger that manifested as a three-headed bird"
+]
 }
 ],
 "Захватывающие приключения": [
@@ -2193,7 +3113,12 @@
 "Волшебные камни, из-за которых дети Небесной женщины пустились кружить по Земле"
 ],
 "id": "empress_adv_0",
-"location": null
+"location": null,
+"tellingsEn": [
+"The girl with the strange stones",
+"The trickster who lures humans with magic stones",
+"The magic stones which lured the Sky Woman's human children to dance across the earth"
+]
 },
 {
 "tellings": [
@@ -2203,7 +3128,12 @@
 ],
 "id": "empress_adv_1",
 "location": null,
-"icon": "duststorm"
+"icon": "duststorm",
+"tellingsEn": [
+"The monster in the maelstrom",
+"The dust-monster that sucks the moisture out of living things",
+"The living dust storm that devours whole towns"
+]
 },
 {
 "tellings": [
@@ -2213,7 +3143,12 @@
 ],
 "id": "empress_adv_2",
 "location": null,
-"icon": "dustcloud"
+"icon": "dustcloud",
+"tellingsEn": [
+"",
+"The women who drove into dust storms in the name of science",
+"The scientists who could conjure dust storms"
+]
 },
 {
 "tellings": [
@@ -2223,7 +3158,12 @@
 ],
 "id": "empress_adv_3",
 "location": null,
-"icon": "babybuff"
+"icon": "babybuff",
+"tellingsEn": [
+"The lastborn buffalo",
+"The spectral riders who hunt the ghosts of buffalo",
+"The spirit of the buffalo, which must run each year to protect its kind from extinction"
+]
 },
 {
 "tellings": [
@@ -2233,7 +3173,12 @@
 ],
 "id": "empress_adv_4",
 "location": null,
-"icon": "paulbunyan"
+"icon": "paulbunyan",
+"tellingsEn": [
+"The woodcutter with incredible strength",
+"",
+"Paul Bunyan, the lumberjack who towered over the forests"
+]
 },
 {
 "tellings": [
@@ -2243,7 +3188,12 @@
 ],
 "id": "empress_adv_5",
 "location": null,
-"icon": "huntingeagle"
+"icon": "huntingeagle",
+"tellingsEn": [
+"The hunting bald eagle",
+"The eagle who watches over travelers from the sky",
+"The immortal vagrant defended by an eagle familiar"
+]
 },
 {
 "tellings": [
@@ -2253,7 +3203,12 @@
 ],
 "id": "empress_adv_6",
 "location": null,
-"icon": "arlet"
+"icon": "arlet",
+"tellingsEn": [
+"The homeless children",
+"The children who kill adults to protect a secret",
+"The kingdom of children living wild in the woods"
+]
 },
 {
 "tellings": [
@@ -2263,7 +3218,12 @@
 ],
 "id": "empress_adv_7",
 "location": null,
-"icon": "buffandchild"
+"icon": "buffandchild",
+"tellingsEn": [
+"The man who could soothe animals",
+"The cowboy who kept a rattlesnake and wild horse",
+"Pecos Bill, the cowboy who used a rattlesnake lasso on his untameable horse"
+]
 },
 {
 "tellings": [
@@ -2273,7 +3233,12 @@
 ],
 "id": "empress_adv_8",
 "location": null,
-"icon": "jackalope"
+"icon": "jackalope",
+"tellingsEn": [
+"The jackrabbit and the cat",
+"The jackrabbit with mighty antlers",
+""
+]
 },
 {
 "tellings": [
@@ -2283,7 +3248,12 @@
 ],
 "id": "empress_adv_9",
 "location": null,
-"icon": "sketcher"
+"icon": "sketcher",
+"tellingsEn": [
+"The woman with the tremendous artistic ability",
+"The woman who could draw faster than the eye could see",
+"The woman cursed to draw forever, at the speed of a runaway train"
+]
 }
 ],
 "Весёлые": [
@@ -2294,7 +3264,12 @@
 "Окруженный частоколом город, где полными семьями живут йети"
 ],
 "id": "empress_fun_0",
-"location": null
+"location": null,
+"tellingsEn": [
+"The strange creature who owns its own boxcar",
+"The town where monsters live amongst humans",
+"The picket-fenced town where sasquatches live in nuclear families"
+]
 },
 {
 "tellings": [
@@ -2304,7 +3279,12 @@
 ],
 "id": "empress_fun_1",
 "location": null,
-"icon": "redrooster"
+"icon": "redrooster",
+"tellingsEn": [
+"The rooster who alerted his owner to strangers",
+"The demonic chicken who savaged passers-by",
+"The prince of Hell who was transmogrified into a chicken by his father, Satan"
+]
 },
 {
 "tellings": [
@@ -2314,7 +3294,12 @@
 ],
 "id": "empress_fun_2",
 "location": null,
-"icon": "fisherman"
+"icon": "fisherman",
+"tellingsEn": [
+"The man obsessed with a fish",
+"The fisherman who tried to catch the same fish for fifty years",
+"The lake monster who bested the fisherman"
+]
 }
 ],
 "Грустные": [
@@ -2326,7 +3311,12 @@
 ],
 "id": "empress_sad_0",
 "location": null,
-"icon": "farmer"
+"icon": "farmer",
+"tellingsEn": [
+"The farmer whose land was choked with dust",
+"The farmer cursed to grow only dust",
+"The farmer cursed to wander, bringing death to every land he visits"
+]
 },
 {
 "tellings": [
@@ -2336,7 +3326,12 @@
 ],
 "id": "empress_sad_1",
 "location": null,
-"icon": "farmerrest"
+"icon": "farmerrest",
+"tellingsEn": [
+"The stuck truck driver",
+"The Liang family saga",
+"Chinatown's silent ghosts from the quake of aught-six"
+]
 }
 ],
 "Счастливые/Оптимистичные": [
@@ -2348,7 +3343,12 @@
 ],
 "id": "empress_hope_0",
 "location": null,
-"icon": "miraclegrowth"
+"icon": "miraclegrowth",
+"tellingsEn": [
+"The dubious-but-promising miracle growth formula",
+"The man who sought to feed the starving through science",
+"The formula which made a single plant able to feed a hundred hungry people"
+]
 },
 {
 "tellings": [
@@ -2358,7 +3358,12 @@
 ],
 "id": "empress_hope_1",
 "location": null,
-"icon": "denver"
+"icon": "denver",
+"tellingsEn": [
+"Music echoing off the red rocks in Denver",
+"The mountains of Denver, which preserve voices as if in amber",
+"The acoustic utopia Denver where echoes bounce for over one hundred years"
+]
 }
 ]
 },
@@ -2383,7 +3388,12 @@
 ],
 "id": "wheel_scary_0",
 "location": null,
-"icon": "seance"
+"icon": "seance",
+"tellingsEn": [
+"The séance",
+"The ghost who punished spiritualists for their hubris",
+""
+]
 },
 {
 "tellings": [
@@ -2393,7 +3403,12 @@
 ],
 "id": "wheel_scary_1",
 "location": null,
-"icon": "madame"
+"icon": "madame",
+"tellingsEn": [
+"The fortune-teller and the curse",
+"The fortune-teller whose dark past stained the souls of all her clients",
+"The cursed fortune-teller fleeing the bargain she made long ago"
+]
 },
 {
 "tellings": [
@@ -2403,7 +3418,12 @@
 ],
 "id": "wheel_scary_2",
 "location": null,
-"icon": "detroit"
+"icon": "detroit",
+"tellingsEn": [
+"The red creature in the fur coat in Detroit",
+"",
+"The Nain Rouge of Detroit"
+]
 },
 {
 "tellings": [
@@ -2413,7 +3433,12 @@
 ],
 "id": "wheel_scary_3",
 "location": null,
-"icon": "neworleans"
+"icon": "neworleans",
+"tellingsEn": [
+"The woman selling gris-gris in New Orleans",
+"The witch who drinks the blood of travelers in New Orleans",
+"The vampire woman of New Orleans"
+]
 }
 ],
 "Захватывающие приключения": [
@@ -2425,7 +3450,12 @@
 ],
 "id": "wheel_adv_0",
 "location": null,
-"icon": "riddles"
+"icon": "riddles",
+"tellingsEn": [
+"The boy with the riddles and the 'pet'",
+"The boy who trapped passers-by with riddles",
+"The boy who riddled travelers and fed failures to a monster"
+]
 },
 {
 "tellings": [
@@ -2435,7 +3465,12 @@
 ],
 "id": "wheel_adv_1",
 "location": null,
-"icon": "racehorse"
+"icon": "racehorse",
+"tellingsEn": [
+"Petunia the racehorse",
+"",
+"Petunia the Triple Crown winner"
+]
 },
 {
 "tellings": [
@@ -2445,7 +3480,12 @@
 ],
 "id": "wheel_adv_2",
 "location": null,
-"icon": "atlanta"
+"icon": "atlanta",
+"tellingsEn": [
+"The fire after a poker game at the Winecoff Hotel in Atlanta",
+"The arsonist who burns down gamblings dens all over the country",
+"The poor-loser demon summoning hellfire on anyone who beats him at poker"
+]
 },
 {
 "tellings": [
@@ -2455,7 +3495,12 @@
 ],
 "id": "wheel_adv_3",
 "location": null,
-"icon": "lasvegas"
+"icon": "lasvegas",
+"tellingsEn": [
+"The eager gamblers in Las Vegas",
+"The gamblers who always beat the house in Las Vegas",
+"The pair who beat the Devil himself at roulette in Las Vegas"
+]
 }
 ],
 "Весёлые": [
@@ -2467,7 +3512,12 @@
 ],
 "id": "wheel_fun_0",
 "location": null,
-"icon": "richkid"
+"icon": "richkid",
+"tellingsEn": [
+"That imperious child asking people to dance for money",
+"The rich kid who hired a hundred poor workers to dance a show for him",
+"The Rockefeller child, who hires hundreds of poor folk to dance for his amusement"
+]
 },
 {
 "tellings": [
@@ -2477,7 +3527,12 @@
 ],
 "id": "wheel_fun_1",
 "location": null,
-"icon": "floydprospector"
+"icon": "floydprospector",
+"tellingsEn": [
+"Floyd the suspicious prospector",
+"",
+"Floyd the nervous serial killer"
+]
 }
 ],
 "Грустные": [
@@ -2489,7 +3544,12 @@
 ],
 "id": "wheel_sad_0",
 "location": null,
-"icon": "jackhammer"
+"icon": "jackhammer",
+"tellingsEn": [
+"The conflicted WPA worker",
+"The WPA worker who gave his pay to orphans",
+"The WPA worker who starved to death so that his hungry children could eat"
+]
 },
 {
 "tellings": [
@@ -2499,7 +3559,12 @@
 ],
 "id": "wheel_sad_1",
 "location": null,
-"icon": "storm"
+"icon": "storm",
+"tellingsEn": [
+"The warehouse with the dust-killed cow",
+"The folks who ate the meat of a cow killed by dust, and got asthma",
+"The folks who ate a cow killed by dust, and were filled with dust themselves"
+]
 }
 ],
 "Счастливые/Оптимистичные": [
@@ -2511,7 +3576,12 @@
 ],
 "id": "wheel_hope_0",
 "location": null,
-"icon": "rosalie"
+"icon": "rosalie",
+"tellingsEn": [
+"The fortune-telling bird",
+"",
+"The blessed bird of foresight, which travelers pay to change their future"
+]
 },
 {
 "tellings": [
@@ -2520,7 +3590,12 @@
 "Девушка, которая потеряла кольцо, исполняющее желания, и искала его всю жизнь"
 ],
 "id": "wheel_hope_1",
-"location": null
+"location": null,
+"tellingsEn": [
+"The lost ring",
+"The ring which grants wishes",
+"The girl who lost her wish-granting ring and searched for it all her life"
+]
 }
 ]
 },

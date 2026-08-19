@@ -69,6 +69,10 @@ const TOTAL = ALL.length
 
 const CHARACTERS = data.characters // 16 люди + Волк
 const CARD_BY_SLUG = Object.fromEntries(data.cards.map((c) => [c.slug, c]))
+// story title in the chosen language — falls back to RU per grade when the game
+// has no English/title for that level
+const titleAt = (s, lang, i = 0) => (lang === 'en' && s.tellingsEn?.[i]) || s.tellings[i]
+const titlesFor = (s, lang) => s.tellings.map((t, i) => (lang === 'en' && s.tellingsEn?.[i]) || t)
 const KIND_LABEL = { traveling: 'кочующая', chapter: 'история персонажа', folklore: 'фольклор', other: '' }
 const GKEY = 'gv-grades-v1'
 const TKEY = 'gv-told-v1'
@@ -372,6 +376,7 @@ export default function App() {
               </button>
             </div>
             <div className="collbox">
+              <LangToggle lang={lang} setLang={setLang} title="Язык названий историй" />
               <button
                 className="ghost theme-btn"
                 onClick={toggleTheme}
@@ -537,6 +542,7 @@ export default function App() {
                     onCycle={() => cycle(s.id)}
                     told={told[s.id] || []}
                     onOpen={() => openStory(s, card, mood)}
+                    lang={lang}
                   />
                 ))}
               </div>
@@ -561,6 +567,7 @@ export default function App() {
           onOpen={openStory}
           wildcards={wildcards}
           onOpenChapter={setGModal}
+          lang={lang}
         />
       ) : (
         <CampView
@@ -625,6 +632,10 @@ export default function App() {
         <div className="msheet-scrim" onClick={() => setMenuOpen(false)}>
           <div className="msheet" onClick={(e) => e.stopPropagation()}>
             <div className="msheet-grab" />
+            <div className="msheet-lang">
+              <span>Язык названий</span>
+              <LangToggle lang={lang} setLang={setLang} />
+            </div>
             <button onClick={toggleTheme}>
               {theme === 'day' ? '☾ Ночная тема' : '☀ Дневная тема'}
             </button>
@@ -779,7 +790,7 @@ function GameStoryModal({ story, meta, lang, setLang, onClose }) {
   )
 }
 
-function AllView({ stories, allMoods, mood, matchQ, matchOwned, owned, setOwned, sort, setSort, grades, cycle, told, onOpen, wildcards = [], onOpenChapter }) {
+function AllView({ stories, allMoods, mood, matchQ, matchOwned, owned, setOwned, sort, setSort, grades, cycle, told, onOpen, wildcards = [], onOpenChapter, lang = 'ru' }) {
   const CARD_ORDER = data.cards.map((c) => c.slug)
   const onlyWild = owned === 'wildcards'
   const list = onlyWild
@@ -789,7 +800,7 @@ function AllView({ stories, allMoods, mood, matchQ, matchOwned, owned, setOwned,
         .sort((a, b) => {
           if (sort === 'grade') return (grades[b.id] || 0) - (grades[a.id] || 0)
           if (sort === 'told') return (told[b.id] || []).length - (told[a.id] || []).length
-          if (sort === 'az') return a.tellings[0].localeCompare(b.tellings[0], 'ru')
+          if (sort === 'az') return titleAt(a, lang).localeCompare(titleAt(b, lang), 'ru')
           return CARD_ORDER.indexOf(a.card.slug) - CARD_ORDER.indexOf(b.card.slug)
         })
   const wildList =
@@ -842,6 +853,7 @@ function AllView({ stories, allMoods, mood, matchQ, matchOwned, owned, setOwned,
             onCycle={() => cycle(s.id)}
             told={told[s.id] || []}
             onOpen={() => onOpen(s, s.card, s.mood)}
+            lang={lang}
           />
         ))}
         {wildList.map((w) => (
@@ -874,7 +886,7 @@ function WildcardRow({ w, onOpen }) {
   )
 }
 
-function StoryRow({ story, card, mood, showMeta, grade, onCycle, told = [], onOpen }) {
+function StoryRow({ story, card, mood, showMeta, grade, onCycle, told = [], onOpen, lang = 'ru' }) {
   return (
     <article className={`story ${grade ? 'have' : ''}`}>
       <div className="story-row">
@@ -897,7 +909,7 @@ function StoryRow({ story, card, mood, showMeta, grade, onCycle, told = [], onOp
           />
         </span>
         <span className="story-main" onClick={onOpen}>
-          <span className="story-title">{story.tellings[0]}</span>
+          <span className="story-title">{titleAt(story, lang)}</span>
           {showMeta && (
             <span className="story-meta">
               {card.name} · <span className={`dot ${moodCls(mood)}`} /> {MOODS.find((m) => m.key === mood)?.short}
@@ -935,7 +947,7 @@ function StoryRow({ story, card, mood, showMeta, grade, onCycle, told = [], onOp
 }
 
 function StoryModal({ story, card, mood, grade, onSetGrade, onCycle, told, onToggleTold, gs, lang, setLang, variant, onSetVariant, onClose }) {
-  const t = story.tellings
+  const t = titlesFor(story, lang)
   const g = story.icon && gs && !gs.error ? gs.stories.find((s) => s.id === story.icon) : null
   const variantCards = (story.variantCards || []).map((sl) => CARD_BY_SLUG[sl]).filter(Boolean)
   const shownCard = (variant && CARD_BY_SLUG[variant]) || card
@@ -961,7 +973,7 @@ function StoryModal({ story, card, mood, grade, onSetGrade, onCycle, told, onTog
           <div className="modal-head">
             <span className="roman">{shownCard.roman}</span>
             <div className={`tag ${moodCls(mood)}`}>{mood}</div>
-            <h2>{story.tellings[0]}</h2>
+            <h2>{t[0]}</h2>
             <div className="modal-sub">
               <img className="modal-cardicon" src={`${BASE}icons/${shownCard.slug}.webp`} alt="" />
               <span>{shownCard.name}</span> · <span className="en">{shownCard.en}</span>
@@ -1187,7 +1199,7 @@ function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, o
                     <div key={s.id} className={`camp-story ${matches ? 'match' : ''}`}>
                       <span className={`dot ${moodCls(s.mood)}`} />
                       <span className="camp-story-title" onClick={() => onOpen(s, s.card, s.mood)}>
-                        {s.tellings[Math.max(0, g - 1)]}
+                        {titleAt(s, lang, Math.max(0, g - 1))}
                       </span>
                       <span className="camp-story-mood">
                         {MOODS.find((m) => m.key === s.mood)?.short}

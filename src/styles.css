@@ -950,3 +950,7 @@ body {
 @media (max-width: 680px) {
   .modal-vignette { max-height: 220px; }
 }
+
+.msheet-lang { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; }
+.msheet-lang span { font-family: var(--body); }
+.collbox .lang-toggle { align-self: center; }
