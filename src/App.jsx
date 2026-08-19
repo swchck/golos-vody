@@ -44,6 +44,13 @@ const TOTAL = ALL.length
 
 const CHARACTERS = data.characters // 16 люди + Волк
 const CARD_BY_SLUG = Object.fromEntries(data.cards.map((c) => [c.slug, c]))
+// exact card order around the wheel as in the game, read off the in-game screen.
+// node indices from NODE_ANGLES: 0-7 = right arc top→bottom, 8-15 = left arc bottom→top
+const WHEEL_ORDER = [
+  'three-of-staves', 'justice', 'fool', 'devil', 'world', 'star', 'wheel', 'tower',
+  'nine-of-swords', 'two-of-coins', 'empress', 'lovers', 'queen-of-cups', 'high-priestess', 'sun', 'emperor',
+]
+const WHEEL_CARDS = WHEEL_ORDER.map((s) => CARD_BY_SLUG[s])
 // story title in the chosen language — falls back to RU per grade when the game
 // has no English/title for that level
 const titleAt = (s, lang, i = 0) => (lang === 'en' && s.tellingsEn?.[i]) || s.tellings[i]
@@ -229,7 +236,7 @@ export default function App() {
   }
 
   // ---- wheel view data ----
-  const card = data.cards[active]
+  const card = WHEEL_CARDS[active]
   const wheelStories = useMemo(
     () =>
       allEff.filter(
@@ -448,7 +455,7 @@ export default function App() {
           />
 
           <div className="ring">
-            {data.cards.map((c, i) => {
+            {WHEEL_CARDS.map((c, i) => {
               const p = nodePos(NODE_ANGLES[i])
               return (
                 <button
