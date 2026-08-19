@@ -6,11 +6,14 @@ const BASE = import.meta.env.BASE_URL
 export function Eye({ grade = 0 }) {
   const g = Math.max(0, Math.min(3, grade))
   const frame = g === 0 ? 1 : g
+  // mask-image is set inline (not via a CSS var consumed in the stylesheet) so the
+  // relative url resolves against the document, not the /assets/ css file → prod-safe
+  const src = `url(${BASE}ui/eye-${frame}.webp)`
   return (
     <span
       className={`eye g${g}`}
       aria-hidden
-      style={{ '--eye-src': `url(${BASE}ui/eye-${frame}.webp)` }}
+      style={{ WebkitMaskImage: src, maskImage: src }}
     />
   )
 }
