@@ -120,6 +120,12 @@ export default function App() {
   const fileRef = useRef(null)
 
   useEffect(() => {
+    const bg = theme === 'night' ? '#18130d' : '#e7ddc6'
+    document.getElementById('theme-color')?.setAttribute('content', bg)
+    document.documentElement.style.backgroundColor = bg
+    document.body.style.backgroundColor = bg
+  }, [theme])
+  useEffect(() => {
     const mq = window.matchMedia?.('(prefers-color-scheme: dark)')
     if (!mq) return
     const onChange = (e) => {
