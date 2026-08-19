@@ -68,6 +68,8 @@ const ALL = data.cards.flatMap((c) =>
 const TOTAL = ALL.length
 
 const CHARACTERS = data.characters // 16 люди + Волк
+const CARD_BY_SLUG = Object.fromEntries(data.cards.map((c) => [c.slug, c]))
+const KIND_LABEL = { traveling: 'кочующая', chapter: 'история персонажа', folklore: 'фольклор', other: '' }
 const GKEY = 'gv-grades-v1'
 const TKEY = 'gv-told-v1'
 const loadLS = (k) => {
@@ -98,10 +100,22 @@ export default function App() {
   )
   const [grades, setGrades] = useState(() => loadLS(GKEY))
   const [told, setTold] = useState(() => loadLS(TKEY))
+  const [lang, setLang] = useState(() => localStorage.getItem('gv-lang') || 'ru')
+  const [gs, setGs] = useState(null) // lazy-loaded gamestories.json
+  const [gModal, setGModal] = useState(null) // opened game story
   const stageRef = useRef(null)
   const fileRef = useRef(null)
 
   useEffect(() => localStorage.setItem('gv-theme', theme), [theme])
+  useEffect(() => localStorage.setItem('gv-lang', lang), [lang])
+  useEffect(() => {
+    if (view === 'all' && !gs) {
+      fetch(`${BASE}gamestories.json`)
+        .then((r) => r.json())
+        .then(setGs)
+        .catch(() => setGs({ error: true, stories: [], meta: {} }))
+    }
+  }, [view, gs])
   useEffect(() => {
     if (!localStorage.getItem('gv-seen-guide')) {
       setOverlay('guide')
@@ -454,19 +468,14 @@ export default function App() {
           )}
         </main>
       ) : view === 'all' ? (
-        <AllView
-          allMoods={allMoods}
+        <GameCatalog
+          gs={gs}
+          lang={lang}
+          setLang={setLang}
           mood={mood}
-          matchQ={matchQ}
-          matchOwned={matchOwned}
-          owned={owned}
-          setOwned={setOwned}
-          sort={sort}
-          setSort={setSort}
-          grades={grades}
-          cycle={cycle}
-          told={told}
-          onOpen={openStory}
+          allMoods={allMoods}
+          query={query}
+          onOpen={setGModal}
         />
       ) : (
         <CampView
@@ -495,6 +504,16 @@ export default function App() {
           told={told[modal.story.id] || []}
           onToggleTold={(i) => toggleTold(modal.story.id, i)}
           onClose={() => setModal(null)}
+        />
+      )}
+
+      {gModal && (
+        <GameStoryModal
+          story={gModal}
+          meta={gs?.meta}
+          lang={lang}
+          setLang={setLang}
+          onClose={() => setGModal(null)}
         />
       )}
 
@@ -537,6 +556,126 @@ export default function App() {
           <span className="tb-ico">✸</span>Костёр
         </button>
       </nav>
+    </div>
+  )
+}
+
+function LangToggle({ lang, setLang }) {
+  return (
+    <div className="lang-toggle" role="group" aria-label="Язык текста">
+      <button className={lang === 'ru' ? 'on' : ''} onClick={() => setLang('ru')}>RU</button>
+      <button className={lang === 'en' ? 'on' : ''} onClick={() => setLang('en')}>EN</button>
+    </div>
+  )
+}
+
+function GameRow({ s, lang, onOpen }) {
+  const cards = s.cards.map((sl) => CARD_BY_SLUG[sl]).filter(Boolean)
+  const preview = ((s[lang] && s[lang].length ? s[lang] : s.en) || [])[0] || ''
+  return (
+    <article className="gs-row" onClick={() => onOpen(s)}>
+      <div className="gs-ico">
+        {s.icon ? (
+          <img src={`${BASE}storyicons/${s.id}.webp`} alt="" loading="lazy" />
+        ) : cards[0] ? (
+          <img src={`${BASE}icons/${cards[0].slug}.png`} alt="" />
+        ) : (
+          <span className="gs-ico-none" />
+        )}
+      </div>
+      <div className="gs-main">
+        <div className="gs-title">{s.title}</div>
+        <div className="gs-preview">{preview.slice(0, 96)}{preview.length > 96 ? '…' : ''}</div>
+        <div className="gs-meta">
+          {cards.map((c) => <span key={c.slug} className="gs-card">{c.name}</span>)}
+          {(s.moodsApp || []).map((m) => (
+            <span key={m} className={`tag ${moodCls(m)}`}>{MOODS.find((x) => x.key === m)?.short}</span>
+          ))}
+          {s.character && <span className="gs-who">{s.character}</span>}
+        </div>
+      </div>
+      <span className="chev">›</span>
+    </article>
+  )
+}
+
+function GameCatalog({ gs, lang, setLang, mood, allMoods, query, onOpen }) {
+  const [cardFilter, setCardFilter] = useState('all')
+  if (!gs) return <main className="allview"><p className="empty-msg">Загружаю истории из игры…</p></main>
+  if (gs.error) return <main className="allview"><p className="empty-msg">Не удалось загрузить истории игры.</p></main>
+  const q = norm(query.trim())
+  const list = gs.stories.filter((s) => {
+    if (cardFilter !== 'all' && !s.cards.includes(cardFilter)) return false
+    if (!allMoods && !(s.moodsApp || []).includes(mood)) return false
+    if (q) {
+      const hay = norm(`${s.title} ${(s[lang] || []).join(' ')} ${(s.en || []).join(' ')}`)
+      if (!hay.includes(q)) return false
+    }
+    return true
+  })
+  return (
+    <main className="allview">
+      <div className="allbar">
+        <div className="allright gs-toolbar">
+          <LangToggle lang={lang} setLang={setLang} />
+          <label className="sortbox">
+            карта
+            <select value={cardFilter} onChange={(e) => setCardFilter(e.target.value)}>
+              <option value="all">все</option>
+              {data.cards.map((c) => <option key={c.slug} value={c.slug}>{c.name}</option>)}
+            </select>
+          </label>
+          <span className="allcount">{list.length} историй</span>
+        </div>
+      </div>
+      <div className="gs-list">
+        {list.length === 0 && <p className="empty-msg">Ничего не найдено под эти фильтры.</p>}
+        {list.map((s) => <GameRow key={s.id} s={s} lang={lang} onOpen={onOpen} />)}
+      </div>
+    </main>
+  )
+}
+
+function GameStoryModal({ story, meta, lang, setLang, onClose }) {
+  const cards = story.cards.map((sl) => CARD_BY_SLUG[sl]).filter(Boolean)
+  const hasRu = story.ru && story.ru.length > 0
+  const showLang = lang === 'ru' && !hasRu ? 'en' : lang
+  const text = story[showLang] || story.en || []
+  return (
+    <div className="modal-scrim" onClick={onClose}>
+      <div className="modal gs-modal" onClick={(e) => e.stopPropagation()}>
+        <button className="modal-close" onClick={onClose} aria-label="Закрыть">×</button>
+        <div className="gs-modal-head">
+          {story.icon && <img className="gs-modal-ico" src={`${BASE}storyicons/${story.id}.webp`} alt="" />}
+          <div className="gs-modal-title">
+            <h2>{story.title}</h2>
+            <div className="modal-sub">
+              {KIND_LABEL[story.kind]}{story.character ? ` · ${story.character}` : ''}
+            </div>
+            <div className="gs-tags">
+              {cards.map((c) => (
+                <span key={c.slug} className="gs-cardtag">
+                  <img src={`${BASE}icons/${c.slug}.png`} alt="" />
+                  <b>{c.name}</b>
+                  {meta?.cardMeanings?.[c.slug] && <em>{meta.cardMeanings[c.slug].ru}</em>}
+                </span>
+              ))}
+              {(story.moodsApp || []).map((m) => (
+                <span key={m} className={`tag ${moodCls(m)}`}>{MOODS.find((x) => x.key === m)?.short}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="gs-modal-bar">
+          <LangToggle lang={lang} setLang={setLang} />
+          {lang === 'ru' && !hasRu && <span className="gs-noru">рус. перевода нет — оригинал</span>}
+        </div>
+
+        <div className="gs-text">
+          {text.map((p, i) => <p key={i}>{p}</p>)}
+        </div>
+      </div>
     </div>
   )
 }
