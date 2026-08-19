@@ -405,16 +405,16 @@ body {
   flex: 0 0 auto; width: 30px; height: 28px; padding: 0;
   background: transparent; border: none; cursor: pointer; display: grid; place-items: center;
 }
-.eye { display: block; }
-.eye .lid { fill: none; stroke: var(--ink-soft); stroke-width: 1.6; stroke-linecap: round; }
-.eye .lash { stroke: var(--ink-soft); stroke-width: 1.4; stroke-linecap: round; }
-.eye .slash { stroke: var(--ink-soft); stroke-width: 1.4; stroke-linecap: round; opacity: 0.6; }
-.eye .dash { stroke-dasharray: 2 2.4; opacity: 0.5; }
-.eye .iris { fill: var(--stamp); }
-.eye .pupil { fill: var(--paper); }
-.eye.g0 { opacity: 0.55; }
-.eye.g1 .lid, .eye.g1 .lash { stroke: var(--ink); }
-.eye.g2 .lid, .eye.g3 .lid { stroke: var(--ink); stroke-width: 1.8; }
+/* in-game deck eye (extracted sprite) as an alpha mask, so it inherits the
+   text color and adapts to the night theme like the old inline SVG did */
+.eye {
+  display: block; width: 24px; height: 21px;
+  background-color: var(--ink);
+  -webkit-mask: var(--eye-src) center / contain no-repeat;
+  mask: var(--eye-src) center / contain no-repeat;
+}
+.eye.g0 { opacity: 0.4; }
+.eye.g3 { background-color: var(--gold); }
 .eye-btn:hover .eye { transform: scale(1.12); transition: transform 0.15s; }
 
 .grade-pips { display: inline-flex; gap: 3px; flex: 0 0 auto; cursor: pointer; }

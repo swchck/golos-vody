@@ -1271,8 +1271,8 @@ function GuideModal({ lang = 'ru', onClose, onMoods }) {
           </p>
           <div className="guide-eyes">
             <span><Eye grade={1} /> {en ? 'closed — I' : 'закрытый — I'}</span>
-            <span><Eye grade={2} /> {en ? 'half-open — II' : 'приоткрытый — II'}</span>
-            <span><Eye grade={3} /> {en ? 'open — III' : 'открытый — III'}</span>
+            <span><Eye grade={2} /> {en ? 'open — II' : 'открытый — II'}</span>
+            <span><Eye grade={3} /> {en ? 'radiant — III' : 'сияющий — III'}</span>
           </div>
           <p className="guide-p">
             {en ? (
