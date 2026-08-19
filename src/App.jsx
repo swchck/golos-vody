@@ -83,6 +83,7 @@ export default function App() {
   const [aim, setAim] = useState(7)
   const [active, setActive] = useState(7)
   const [reading, setReading] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
   const [mood, setMood] = useState('Весёлые')
   const [allMoods, setAllMoods] = useState(true)
   const [query, setQuery] = useState('')
@@ -257,6 +258,15 @@ export default function App() {
           <h1>Голос&nbsp;воды</h1>
           <div className="sub">альманах кочующих историй · сбор по картам Таро</div>
         </div>
+
+        <button
+          className="hamburger"
+          onClick={() => setMenuOpen((o) => !o)}
+          aria-label="Меню"
+          aria-expanded={menuOpen}
+        >
+          <span /><span /><span />
+        </button>
 
         <div className="controls">
           <div className="toprow">
@@ -497,6 +507,36 @@ export default function App() {
           <>клик по истории — детали, грейды и где искать · <b>глаз</b> — грейд эволюции · <b>аватары</b> — кому уже рассказал · прогресс хранится в браузере</>
         )}
       </footer>
+
+      {menuOpen && (
+        <div className="msheet-scrim" onClick={() => setMenuOpen(false)}>
+          <div className="msheet" onClick={(e) => e.stopPropagation()}>
+            <div className="msheet-grab" />
+            <button onClick={() => { setTheme((t) => (t === 'day' ? 'night' : 'day')) }}>
+              {theme === 'day' ? '☾ Ночная тема' : '☀ Дневная тема'}
+            </button>
+            <button onClick={() => { setOverlay('guide'); setMenuOpen(false) }}>Как играть</button>
+            <button onClick={() => { setOverlay('hint'); setMenuOpen(false) }}>Подсказка настроений</button>
+            <button onClick={() => { setOverlay('stats'); setMenuOpen(false) }}>
+              Статистика · собрано {collected}/{TOTAL}
+            </button>
+            <button onClick={() => { exportJson(); setMenuOpen(false) }}>Экспорт прогресса</button>
+            <button onClick={() => { fileRef.current?.click(); setMenuOpen(false) }}>Импорт прогресса</button>
+          </div>
+        </div>
+      )}
+
+      <nav className="tabbar">
+        <button className={view === 'wheel' ? 'on' : ''} onClick={() => setView('wheel')}>
+          <span className="tb-ico">✦</span>Колесо
+        </button>
+        <button className={view === 'all' ? 'on' : ''} onClick={() => setView('all')}>
+          <span className="tb-ico">☰</span>Все истории
+        </button>
+        <button className={view === 'camp' ? 'on' : ''} onClick={() => setView('camp')}>
+          <span className="tb-ico">✸</span>Костёр
+        </button>
+      </nav>
     </div>
   )
 }

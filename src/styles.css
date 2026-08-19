@@ -393,57 +393,9 @@ body {
 .hint b { color: var(--stamp); font-weight: 600; }
 
 /* ---------------- responsive ---------------- */
-@media (max-width: 900px) {
-  .app { overflow-x: hidden; overflow-y: auto; height: auto; min-height: 100%; }
-  /* block layout (not flex-column) so children take exactly 100% width and
-     wrap their text instead of holding their min-content width */
-  .masthead { display: block; padding: 12px 16px 10px; }
-  .title-block { margin-bottom: 12px; }
-  .controls { align-items: stretch; gap: 8px; min-width: 0; }
-  .toprow, .filterrow { justify-content: flex-start; gap: 8px; min-width: 0; width: 100%; }
+/* mobile-only chrome — hidden on tablet/desktop */
+.hamburger, .tabbar, .msheet-scrim { display: none; }
 
-  /* bordered button groups fill the row instead of overflowing off-screen.
-     min-width:0 defeats flexbox's default min-width:auto that otherwise lets
-     a bordered group grow to its content width and blow past the viewport */
-  .views, .ownfilter { width: 100%; min-width: 0; }
-  .views button, .ownfilter button { flex: 1 1 0; min-width: 0; padding: 9px 4px; font-size: 11px; }
-  .moods { width: 100%; min-width: 0; }
-  .mood { flex: 1 1 0; min-width: 0; font-size: 10px; letter-spacing: 0.03em; padding: 9px 3px; white-space: nowrap; }
-  .search { width: 100%; min-width: 0; }
-  .search input { width: 100%; }
-  /* collbox packs 6 controls; let them wrap instead of running off-screen */
-  .collbox { flex-wrap: wrap; width: 100%; gap: 8px; }
-
-  /* keep the wheel a real circle, sized to the viewport; ring inset so the
-     medallions (centred on the ring edge) stay inside the stage box */
-  .stage { width: min(92vw, 480px); max-width: 92vw; aspect-ratio: 1 / 1; height: auto; margin: 14px auto; }
-  .ring { inset: 8%; }
-  .divider { top: 8%; bottom: 8%; }
-  .pointer { display: none; }
-  .node { width: 13%; border-width: 1.5px; }
-  .node.active { transform: translate(-50%, -50%) scale(1.3); }
-
-  /* wheel hint pill sits centred at the smaller scale */
-  .wheel-hint { font-size: 11px; padding: 8px 14px; }
-
-  /* reading table becomes a bottom sheet that never covers the whole wheel */
-  .reading {
-    position: fixed;
-    left: 0; right: 0; bottom: 0; top: auto;
-    transform: none;
-    width: 100%; min-width: 0; max-width: 100%;
-    max-height: 82vh;
-    overflow-y: auto;
-    flex-direction: column;
-    gap: 14px;
-    border-radius: 16px 16px 0 0;
-    z-index: 60;
-    animation: sheet 0.3s ease-out both;
-  }
-  @keyframes sheet { from { transform: translateY(100%); } to { transform: translateY(0); } }
-  .reading-card { flex: 0 0 auto; align-self: center; max-width: 180px; }
-  .reading-close { top: 8px; right: 12px; font-size: 30px; }
-}
 
 @media (prefers-reduced-motion: reduce) {
   .pointer, .node, .reading { transition: none; animation: none; }
@@ -750,3 +702,138 @@ body {
   object-position: center 18%; border: 2px solid var(--rule); background: #191510;
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4); }
 .char-moods { display: flex; gap: 8px; flex-wrap: wrap; }
+
+
+/* ============ responsive overrides (kept last so they win source-order) ============ */
+/* tablet: keep the desktop layout but ease the paddings so nothing crowds */
+@media (max-width: 1024px) and (min-width: 681px) {
+  .masthead { padding: 14px 20px 10px; gap: 18px; }
+  .allview, .campview { padding: 0 20px 30px; }
+  .search input { width: 200px; }
+}
+
+/* ======================= PHONE ( ≤ 680px ) ======================= */
+@media (max-width: 680px) {
+  .app { overflow-x: hidden; overflow-y: auto; height: auto; min-height: 100%; }
+
+  /* ---- header: masthead becomes title + hamburger only ---- */
+  .masthead { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; padding: 12px 14px 10px; }
+  .title-block { margin: 0; min-width: 0; }
+  .masthead h1 { font-size: 30px; }
+  .kicker { font-size: 10px; letter-spacing: 0.24em; }
+  .sub { font-size: 11px; }
+  .hamburger {
+    display: flex; flex-direction: column; justify-content: center; gap: 4px;
+    flex: 0 0 auto; width: 46px; height: 44px; padding: 0 12px;
+    background: transparent; border: 1.5px solid var(--rule); cursor: pointer;
+  }
+  .hamburger span { display: block; height: 2px; background: var(--ink); border-radius: 2px; }
+
+  .controls { width: 100%; align-items: stretch; }
+  .toprow { display: none; }                 /* views → tab bar, extras → menu */
+  .filterrow { flex-direction: column; align-items: stretch; gap: 8px; width: 100%; min-width: 0; }
+
+  /* moods: comfortable scrollable chips (bordered group stays intact) */
+  .moods { width: 100%; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+  .moods::-webkit-scrollbar { display: none; }
+  .mood { flex: 0 0 auto; font-size: 12px; letter-spacing: 0.06em; padding: 11px 15px; white-space: nowrap; }
+  .search { width: 100%; min-width: 0; }
+  .search input { width: 100%; padding: 12px 14px; font-size: 15px; }
+
+  /* ---- wheel → comfortable 4×4 grid of big tappable cards ---- */
+  .stage { width: 100%; max-width: 100%; aspect-ratio: auto; height: auto; margin: 0; padding: 14px 14px 80px; }
+  .divider, .hub, .pointer, .wheel-hint { display: none; }
+  .ring { position: static; inset: auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .node { position: static; width: 100%; aspect-ratio: 1; transform: none; border-width: 2px; }
+  .node:hover, .node.aim:not(.active) {
+    transform: none; border-color: var(--rule); filter: none;
+    box-shadow: 0 2px 6px rgba(26, 23, 18, 0.28);
+  }
+  .node.active {
+    transform: none; border-color: var(--stamp);
+    box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--stamp);
+  }
+  .node.empty { filter: grayscale(1) opacity(0.45); }
+
+  /* ---- reading table → bottom sheet ---- */
+  .reading {
+    position: fixed; left: 0; right: 0; bottom: 0; top: auto; transform: none;
+    width: 100%; min-width: 0; max-width: 100%;
+    max-height: 86vh; overflow-y: auto; flex-direction: column; gap: 14px;
+    border-radius: 16px 16px 0 0; z-index: 200;
+    padding: 22px 16px calc(20px + env(safe-area-inset-bottom));
+    box-shadow: 0 -10px 40px rgba(26, 23, 18, 0.4);
+    animation: sheet 0.3s ease-out both;
+  }
+  @keyframes sheet { from { transform: translateY(100%); } to { transform: translateY(0); } }
+  .reading-card { flex: 0 0 auto; align-self: center; max-width: 160px; }
+  .reading-close { top: 8px; right: 12px; font-size: 30px; }
+
+  /* ---- catalogue / campfire ---- */
+  .allview, .campview { padding: 0 14px calc(84px + env(safe-area-inset-bottom)); }
+  .allbar { flex-direction: column; align-items: stretch; gap: 12px; padding: 12px 0; }
+  /* filters: comfortable scrollable chips instead of cramped equal columns */
+  .ownfilter { width: 100%; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+  .ownfilter::-webkit-scrollbar { display: none; }
+  .ownfilter button { flex: 0 0 auto; white-space: nowrap; padding: 11px 15px; font-size: 12px; }
+  .allright { width: 100%; flex-wrap: nowrap; justify-content: space-between; gap: 12px; }
+  .sortbox { flex: 1 1 auto; min-width: 0; }
+  .sortbox select { padding: 9px 10px; font-size: 14px; }
+  .allcount { flex: 0 0 auto; font-size: 13px; }
+  .allgrid, .camp-body { columns: 1; }
+  .camp-round { flex-wrap: wrap; gap: 10px; }
+
+  /* bigger, comfier story rows */
+  .story { padding: 12px 0; }
+  .story-row { gap: 14px; }
+  .story-icon { width: 46px; height: 46px; }
+  .story-title { font-size: 17px; line-height: 1.3; }
+  .story-meta { font-size: 12.5px; }
+  .eye-btn { width: 40px; height: 38px; }
+  .chev { font-size: 26px; }
+
+  /* ---- modals → bottom-anchored full-width sheets (above the tab bar) ---- */
+  .modal-scrim { padding: 0; align-items: flex-end; z-index: 250; }
+  .modal {
+    width: 100%; max-width: 100%; max-height: 92vh;
+    border-radius: 16px 16px 0 0;
+    padding: 20px 16px calc(20px + env(safe-area-inset-bottom));
+  }
+  .modal-hero { flex-direction: column; gap: 14px; }
+  .modal-card { width: 150px; flex: 0 0 auto; align-self: center; }
+  .modal-head { padding-right: 40px; }
+
+  /* ---- footer hint hidden, replaced by bottom tab bar ---- */
+  .hint { display: none; }
+  .tabbar {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 150;
+    background: var(--paper); border-top: 1.5px solid var(--rule);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .tabbar button {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    padding: 9px 4px 8px; background: transparent; border: none; cursor: pointer;
+    font-family: var(--label); font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .tabbar button .tb-ico { font-size: 16px; line-height: 1; }
+  .tabbar button.on { color: var(--stamp); }
+
+  /* ---- overflow menu sheet ---- */
+  .msheet-scrim { display: block; position: fixed; inset: 0; z-index: 300; background: rgba(20, 16, 10, 0.5); }
+  .msheet {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    background: var(--paper); border-top: 1.5px solid var(--rule);
+    border-radius: 16px 16px 0 0; padding: 0 14px calc(16px + env(safe-area-inset-bottom));
+    display: flex; flex-direction: column;
+    animation: sheet 0.25s ease-out both;
+  }
+  .msheet-grab { width: 40px; height: 4px; border-radius: 2px; background: var(--rule); opacity: 0.5; margin: 10px auto 6px; }
+  .msheet button {
+    text-align: left; padding: 15px 6px; background: transparent; border: none;
+    border-bottom: 1px solid var(--rule); cursor: pointer;
+    font-family: var(--label); font-size: 14px; letter-spacing: 0.04em; color: var(--ink);
+  }
+  .msheet button:last-child { border-bottom: none; }
+}
