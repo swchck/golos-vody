@@ -1032,7 +1032,12 @@ function StoryModal({ story, card, mood, grade, onSetGrade, onCycle, told, onTog
 
         <div className="modal-section">
           <div className="section-lbl">{L.sec_where}</div>
-          <p className="where-text">{story.location || L.where_default}</p>
+          <p className="where-text">
+            {(lang === 'en' ? story.locationEn : story.location) && (
+              <><b className="where-region">{lang === 'en' ? story.locationEn : story.location}</b><br /></>
+            )}
+            {L.where_default}
+          </p>
         </div>
 
         <div className="modal-section">
