@@ -58,6 +58,8 @@ const titlesFor = (s, lang) => s.tellings.map((t, i) => (lang === 'en' && s.tell
 const GKEY = 'gv-grades-v1'
 const TKEY = 'gv-told-v1'
 const VKEY = 'gv-variant-v1'
+const DKEY = 'gv-deck-v1'
+const DECK_MAX = 3 // in-game: at most 3 active stories per tarot card
 const loadLS = (k) => {
   try {
     return JSON.parse(localStorage.getItem(k)) || {}
@@ -98,6 +100,7 @@ export default function App() {
   const [grades, setGrades] = useState(() => loadLS(GKEY))
   const [told, setTold] = useState(() => loadLS(TKEY))
   const [variant, setVariant] = useState(() => loadLS(VKEY))
+  const [deck, setDeck] = useState(() => loadLS(DKEY)) // {cardSlug: [storyId, ...] max 3}
   const [lang, setLang] = useState(() => localStorage.getItem('gv-lang') || 'ru')
   const [gs, setGs] = useState(null) // lazy-loaded gamestories.json
   const [gModal, setGModal] = useState(null) // opened game story
@@ -159,6 +162,24 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem(VKEY, JSON.stringify(variant))
   }, [variant])
+  useEffect(() => {
+    localStorage.setItem(DKEY, JSON.stringify(deck))
+  }, [deck])
+
+  // deck holds up to 3 stories per card; toggling caps at DECK_MAX
+  const toggleDeck = useCallback((cardSlug, id) => {
+    setDeck((prev) => {
+      const cur = prev[cardSlug] || []
+      let next
+      if (cur.includes(id)) next = cur.filter((x) => x !== id)
+      else if (cur.length >= DECK_MAX) return prev
+      else next = [...cur, id]
+      const o = { ...prev }
+      if (next.length) o[cardSlug] = next
+      else delete o[cardSlug]
+      return o
+    })
+  }, [])
 
   // a variant story lives under its game default card until the player marks which
   // card the mini-game choice actually gave them; then it moves to that card everywhere.
@@ -570,6 +591,9 @@ export default function App() {
           toggleTold={toggleTold}
           onOpen={openStory}
           gs={gs}
+          deck={deck}
+          toggleDeck={toggleDeck}
+          setDeck={setDeck}
           lang={lang}
           setLang={setLang}
         />
@@ -1034,12 +1058,28 @@ function StoryModal({ story, card, mood, grade, onSetGrade, onCycle, told, onTog
   )
 }
 
-function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, onOpen, setMood, setAllMoods, gs, lang, setLang }) {
+function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, onOpen, setMood, setAllMoods, gs, deck, toggleDeck, setDeck, lang, setLang }) {
   const L = tr(lang)
   const [char, setChar] = useState(0)
   const [used, setUsed] = useState(() => new Set())
   const [infoOpen, setInfoOpen] = useState(false)
   const ch = CHARACTERS[char]
+
+  // auto-build the deck for this character: up to 3 per card, favoring liked moods
+  const buildDeck = () => {
+    const pool = stories.filter((s) => (grades[s.id] || 0) >= 1 && !(told[s.id] || []).includes(char))
+    const likes = new Set(ch.moods || [])
+    const next = {}
+    for (const c of data.cards) {
+      const picks = pool
+        .filter((s) => s.card.slug === c.slug)
+        .sort((a, b) => (likes.has(b.mood) - likes.has(a.mood)) || (grades[b.id] || 0) - (grades[a.id] || 0))
+        .slice(0, DECK_MAX)
+        .map((s) => s.id)
+      if (picks.length) next[c.slug] = picks
+    }
+    setDeck(next)
+  }
 
   // a mood filter hides non-matching stories entirely (highlighting them was confusing)
   const avail = stories.filter(
@@ -1130,7 +1170,14 @@ function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, o
           <button className="ghost" onClick={() => setUsed(new Set())}>
             {L.camp_new}
           </button>
+          <button className="ghost deck-build" onClick={buildDeck} title={L.deck_build_hint}>
+            ✦ {L.deck_build}
+          </button>
+          {Object.keys(deck).length > 0 && (
+            <button className="ghost" onClick={() => setDeck({})}>{L.deck_clear}</button>
+          )}
         </div>
+        <div className="camp-deckhint">{L.deck_hint}</div>
       </div>
 
       <div className="camp-body">
@@ -1139,6 +1186,10 @@ function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, o
         )}
         {byCard.map(({ card, list }) => {
           const cardUsed = used.has(card.slug)
+          const deckIds = deck[card.slug] || []
+          const deckFull = deckIds.length >= DECK_MAX
+          // deck stories first, so the active hand is on top
+          const ordered = list.slice().sort((a, b) => deckIds.includes(b.id) - deckIds.includes(a.id))
           return (
             <section key={card.slug} className={`camp-card ${cardUsed ? 'used' : ''}`}>
               <div className="camp-card-head">
@@ -1147,13 +1198,26 @@ function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, o
                 </span>
                 <h3>{cardName(card, lang)}</h3>
                 {cardUsed && <span className="used-tag">{L.camp_card_locked}</span>}
+                <span className={`camp-deck-count ${deckIds.length ? 'on' : ''}`}>
+                  {L.deck_in} {deckIds.length}/{DECK_MAX}
+                </span>
                 <span className="camp-card-count">{list.length}</span>
               </div>
               <div className="camp-stories">
-                {list.map((s) => {
+                {ordered.map((s) => {
                   const g = grades[s.id] || 0
+                  const inDeck = deckIds.includes(s.id)
                   return (
-                    <div key={s.id} className="camp-story">
+                    <div key={s.id} className={`camp-story ${inDeck ? 'in-deck' : ''}`}>
+                      <button
+                        className={`deck-star ${inDeck ? 'on' : ''}`}
+                        onClick={() => toggleDeck(card.slug, s.id)}
+                        disabled={!inDeck && deckFull}
+                        title={inDeck ? L.deck_remove : deckFull ? L.deck_full : L.deck_add}
+                        aria-label={inDeck ? L.deck_remove : L.deck_add}
+                      >
+                        {inDeck ? '★' : '☆'}
+                      </button>
                       <span className={`dot ${moodCls(s.mood)}`} />
                       <span className="camp-story-title" onClick={() => onOpen(s, s.card, s.mood)}>
                         {titleAt(s, lang, Math.max(0, g - 1))}
@@ -1164,8 +1228,8 @@ function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, o
                       <button
                         className="tell-btn"
                         onClick={() => tell(s)}
-                        disabled={cardUsed}
-                        title={cardUsed ? L.tell_btn_locked : L.tell_btn_do}
+                        disabled={cardUsed || !inDeck}
+                        title={cardUsed ? L.tell_btn_locked : !inDeck ? L.tell_need_deck : L.tell_btn_do}
                       >
                         {L.tell_btn}
                       </button>

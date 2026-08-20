@@ -640,9 +640,16 @@ body {
 .camp-story .dot { width: 9px; height: 9px; border-radius: 50%; flex: 0 0 auto; }
 .camp-story-title { flex: 1; min-width: 0; font-size: 14.5px; line-height: 1.25; cursor: pointer; }
 .camp-story-mood { font-family: var(--label); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); }
-.camp-story.match { }
-.camp-story.match .camp-story-title { font-weight: 600; }
-.camp-story.match { background: rgba(184, 138, 46, 0.12); margin: 0 -12px; padding: 7px 12px; }
+.camp-story.in-deck { background: rgba(184, 138, 46, 0.12); margin: 0 -12px; padding: 7px 12px; }
+.camp-story.in-deck .camp-story-title { font-weight: 600; }
+.deck-star { flex: 0 0 auto; background: none; border: none; cursor: pointer; font-size: 16px; line-height: 1; color: var(--ink-soft); padding: 0 2px; }
+.deck-star.on { color: var(--gold); }
+.deck-star:disabled { opacity: 0.3; cursor: not-allowed; }
+.camp-deck-count { font-family: var(--label); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); padding: 2px 7px; border: 1px solid var(--rule); border-radius: 10px; }
+.camp-deck-count.on { color: var(--paper); background: var(--gold); border-color: var(--gold); }
+.camp-deckhint { font-size: 12px; color: var(--ink-soft); margin-top: 8px; font-style: italic; }
+.deck-build { border-color: var(--gold) !important; color: var(--gold) !important; }
+.tell-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .tell-btn { font-family: var(--label); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--paper); background: var(--accent); border: none; padding: 5px 10px; cursor: pointer; flex: 0 0 auto; }
 .tell-btn:disabled { background: var(--ink-soft); opacity: 0.5; cursor: not-allowed; }
