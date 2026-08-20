@@ -124,9 +124,11 @@ export const STR = {
     deck_remove: 'убрать из колоды',
     deck_full: 'в колоде уже 3 — сначала убери одну',
     deck_build: 'Собрать колоду',
-    deck_build_hint: 'подобрать до 3 историй на карту под любимые настроения персонажа',
+    deck_build_for: (name) => `✦ Собрать колоду под ${name}`,
+    deck_build_hint: 'подобрать до 3 историй на карту под любимые настроения этого персонажа',
     deck_clear: 'Очистить колоду',
     deck_hint: 'В колоде — до 3 историй на карту, как в игре. Рассказывать можно только истории из колоды.',
+    deck_summary: (n, liked) => `в колоде ${n} · под настроения персонажа: ${liked}`,
 
     // CharacterModal
     ch_where: 'Где искать',
@@ -288,9 +290,11 @@ export const STR = {
     deck_remove: 'remove from deck',
     deck_full: 'deck already has 3 — remove one first',
     deck_build: 'Build a deck',
-    deck_build_hint: "pick up to 3 stories per card matching the character's favorite moods",
+    deck_build_for: (name) => `✦ Build a deck for ${name}`,
+    deck_build_hint: "pick up to 3 stories per card matching this character's favorite moods",
     deck_clear: 'Clear deck',
     deck_hint: 'A deck holds up to 3 stories per card, like in the game. You can only tell stories from your deck.',
+    deck_summary: (n, liked) => `${n} in deck · matching this character: ${liked}`,
 
     ch_where: 'Where to find',
     ch_moods: 'Favorite moods',

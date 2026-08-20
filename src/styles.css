@@ -965,3 +965,5 @@ body {
 .collbox .lang-toggle { align-self: center; }
 
 .where-region { color: var(--stamp); }
+
+.camp-deck-summary { font-size: 12px; color: var(--gold); font-style: italic; }

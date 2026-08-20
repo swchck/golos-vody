@@ -1070,21 +1070,33 @@ function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, o
   const [infoOpen, setInfoOpen] = useState(false)
   const ch = CHARACTERS[char]
 
-  // auto-build the deck for this character: up to 3 per card, favoring liked moods
+  // auto-build the deck best suited to this character: up to 3 per card, ranking
+  // stories by how well their mood matches the character's preferences (preferred
+  // mood weighs most), then by grade
+  const moodRank = (m) => {
+    const i = (ch.moods || []).indexOf(m)
+    return i === -1 ? 0 : (ch.moods.length - i) // preferred first → highest weight
+  }
   const buildDeck = () => {
     const pool = stories.filter((s) => (grades[s.id] || 0) >= 1 && !(told[s.id] || []).includes(char))
-    const likes = new Set(ch.moods || [])
     const next = {}
+    let picked = 0
     for (const c of data.cards) {
       const picks = pool
         .filter((s) => s.card.slug === c.slug)
-        .sort((a, b) => (likes.has(b.mood) - likes.has(a.mood)) || (grades[b.id] || 0) - (grades[a.id] || 0))
+        .sort((a, b) => moodRank(b.mood) - moodRank(a.mood) || (grades[b.id] || 0) - (grades[a.id] || 0))
         .slice(0, DECK_MAX)
         .map((s) => s.id)
-      if (picks.length) next[c.slug] = picks
+      if (picks.length) { next[c.slug] = picks; picked += picks.length }
     }
     setDeck(next)
   }
+  const deckCount = Object.values(deck).reduce((a, ids) => a + ids.length, 0)
+  // how many deck stories match the character's liked moods (recommendation quality)
+  const deckLiked = Object.entries(deck).reduce((a, [cs, ids]) => {
+    const likes = new Set(ch.moods || [])
+    return a + ids.filter((id) => { const s = stories.find((x) => x.id === id); return s && likes.has(s.mood) }).length
+  }, 0)
 
   // a mood filter hides non-matching stories entirely (highlighting them was confusing)
   const avail = stories.filter(
@@ -1176,10 +1188,13 @@ function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, o
             {L.camp_new}
           </button>
           <button className="ghost deck-build" onClick={buildDeck} title={L.deck_build_hint}>
-            ✦ {L.deck_build}
+            {L.deck_build_for(ch.short)}
           </button>
-          {Object.keys(deck).length > 0 && (
-            <button className="ghost" onClick={() => setDeck({})}>{L.deck_clear}</button>
+          {deckCount > 0 && (
+            <>
+              <span className="camp-deck-summary">{L.deck_summary(deckCount, deckLiked)}</span>
+              <button className="ghost" onClick={() => setDeck({})}>{L.deck_clear}</button>
+            </>
           )}
         </div>
         <div className="camp-deckhint">{L.deck_hint}</div>
