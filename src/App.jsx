@@ -59,6 +59,7 @@ const GKEY = 'gv-grades-v1'
 const TKEY = 'gv-told-v1'
 const VKEY = 'gv-variant-v1'
 const DKEY = 'gv-deck-v1'
+const CHKEY = 'gv-chapters-v1'
 const DECK_MAX = 3 // in-game: at most 3 active stories per tarot card
 const loadLS = (k) => {
   try {
@@ -101,6 +102,7 @@ export default function App() {
   const [told, setTold] = useState(() => loadLS(TKEY))
   const [variant, setVariant] = useState(() => loadLS(VKEY))
   const [deck, setDeck] = useState(() => loadLS(DKEY)) // {cardSlug: [storyId, ...] max 3}
+  const [chaptersRead, setChaptersRead] = useState(() => loadLS(CHKEY)) // {chapterId: 1} — character progress
   const [lang, setLang] = useState(() => localStorage.getItem('gv-lang') || 'ru')
   const [gs, setGs] = useState(null) // lazy-loaded gamestories.json
   const [gModal, setGModal] = useState(null) // opened game story
@@ -165,6 +167,17 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem(DKEY, JSON.stringify(deck))
   }, [deck])
+  useEffect(() => {
+    localStorage.setItem(CHKEY, JSON.stringify(chaptersRead))
+  }, [chaptersRead])
+  const toggleChapterRead = useCallback((chapterId) => {
+    setChaptersRead((prev) => {
+      const next = { ...prev }
+      if (next[chapterId]) delete next[chapterId]
+      else next[chapterId] = 1
+      return next
+    })
+  }, [])
 
   // deck holds up to 3 stories per card; toggling caps at DECK_MAX
   const toggleDeck = useCallback((cardSlug, id) => {
@@ -576,6 +589,7 @@ export default function App() {
           onOpen={openStory}
           wildcards={wildcards}
           onOpenChapter={(w) => setCharModal(w.charSlug)}
+          chaptersRead={chaptersRead}
           lang={lang}
         />
       ) : (
@@ -594,6 +608,8 @@ export default function App() {
           deck={deck}
           toggleDeck={toggleDeck}
           setDeck={setDeck}
+          chaptersRead={chaptersRead}
+          toggleChapterRead={toggleChapterRead}
           lang={lang}
           setLang={setLang}
         />
@@ -634,6 +650,8 @@ export default function App() {
         <CharacterModal
           ch={CHARACTERS.find((c) => c.slug === charModal)}
           gs={gs}
+          chaptersRead={chaptersRead}
+          toggleChapterRead={toggleChapterRead}
           lang={lang}
           setLang={setLang}
           onClose={() => setCharModal(null)}
@@ -746,7 +764,7 @@ function GameStoryModal({ story, meta, lang, setLang, onClose }) {
   )
 }
 
-function AllView({ stories, allMoods, mood, matchQ, matchOwned, owned, setOwned, sort, setSort, grades, cycle, told, onOpen, wildcards = [], onOpenChapter, lang = 'ru' }) {
+function AllView({ stories, allMoods, mood, matchQ, matchOwned, owned, setOwned, sort, setSort, grades, cycle, told, onOpen, wildcards = [], onOpenChapter, chaptersRead = {}, lang = 'ru' }) {
   const L = tr(lang)
   const CARD_ORDER = data.cards.map((c) => c.slug)
   const onlyWild = owned === 'wildcards'
@@ -822,6 +840,7 @@ function AllView({ stories, allMoods, mood, matchQ, matchOwned, owned, setOwned,
             grade={grades[w.id] || 0}
             onCycle={() => cycle(w.id)}
             onOpen={() => onOpenChapter(w)}
+            level={(w.chapters || []).filter((c) => chaptersRead[c.id]).length}
             lang={lang}
           />
         ))}
@@ -837,7 +856,7 @@ function chapterWord(n, lang) {
   if (a >= 2 && a <= 4 && (b < 10 || b >= 20)) return 'главы'
   return 'глав'
 }
-function WildcardRow({ w, grade = 0, onCycle, onOpen, lang = 'ru' }) {
+function WildcardRow({ w, grade = 0, onCycle, onOpen, level = 0, lang = 'ru' }) {
   const L = tr(lang)
   const nCh = w.chapters?.length || 0
   return (
@@ -858,7 +877,7 @@ function WildcardRow({ w, grade = 0, onCycle, onOpen, lang = 'ru' }) {
           <span className="story-title">{w.title}</span>
           <span className="story-meta">
             <span className="joker-badge">{L.joker}</span> {L.joker_sub}
-            {nCh ? ` · ${nCh} ${chapterWord(nCh, lang)}` : ''}
+            {nCh ? ` · ${level}/${nCh} ${chapterWord(nCh, lang)}` : ''}
           </span>
         </span>
         <span className="chev" aria-hidden onClick={onOpen}>›</span>
@@ -1063,9 +1082,15 @@ function StoryModal({ story, card, mood, grade, onSetGrade, onCycle, told, onTog
   )
 }
 
-function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, onOpen, setMood, setAllMoods, gs, deck, toggleDeck, setDeck, lang, setLang }) {
+function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, onOpen, setMood, setAllMoods, gs, deck, toggleDeck, setDeck, chaptersRead = {}, toggleChapterRead, lang, setLang }) {
   const L = tr(lang)
   const [char, setChar] = useState(0)
+  // character level = revealed life-story chapters
+  const chLevel = (slug) => {
+    if (!gs || gs.error) return { read: 0, total: 0 }
+    const chs = gs.stories.filter((s) => s.kind === 'chapter' && charSlug(s.character) === slug)
+    return { read: chs.filter((c) => chaptersRead[c.id]).length, total: chs.length }
+  }
   const [used, setUsed] = useState(() => new Set())
   const [infoOpen, setInfoOpen] = useState(false)
   const ch = CHARACTERS[char]
@@ -1132,7 +1157,9 @@ function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, o
       <div className="camp-top">
         <div className="camp-lbl">{L.camp_with}</div>
         <div className="camp-chars">
-          {CHARACTERS.map((c, i) => (
+          {CHARACTERS.map((c, i) => {
+            const lv = chLevel(c.slug)
+            return (
             <button
               key={c.slug}
               className={`camp-char ${i === char ? 'on' : ''} ${c.wolf ? 'wolf' : ''}`}
@@ -1140,9 +1167,15 @@ function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, o
               title={c.short}
             >
               <img src={`${BASE}chars/${c.slug}.webp`} alt="" loading="lazy" />
+              {lv.total > 0 && (
+                <span className={`camp-char-lv ${lv.read === lv.total ? 'done' : lv.read ? 'part' : ''}`}>
+                  {lv.read}/{lv.total}
+                </span>
+              )}
               <span>{c.short}</span>
             </button>
-          ))}
+            )
+          })}
         </div>
 
         <div className="camp-info">
@@ -1269,7 +1302,7 @@ function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, o
       </div>
 
       {infoOpen && (
-        <CharacterModal ch={ch} gs={gs} lang={lang} setLang={setLang} onClose={() => setInfoOpen(false)} />
+        <CharacterModal ch={ch} gs={gs} chaptersRead={chaptersRead} toggleChapterRead={toggleChapterRead} lang={lang} setLang={setLang} onClose={() => setInfoOpen(false)} />
       )}
     </main>
   )
@@ -1285,7 +1318,7 @@ const chapterNo = (id) => {
   return m ? +m[1] : 0
 }
 
-function CharacterModal({ ch, gs, lang, setLang, onClose }) {
+function CharacterModal({ ch, gs, chaptersRead = {}, toggleChapterRead, lang, setLang, onClose }) {
   const L = tr(lang)
   const [open, setOpen] = useState(null)
   const chapters =
@@ -1294,6 +1327,7 @@ function CharacterModal({ ch, gs, lang, setLang, onClose }) {
           .filter((s) => s.kind === 'chapter' && charSlug(s.character) === ch.slug)
           .sort((a, b) => chapterNo(a.id) - chapterNo(b.id))
       : []
+  const readN = chapters.filter((c) => chaptersRead[c.id]).length
   return (
     <div className="modal-scrim" onClick={onClose}>
       <div className="modal char-modal" role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
@@ -1333,15 +1367,30 @@ function CharacterModal({ ch, gs, lang, setLang, onClose }) {
               {L.ch_life(chapters.length, L.story_word(chapters.length))}
               <LangToggle lang={lang} setLang={setLang} />
             </div>
+            <div className="char-level">
+              <span className="char-level-txt">{L.ch_level(readN, chapters.length)}</span>
+              <span className="char-level-bar">
+                <i style={{ width: `${chapters.length ? (readN / chapters.length) * 100 : 0}%` }} />
+              </span>
+            </div>
             <div className="chapters">
               {chapters.map((c, i) => {
                 const hasRu = c.ru && c.ru.length > 0
                 const show = lang === 'ru' && !hasRu ? 'en' : lang
                 const text = c[show] || c.en || []
                 const isOpen = open === i
+                const isRead = !!chaptersRead[c.id]
                 return (
-                  <div key={c.id} className={`chapter ${isOpen ? 'open' : ''}`}>
+                  <div key={c.id} className={`chapter ${isOpen ? 'open' : ''} ${isRead ? 'read' : ''}`}>
                     <button className="chapter-head" onClick={() => setOpen(isOpen ? null : i)}>
+                      <button
+                        className={`chapter-read ${isRead ? 'on' : ''}`}
+                        onClick={(e) => { e.stopPropagation(); toggleChapterRead?.(c.id) }}
+                        title={isRead ? L.chapter_read : L.chapter_unread}
+                        aria-label={isRead ? L.chapter_read : L.chapter_unread}
+                      >
+                        {isRead ? '●' : '○'}
+                      </button>
                       <span className="chapter-no">{L.chapter} {chapterNo(c.id) || i + 1}</span>
                       {(lang === 'en' ? c.chapterTitle : c.chapterTitleRu) && (
                         <span className="chapter-title">{lang === 'en' ? c.chapterTitle : c.chapterTitleRu}</span>

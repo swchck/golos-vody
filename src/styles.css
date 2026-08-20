@@ -618,6 +618,19 @@ body {
 .camp-char:hover img { filter: grayscale(0.3) opacity(0.85); }
 .camp-char.on img { filter: none; border-color: var(--stamp); box-shadow: 0 0 0 2px var(--paper), 0 0 9px -1px var(--stamp); }
 .camp-char.on span { color: var(--ink); font-weight: 600; }
+.camp-char { position: relative; }
+.camp-char-lv { position: absolute; top: 2px; right: 2px; font-family: var(--label); font-size: 9px; line-height: 1;
+  padding: 2px 4px; border-radius: 8px; background: var(--rule); color: var(--paper); }
+.camp-char-lv.part { background: var(--gold); }
+.camp-char-lv.done { background: var(--stamp); }
+/* character life-story progress bar in the modal */
+.char-level { display: flex; align-items: center; gap: 10px; margin: 4px 0 10px; }
+.char-level-txt { font-family: var(--label); font-size: 11px; letter-spacing: 0.06em; color: var(--ink-soft); white-space: nowrap; }
+.char-level-bar { flex: 1; height: 6px; background: rgba(42,36,25,0.15); border-radius: 3px; overflow: hidden; }
+.char-level-bar i { display: block; height: 100%; background: var(--gold); transition: width 0.2s; }
+.chapter-read { flex: 0 0 auto; background: none; border: none; cursor: pointer; font-size: 13px; line-height: 1; color: var(--ink-soft); padding: 0 4px 0 0; }
+.chapter-read.on { color: var(--gold); }
+.chapter.read .chapter-title { color: var(--ink); }
 .camp-round { display: flex; align-items: center; gap: 18px; margin-top: 12px;
   font-family: var(--label); font-size: 12px; letter-spacing: 0.06em; color: var(--ink-soft); }
 .camp-round b { color: var(--stamp); font-size: 14px; }

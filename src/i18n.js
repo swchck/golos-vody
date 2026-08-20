@@ -135,6 +135,9 @@ export const STR = {
     ch_moods: 'Любимые настроения',
     ch_about: 'О персонаже',
     ch_life: (n, word) => `История жизни · ${n} ${word} из игры`,
+    ch_level: (n, total) => `Уровень: ${n}/${total} глав раскрыто`,
+    chapter_read: 'глава раскрыта — клик, чтобы снять',
+    chapter_unread: 'отметить главу раскрытой',
     chapter: 'Глава',
     card_word: 'карта',
 
@@ -300,6 +303,9 @@ export const STR = {
     ch_moods: 'Favorite moods',
     ch_about: 'About',
     ch_life: (n, word) => `Life story · ${n} ${word} from the game`,
+    ch_level: (n, total) => `Progress: ${n}/${total} chapters revealed`,
+    chapter_read: 'chapter revealed — click to unmark',
+    chapter_unread: 'mark chapter revealed',
     chapter: 'Chapter',
     card_word: 'card',
 
