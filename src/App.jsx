@@ -1077,17 +1077,23 @@ function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, o
     const i = (ch.moods || []).indexOf(m)
     return i === -1 ? 0 : (ch.moods.length - i) // preferred first → highest weight
   }
+  // rank: best mood match first, then least-finished (leave maxed grade-III stories
+  // for last so the deck helps level up everything)
   const buildDeck = () => {
     const pool = stories.filter((s) => (grades[s.id] || 0) >= 1 && !(told[s.id] || []).includes(char))
     const next = {}
-    let picked = 0
     for (const c of data.cards) {
       const picks = pool
         .filter((s) => s.card.slug === c.slug)
-        .sort((a, b) => moodRank(b.mood) - moodRank(a.mood) || (grades[b.id] || 0) - (grades[a.id] || 0))
+        .sort(
+          (a, b) =>
+            moodRank(b.mood) - moodRank(a.mood) ||
+            ((grades[a.id] || 0) >= 3) - ((grades[b.id] || 0) >= 3) || // maxed → last
+            (grades[a.id] || 0) - (grades[b.id] || 0), // lower grade first
+        )
         .slice(0, DECK_MAX)
         .map((s) => s.id)
-      if (picks.length) { next[c.slug] = picks; picked += picks.length }
+      if (picks.length) next[c.slug] = picks
     }
     setDeck(next)
   }
