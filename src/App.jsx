@@ -1003,16 +1003,19 @@ function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, o
   const [infoOpen, setInfoOpen] = useState(false)
   const ch = CHARACTERS[char]
 
+  // a mood filter hides non-matching stories entirely (highlighting them was confusing)
   const avail = stories.filter(
-    (s) => (grades[s.id] || 0) >= 1 && !(told[s.id] || []).includes(char) && matchQ(s),
+    (s) =>
+      (grades[s.id] || 0) >= 1 &&
+      !(told[s.id] || []).includes(char) &&
+      matchQ(s) &&
+      (allMoods || s.mood === mood),
   )
-  const matchesN = allMoods ? 0 : avail.filter((s) => s.mood === mood).length
+  const matchesN = allMoods ? 0 : avail.length
   const byCard = data.cards
     .map((c) => ({
       card: c,
-      list: avail
-        .filter((s) => s.card.slug === c.slug)
-        .sort((a, b) => (allMoods ? 0 : (b.mood === mood) - (a.mood === mood))),
+      list: avail.filter((s) => s.card.slug === c.slug),
     }))
     .filter((g) => g.list.length)
     // an already-used card is locked for the round → drop it to the bottom
@@ -1111,9 +1114,8 @@ function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, o
               <div className="camp-stories">
                 {list.map((s) => {
                   const g = grades[s.id] || 0
-                  const matches = !allMoods && s.mood === mood
                   return (
-                    <div key={s.id} className={`camp-story ${matches ? 'match' : ''}`}>
+                    <div key={s.id} className="camp-story">
                       <span className={`dot ${moodCls(s.mood)}`} />
                       <span className="camp-story-title" onClick={() => onOpen(s, s.card, s.mood)}>
                         {titleAt(s, lang, Math.max(0, g - 1))}
