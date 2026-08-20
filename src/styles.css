@@ -926,7 +926,8 @@ body {
   letter-spacing: 0.06em; text-transform: uppercase; font-size: 12px; color: var(--ink); text-align: left;
 }
 .chapter.open .chapter-head { border-bottom: 1px solid var(--rule); }
-.chapter-no { flex: 1; }
+.chapter-no { flex: 0 0 auto; color: var(--stamp); font: 600 12px/1 'Oswald', sans-serif; letter-spacing: 0.06em; text-transform: uppercase; }
+.chapter-title { flex: 1; font-family: 'Playfair Display', serif; font-style: italic; }
 .chapter-toggle { font-size: 18px; color: var(--stamp-deep); line-height: 1; }
 .chapter-body { padding: 14px 16px 4px; }
 .chapter-body p { margin: 0 0 12px; }

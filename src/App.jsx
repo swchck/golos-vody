@@ -101,6 +101,7 @@ export default function App() {
   const [lang, setLang] = useState(() => localStorage.getItem('gv-lang') || 'ru')
   const [gs, setGs] = useState(null) // lazy-loaded gamestories.json
   const [gModal, setGModal] = useState(null) // opened game story
+  const [charModal, setCharModal] = useState(null) // opened character life-story (slug)
   const stageRef = useRef(null)
   const fileRef = useRef(null)
   const L = tr(lang)
@@ -177,24 +178,28 @@ export default function App() {
       }),
     [variant],
   )
-  // character-chapter stories are wildcards (jokers): universal, fit any mood
+  // character life-stories are wildcards (jokers): one arc per character, named like
+  // in the game ("Увольнение Берты"), fit any mood, and can be collected
   const wildcards = useMemo(() => {
     if (!gs || gs.error) return []
-    return gs.stories
-      .filter((s) => s.kind === 'chapter')
-      .map((s) => {
-        const slug = charSlug(s.character)
-        const ch = CHARACTERS.find((c) => c.slug === slug)
-        return {
-          ...s,
-          wildcard: true,
-          charSlug: slug,
-          short: ch?.short || s.character,
-          title: `${ch?.short || s.character} · ${L.chapter.toLowerCase()} ${chapterNo(s.id)}`,
-        }
-      })
-      .sort((a, b) => a.charSlug.localeCompare(b.charSlug) || chapterNo(a.id) - chapterNo(b.id))
-  }, [gs, L])
+    const byChar = {}
+    for (const s of gs.stories) {
+      if (s.kind !== 'chapter') continue
+      const slug = charSlug(s.character)
+      ;(byChar[slug] ||= []).push(s)
+    }
+    return data.cards
+      .filter((c) => c.charSlug && byChar[c.charSlug])
+      .map((c) => ({
+        id: `char-${c.charSlug}`,
+        wildcard: true,
+        charSlug: c.charSlug,
+        short: c.charShort || c.charSlug,
+        title: c.character, // life-story name as shown in the game
+        chapters: byChar[c.charSlug].slice().sort((a, b) => chapterNo(a.id) - chapterNo(b.id)),
+      }))
+      .sort((a, b) => a.short.localeCompare(b.short, 'ru'))
+  }, [gs])
 
   const toggleTold = useCallback((id, idx) => {
     setTold((prev) => {
@@ -549,7 +554,7 @@ export default function App() {
           told={told}
           onOpen={openStory}
           wildcards={wildcards}
-          onOpenChapter={setGModal}
+          onOpenChapter={(w) => setCharModal(w.charSlug)}
           lang={lang}
         />
       ) : (
@@ -598,6 +603,16 @@ export default function App() {
           lang={lang}
           setLang={setLang}
           onClose={() => setGModal(null)}
+        />
+      )}
+
+      {charModal && (
+        <CharacterModal
+          ch={CHARACTERS.find((c) => c.slug === charModal)}
+          gs={gs}
+          lang={lang}
+          setLang={setLang}
+          onClose={() => setCharModal(null)}
         />
       )}
 
@@ -723,7 +738,9 @@ function AllView({ stories, allMoods, mood, matchQ, matchOwned, owned, setOwned,
         })
   const wildList =
     onlyWild || (owned === 'all' && allMoods)
-      ? wildcards.filter((w) => matchQ({ tellings: [w.title, ...(w.ru || [])] }))
+      ? wildcards.filter((w) =>
+          matchQ({ tellings: [w.title, ...(w.chapters || []).flatMap((c) => [c.chapterTitle, c.chapterTitleRu])] }),
+        )
       : []
   return (
     <main className="allview">
@@ -775,31 +792,52 @@ function AllView({ stories, allMoods, mood, matchQ, matchOwned, owned, setOwned,
           />
         ))}
         {wildList.map((w) => (
-          <WildcardRow key={w.id} w={w} onOpen={() => onOpenChapter(w)} lang={lang} />
+          <WildcardRow
+            key={w.id}
+            w={w}
+            grade={grades[w.id] || 0}
+            onCycle={() => cycle(w.id)}
+            onOpen={() => onOpenChapter(w)}
+            lang={lang}
+          />
         ))}
       </div>
     </main>
   )
 }
 
-function WildcardRow({ w, onOpen, lang = 'ru' }) {
+function chapterWord(n, lang) {
+  if (lang === 'en') return n === 1 ? 'chapter' : 'chapters'
+  const a = n % 10, b = n % 100
+  if (a === 1 && b !== 11) return 'глава'
+  if (a >= 2 && a <= 4 && (b < 10 || b >= 20)) return 'главы'
+  return 'глав'
+}
+function WildcardRow({ w, grade = 0, onCycle, onOpen, lang = 'ru' }) {
   const L = tr(lang)
+  const nCh = w.chapters?.length || 0
   return (
-    <article className="story wildcard" onClick={onOpen}>
+    <article className={`story wildcard ${grade ? 'have' : ''}`}>
       <div className="story-row">
-        <span className="eye-btn joker-eye" aria-hidden title={L.joker_no_grades}>
-          <Eye grade={0} />
-        </span>
-        <span className="story-icon joker">
+        <button
+          className="eye-btn"
+          onClick={(e) => { e.stopPropagation(); onCycle?.() }}
+          title={grade ? L.full_title : L.grade_mark}
+          aria-label={L.grade_story_aria}
+        >
+          <Eye grade={grade} />
+        </button>
+        <span className="story-icon joker" onClick={onOpen}>
           <img src={`${BASE}chars/${w.charSlug}.webp`} alt="" loading="lazy" />
         </span>
-        <span className="story-main">
+        <span className="story-main" onClick={onOpen}>
           <span className="story-title">{w.title}</span>
           <span className="story-meta">
             <span className="joker-badge">{L.joker}</span> {L.joker_sub}
+            {nCh ? ` · ${nCh} ${chapterWord(nCh, lang)}` : ''}
           </span>
         </span>
-        <span className="chev" aria-hidden>›</span>
+        <span className="chev" aria-hidden onClick={onOpen}>›</span>
       </div>
     </article>
   )
@@ -1215,6 +1253,9 @@ function CharacterModal({ ch, gs, lang, setLang, onClose }) {
                   <div key={c.id} className={`chapter ${isOpen ? 'open' : ''}`}>
                     <button className="chapter-head" onClick={() => setOpen(isOpen ? null : i)}>
                       <span className="chapter-no">{L.chapter} {chapterNo(c.id) || i + 1}</span>
+                      {(lang === 'en' ? c.chapterTitle : c.chapterTitleRu) && (
+                        <span className="chapter-title">{lang === 'en' ? c.chapterTitle : c.chapterTitleRu}</span>
+                      )}
                       {lang === 'ru' && !hasRu && <span className="gs-noru">{L.only_original}</span>}
                       <span className="chapter-toggle">{isOpen ? '−' : '+'}</span>
                     </button>
