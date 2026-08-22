@@ -41,7 +41,7 @@ export const STR = {
     filter_any: 'Любое',
     filter_all_wheel: 'все настроения',
     filter_all_camp: 'любое настроение',
-    search_ph: 'искать по словам в истории…',
+    search_ph: 'искать по названию или тексту истории…',
 
     wheel_hint: 'наведи и кликни карту',
     char_story: 'История персонажа',
@@ -213,7 +213,7 @@ export const STR = {
     filter_any: 'Any',
     filter_all_wheel: 'all moods',
     filter_all_camp: 'any mood',
-    search_ph: 'search words inside a story…',
+    search_ph: 'search titles or story text…',
 
     wheel_hint: 'point and click a card',
     char_story: "Character's story",

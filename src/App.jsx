@@ -131,13 +131,13 @@ export default function App() {
   }, [])
   useEffect(() => localStorage.setItem('gv-lang', lang), [lang])
   useEffect(() => {
-    if ((view === 'all' || view === 'camp' || modal) && !gs) {
+    if ((view === 'all' || view === 'camp' || modal || query.trim()) && !gs) {
       fetch(`${BASE}gamestories.json`)
         .then((r) => r.json())
         .then(setGs)
         .catch(() => setGs({ error: true, stories: [], meta: {} }))
     }
-  }, [view, modal, gs])
+  }, [view, modal, gs, query])
   useEffect(() => {
     if (!localStorage.getItem('gv-seen-guide')) {
       setOverlay('guide')
@@ -261,8 +261,27 @@ export default function App() {
 
   const collected = ALL.filter((s) => grades[s.id]).length
   const q = norm(query.trim())
-  const matchQ = (s) =>
-    !q || q.split(/\s+/).every((w) => w.length < 2 || norm(s.tellings.join(' ')).includes(w))
+  // full-text index: title + every variant title + the full RU/EN narrative (from gs),
+  // keyed by icon (= ink name = gamestories id), so search covers story bodies too
+  const searchText = useMemo(() => {
+    const body = {}
+    if (gs && !gs.error) for (const s of gs.stories) body[s.id] = [...(s.en || []), ...(s.ru || [])].join(' ')
+    const m = {}
+    for (const s of ALL) {
+      const titles = [
+        s.tellings.join(' '),
+        (s.tellingsEn || []).join(' '),
+        ...(s.variants || []).flatMap((v) => [...(v.tellings || []), ...(v.tellingsEn || [])]),
+      ].join(' ')
+      if (s.icon) m[s.icon] = norm(titles + ' ' + (body[s.icon] || ''))
+    }
+    return m
+  }, [gs])
+  const matchQ = (s) => {
+    if (!q) return true
+    const hay = (s.icon && searchText[s.icon]) || norm(s.tellings.join(' '))
+    return q.split(/\s+/).every((w) => w.length < 2 || hay.includes(w))
+  }
   const matchOwned = (s) => {
     const g = grades[s.id] || 0
     const t = (told[s.id] || []).length
