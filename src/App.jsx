@@ -641,6 +641,7 @@ export default function App() {
       {modal && (
         <StoryModal
           {...modal}
+          grades={grades}
           grade={grades[modal.story.id] || 0}
           onSetGrade={(g) => setGrade(modal.story.id, g)}
           onCycle={() => cycle(modal.story.id)}
@@ -966,11 +967,21 @@ function StoryRow({ story, card, mood, showMeta, grade, onCycle, told = [], onOp
   )
 }
 
-function StoryModal({ story, card, mood, grade, onSetGrade, onCycle, told, onToggleTold, gs, lang, setLang, variant, onSetVariant, onClose }) {
+function StoryModal({ story, card, mood, grade, grades = {}, onSetGrade, onCycle, told, onToggleTold, gs, lang, setLang, variant, onSetVariant, onClose }) {
   const L = tr(lang)
   const t = titlesFor(story, lang)
   const g = story.icon && gs && !gs.error ? gs.stories.find((s) => s.id === story.icon) : null
   const variantCards = (story.variantCards || []).map((sl) => CARD_BY_SLUG[sl]).filter(Boolean)
+  // pool for a card = its primary stories + multi-variant stories that can land on it;
+  // "have" counts what's already in the bag (grade ≥ 1) so the deck-fill math matches the game
+  const cardStat = (slug) => {
+    const pool = ALL.filter((s) => s.card.slug === slug || (s.variantCards || []).includes(slug))
+    return { total: pool.length, have: pool.filter((s) => grades[s.id]).length }
+  }
+  const variantStats = variantCards.map((c) => ({ slug: c.slug, ...cardStat(c.slug) }))
+  const recSlug = variantStats.length
+    ? [...variantStats].sort((a, b) => a.have - b.have || a.total - b.total)[0].slug
+    : null
   const shownCard = (variant && CARD_BY_SLUG[variant]) || card
   const hasRu = g && g.ru && g.ru.length > 0
   const showLang = lang === 'ru' && !hasRu ? 'en' : lang
@@ -1032,25 +1043,31 @@ function StoryModal({ story, card, mood, grade, onSetGrade, onCycle, told, onTog
           })}
         </div>
 
-        {variantCards.length === 2 && (
+        {variantCards.length >= 2 && (
           <div className="modal-section">
             <div className="section-lbl">
               {L.sec_variants}{' '}
               <span className="told-hint">{L.variants_hint}</span>
             </div>
             <div className="variant-cards">
-              {variantCards.map((c) => (
-                <button
-                  key={c.slug}
-                  className={`variant-card ${variant === c.slug ? 'on' : ''}`}
-                  onClick={() => onSetVariant(c.slug)}
-                  title={variant === c.slug ? L.variant_untake : L.variant_take}
-                >
-                  <img src={`${BASE}icons/${c.slug}.webp`} alt="" />
-                  <b>{cardName(c, lang)}</b>
-                  {cardMeaning(c, lang) && <em>{cardMeaning(c, lang)}</em>}
-                </button>
-              ))}
+              {variantCards.map((c) => {
+                const st = cardStat(c.slug)
+                const rec = c.slug === recSlug
+                return (
+                  <button
+                    key={c.slug}
+                    className={`variant-card ${variant === c.slug ? 'on' : ''} ${rec ? 'rec' : ''}`}
+                    onClick={() => onSetVariant(c.slug)}
+                    title={variant === c.slug ? L.variant_untake : L.variant_take}
+                  >
+                    {rec && <span className="variant-badge" title={L.variant_rec_why}>★ {L.variant_recommend}</span>}
+                    <img src={`${BASE}icons/${c.slug}.webp`} alt="" />
+                    <b>{cardName(c, lang)}</b>
+                    {cardMeaning(c, lang) && <em>{cardMeaning(c, lang)}</em>}
+                    <span className="variant-stat">{L.variant_have(st.have, st.total)}</span>
+                  </button>
+                )
+              })}
             </div>
           </div>
         )}

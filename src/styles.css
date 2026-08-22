@@ -925,16 +925,24 @@ body {
 /* story variability + game original inside StoryModal */
 .variant-cards { display: flex; flex-wrap: wrap; gap: 12px; }
 .variant-card {
-  display: inline-flex; align-items: center; gap: 10px; font-family: var(--body); font-size: 14px;
-  padding: 8px 14px 8px 8px; border: 1.5px solid var(--rule); border-radius: 999px;
+  position: relative; display: inline-flex; flex-direction: column; align-items: center; gap: 4px;
+  font-family: var(--body); font-size: 14px; text-align: center; min-width: 120px;
+  padding: 14px 14px 10px; border: 1.5px solid var(--rule); border-radius: 14px;
   background: transparent; color: inherit; cursor: pointer; transition: border-color .15s, background .15s;
 }
 .variant-card:hover { border-color: var(--stamp-deep); }
 .variant-card.on { border-color: var(--stamp-deep); background: color-mix(in srgb, var(--stamp) 16%, transparent); }
-.variant-card.on::after { content: '✓ у тебя'; font-family: var(--label); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--stamp-deep); margin-left: 2px; }
-.variant-card img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 1.5px solid var(--rule); }
+.variant-card.on::after { content: '✓ у тебя'; font-family: var(--label); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--stamp-deep); }
+.variant-card.rec { border-color: var(--gold, #c99a2e); }
+.variant-card img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1.5px solid var(--rule); }
 .variant-card b { color: var(--ink); }
 .variant-card em { color: var(--ink-soft); font-style: italic; font-size: 12px; }
+.variant-stat { font-family: var(--label); font-size: 11px; letter-spacing: 0.04em; color: var(--ink-soft); }
+.variant-badge {
+  position: absolute; top: -9px; left: 50%; transform: translateX(-50%); white-space: nowrap;
+  font-family: var(--label); font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 999px; background: var(--gold, #c99a2e); color: #1a1206;
+}
 .gs-orig-lbl { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 
 /* character life-story chapters (accordion) */
