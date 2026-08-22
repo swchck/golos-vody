@@ -655,6 +655,11 @@ body {
 .camp-story-mood { font-family: var(--label); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); }
 .camp-story.in-deck { background: rgba(184, 138, 46, 0.12); margin: 0 -12px; padding: 7px 12px; }
 .camp-story.in-deck .camp-story-title { font-weight: 600; }
+.camp-story.maxed .camp-story-title { color: var(--ink-soft); }
+.camp-maxed {
+  flex: 0 0 auto; font-family: var(--label); font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 1.5px 7px; border-radius: 999px; color: var(--ink-soft); border: 1px solid var(--rule);
+}
 .deck-star { flex: 0 0 auto; background: none; border: none; cursor: pointer; font-size: 16px; line-height: 1; color: var(--ink-soft); padding: 0 2px; }
 .deck-star.on { color: var(--gold); }
 .deck-star:disabled { opacity: 0.3; cursor: not-allowed; }

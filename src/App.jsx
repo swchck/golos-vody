@@ -1140,22 +1140,23 @@ function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, o
     const i = (ch.moods || []).indexOf(m)
     return i === -1 ? 0 : (ch.moods.length - i) // preferred first → highest weight
   }
-  // rank: best mood match first, then least-finished (leave maxed grade-III stories
-  // for last so the deck helps level up everything)
+  // a told story levels up one grade at the next upgrade house, so its final grade is
+  // grade + (told-to-anyone ? 1 : 0), capped at 3. "maxed" = that final grade is already 3:
+  // telling it again buys nothing, so the deck must avoid it when a levelable story exists.
+  const effGrade = (id) => Math.min(3, (grades[id] || 0) + ((told[id] || []).length ? 1 : 0))
+  const isMaxed = (id) => effGrade(id) >= 3
+  const rank = (a, b) =>
+    moodRank(b.mood) - moodRank(a.mood) ||
+    effGrade(a.id) - effGrade(b.id) || // least-finished first
+    (grades[a.id] || 0) - (grades[b.id] || 0)
   const buildDeck = () => {
     const pool = stories.filter((s) => (grades[s.id] || 0) >= 1 && !(told[s.id] || []).includes(char))
     const next = {}
     for (const c of data.cards) {
-      const picks = pool
-        .filter((s) => s.card.slug === c.slug)
-        .sort(
-          (a, b) =>
-            moodRank(b.mood) - moodRank(a.mood) ||
-            ((grades[a.id] || 0) >= 3) - ((grades[b.id] || 0) >= 3) || // maxed → last
-            (grades[a.id] || 0) - (grades[b.id] || 0), // lower grade first
-        )
-        .slice(0, DECK_MAX)
-        .map((s) => s.id)
+      const inCard = pool.filter((s) => s.card.slug === c.slug)
+      const fresh = inCard.filter((s) => !isMaxed(s.id)).sort(rank)
+      // only fall back to already-maxed stories when the card has nothing levelable
+      const picks = (fresh.length ? fresh : inCard.sort(rank)).slice(0, DECK_MAX).map((s) => s.id)
       if (picks.length) next[c.slug] = picks
     }
     setDeck(next)
@@ -1304,8 +1305,9 @@ function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, o
                 {ordered.map((s) => {
                   const g = grades[s.id] || 0
                   const inDeck = deckIds.includes(s.id)
+                  const maxed = isMaxed(s.id)
                   return (
-                    <div key={s.id} className={`camp-story ${inDeck ? 'in-deck' : ''}`}>
+                    <div key={s.id} className={`camp-story ${inDeck ? 'in-deck' : ''} ${maxed ? 'maxed' : ''}`}>
                       <button
                         className={`deck-star ${inDeck ? 'on' : ''}`}
                         onClick={() => toggleDeck(card.slug, s.id)}
@@ -1319,6 +1321,7 @@ function CampView({ stories, allMoods, mood, matchQ, grades, told, toggleTold, o
                       <span className="camp-story-title" onClick={() => onOpen(s, s.card, s.mood)}>
                         {titleAt(s, lang, Math.max(0, g - 1))}
                       </span>
+                      {maxed && <span className="camp-maxed" title={L.deck_maxed_hint}>{L.deck_maxed}</span>}
                       <span className="camp-story-mood">
                         {moodShort(s.mood, lang)}
                       </span>

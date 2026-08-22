@@ -128,9 +128,11 @@ export const STR = {
     deck_full: 'в колоде уже 3 — сначала убери одну',
     deck_build: 'Собрать колоду',
     deck_build_for: (name) => `✦ Собрать колоду под ${name}`,
-    deck_build_hint: 'подобрать до 3 историй на карту под настроения персонажа, приберегая уже прокачанные (грейд III)',
+    deck_build_hint: 'подобрать до 3 историй на карту под настроения персонажа, не трогая уже готовые (грейд III или грейд II + рассказана)',
     deck_clear: 'Очистить колоду',
     deck_hint: 'В колоде — до 3 историй на карту, как в игре. Рассказывать можно только истории из колоды.',
+    deck_maxed: 'уже макс',
+    deck_maxed_hint: 'после улучшения станет грейда III — рассказывать нет смысла, тут просто нет других вариантов на эту карту',
     deck_summary: (n, liked) => `в колоде ${n} · под настроения персонажа: ${liked}`,
 
     // CharacterModal
@@ -300,9 +302,11 @@ export const STR = {
     deck_full: 'deck already has 3 — remove one first',
     deck_build: 'Build a deck',
     deck_build_for: (name) => `✦ Build a deck for ${name}`,
-    deck_build_hint: "pick up to 3 stories per card matching this character's moods, saving already-maxed (grade III) ones",
+    deck_build_hint: "pick up to 3 stories per card matching this character's moods, skipping ones already done (grade III, or grade II already told)",
     deck_clear: 'Clear deck',
     deck_hint: 'A deck holds up to 3 stories per card, like in the game. You can only tell stories from your deck.',
+    deck_maxed: 'maxed',
+    deck_maxed_hint: "it'll hit grade III after the next upgrade — no point telling it; it's only here because this card has nothing else",
     deck_summary: (n, liked) => `${n} in deck · matching this character: ${liked}`,
 
     ch_where: 'Where to find',
