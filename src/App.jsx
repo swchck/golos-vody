@@ -262,7 +262,8 @@ export default function App() {
   const collected = ALL.filter((s) => grades[s.id]).length
   const q = norm(query.trim())
   // full-text index: title + every variant title + the full RU/EN narrative (from gs),
-  // keyed by icon (= ink name = gamestories id), so search covers story bodies too
+  // keyed by story id (= ink name = gamestories id). NOT icon: for ~35 stories the sprite
+  // name (icon) differs from the ink name, so keying by icon lost their bodies entirely.
   const searchText = useMemo(() => {
     const body = {}
     if (gs && !gs.error) for (const s of gs.stories) body[s.id] = [...(s.en || []), ...(s.ru || [])].join(' ')
@@ -273,13 +274,13 @@ export default function App() {
         (s.tellingsEn || []).join(' '),
         ...(s.variants || []).flatMap((v) => [...(v.tellings || []), ...(v.tellingsEn || [])]),
       ].join(' ')
-      if (s.icon) m[s.icon] = norm(titles + ' ' + (body[s.icon] || ''))
+      m[s.id] = norm(titles + ' ' + (body[s.id] || ''))
     }
     return m
   }, [gs])
   const matchQ = (s) => {
     if (!q) return true
-    const hay = (s.icon && searchText[s.icon]) || norm(s.tellings.join(' '))
+    const hay = searchText[s.id] || norm(s.tellings.join(' '))
     return q.split(/\s+/).every((w) => w.length < 2 || hay.includes(w))
   }
   const matchOwned = (s) => {
@@ -970,7 +971,8 @@ function StoryRow({ story, card, mood, showMeta, grade, onCycle, told = [], onOp
 function StoryModal({ story, card, mood, grade, grades = {}, onSetGrade, onCycle, told, onToggleTold, gs, lang, setLang, variant, onSetVariant, onClose }) {
   const L = tr(lang)
   const t = titlesFor(story, lang)
-  const g = story.icon && gs && !gs.error ? gs.stories.find((s) => s.id === story.icon) : null
+  // gs is keyed by ink name (= story.id), not the sprite name (story.icon)
+  const g = gs && !gs.error ? gs.stories.find((s) => s.id === story.id) : null
   const variantCards = (story.variantCards || []).map((sl) => CARD_BY_SLUG[sl]).filter(Boolean)
   // pool for a card = its primary stories + multi-variant stories that can land on it;
   // "have" counts what's already in the bag (grade ≥ 1) so the deck-fill math matches the game
